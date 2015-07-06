@@ -1,7 +1,7 @@
-Messageplate
+Injectplate
 ==========
 
-A basic message component.
+A Javascript component injector.
 
 
 Author
