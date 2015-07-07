@@ -15,10 +15,15 @@ var injectplate = function() {
 	var $componentList = {};
 
 	// Functions
-	var append = function($html, $element, $onDone) {
-		var $div = document.createElement('div');
-		$div.innerHTML = $html;
-		$element.appendChild($div);
+	var append = function($html, $element, $overwrite, $onDone) {
+		// var $container = document.createElement($containerType);
+		// $container.innerHTML = $html;
+		// $element.appendChild($container.firstChild);
+		if ($overwrite === true) {
+			$element.innerHTML = $html;
+		} else {
+			$element.innerHTML += $html;
+		}
 		$element.setAttribute('data-inject', 'true');
 		if ($onDone !== undefined) {
 			setTimeout(function() {
@@ -48,13 +53,14 @@ var injectplate = function() {
 			if ($objBind.className) {
 				$element.className = $className;
 			}
-			append($flatHTML, $element, $objBind.onDone);
+			append($flatHTML, $element, $objBind.overwrite || $componentList[$objBind.component].overwrite, $objBind.onDone);
 		}
 	};
 	var component = function($objComponent) {
 		$componentList[$objComponent.name] = {
 			html: $objComponent.html,
-			onDone: $objComponent.onDone || false
+			onDone: $objComponent.onDone || false,
+			overwrite: $objComponent.overwrite || false
 		};
 	};
 	var exists = function($element) {
