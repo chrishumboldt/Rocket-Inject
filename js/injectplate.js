@@ -50,14 +50,15 @@ var injectplate = function() {
 		// Flatten HTML
 		if (exists($element)) {
 			var $flatHTML = flattenHTML($componentList[$objBind.component].html, $objBind.data);
-			if ($objBind.className) {
-				$element.className = $className;
+			if ($objBind.className || $componentList[$objBind.component].className) {
+				$element.className = ($objBind.className || $componentList[$objBind.component].className);
 			}
 			append($flatHTML, $element, $objBind.overwrite || $componentList[$objBind.component].overwrite, $objBind.onDone);
 		}
 	};
 	var component = function($objComponent) {
 		$componentList[$objComponent.name] = {
+			className: $objComponent.className || false,
 			html: $objComponent.html,
 			onDone: $objComponent.onDone || false,
 			overwrite: $objComponent.overwrite || false
