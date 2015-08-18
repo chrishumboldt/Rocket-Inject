@@ -96,7 +96,7 @@ var injectplate = function() {
 					// Inner HTML flat
 					var $innerFlatHTML = '';
 					var $arInnerHTML = $componentHTML[$i][$componentHTMLKey];
-					for (var $r = $arInnerHTML.length - 1; $r >= 0; $r--) {
+					for (var $r = 0, $lenr = $arInnerHTML.length; $r < $lenr; $r++) {
 						$innerFlatHTML += $arInnerHTML[$r];
 					}
 
