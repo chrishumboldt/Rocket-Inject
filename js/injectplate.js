@@ -108,7 +108,7 @@ var injectplate = function() {
 						if ($innerFlatHTML.indexOf('{{') > -1) {
 							var $htmlMatch = $innerFlatHTML.match($bracketRegExp);
 							if ($htmlMatch !== null) {
-								for (var $i2 = $htmlMatch.length - 1; $i2 >= 0; $i2--) {
+								for (var $i2 = 0, $len2 = $htmlMatch.length; $i2 < $len2; $i2++) {
 									var $replaceValue = stringToRef($innerData, $htmlMatch[$i2].substring(2, $htmlMatch[$i2].length - 2)) || '';
 									$flatHTML = $flatHTML.replace(new RegExp($htmlMatch[$i2], 'g'), $replaceValue);
 								}
@@ -121,7 +121,7 @@ var injectplate = function() {
 				$flatHTML += $componentHTML[$i];
 				if ($componentHTML[$i].indexOf('{{') > -1) {
 					var $htmlMatch = $componentHTML[$i].match($bracketRegExp);
-					for (var $i2 = $htmlMatch.length - 1; $i2 >= 0; $i2--) {
+					for (var $i2 = 0, $len2 = $htmlMatch.length; $i2 < $len2; $i2++) {
 						var $replaceValue = $topLevelBinding[$htmlMatch[$i2].substring(2, $htmlMatch[$i2].length - 2)] || '';
 						$flatHTML = $flatHTML.replace(new RegExp($htmlMatch[$i2], 'g'), $replaceValue);
 					}
