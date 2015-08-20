@@ -4,6 +4,39 @@ Injectplate
 A Javascript component injector.
 
 
+Getting Started
+=========
+
+Start by including the required Javascript file.
+
+```
+<body>
+    <script src="js/min/injectplate.min.js"></script>
+</body>
+```
+
+Next initialize the Injectplate before creating your first component.
+
+```
+<script>
+    // Initialize
+    var $inject = new injectplate();
+    
+    // Create component
+    $inject.component({
+        name: 'article',
+        className: 'example-article',
+        html: [
+            '<article>',
+                '<h2>{{heading}}</h2>',
+                '<div>{{content}}</div>',
+            '</article>'
+        ]
+    });
+</script>
+```
+
+
 Author
 =========
 
