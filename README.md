@@ -13,7 +13,7 @@ You can either download a fresh copy of the source files or install Injectplate 
 bower install injectplate
 ```
 
-Start by including the required Javascript file.
+Simply start by including the required Javascript file.
 
 ```
 <body>
