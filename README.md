@@ -121,6 +121,29 @@ Once the component has been injected you might want to execute some code. To do 
 
 ```
 <script>
+    // Create component
+    $inject.component({
+        name: 'article',
+        className: 'article',
+        html: [
+            '<article>',
+                '<h2>{{heading}}</h2>',
+                '<div>{{content}}</div>',
+                '<div class="comments></div>'
+            '</article>'
+        ]
+    });
+    $inject.component({
+        name: 'comments',
+        html: [
+            '<comment>',
+                '<p>{{comment}}</p>',
+                '<div>By: {{user}}</div>'
+            '</comment>'
+        ]
+    });
+    
+    // Call component
     $inject.bind({
         component: 'article',
         to: '#article',
@@ -129,13 +152,46 @@ Once the component has been injected you might want to execute some code. To do 
             content: 'More arbitrary text goes here.'
         },
         onDone: function() {
-            console.log('The binding is done!');
+            $inject.bind({
+                component: 'comments',
+                to: '.comments',
+                data: {
+                    0: {
+                        comment: 'I like this Javascript component',
+                        user: 'Greg McAwesome'
+                    },
+                    1: {
+                        comment: 'Let use this component in our next project',
+                        user: 'Bob Knowsitall'
+                    }
+                }
+            });
         }
     });
 </script>
 ```
 
-Note that you are also be able to bind again in the onDone function and nest components.
+
+Nesting Components
+=========
+
+Note that you are also be able to bind again with the onDone function and nest components.
+
+```
+<script>
+    $inject.bind({
+        component: 'article',
+        to: '#article',
+        data: {
+            heading: 'Anther Great Article Heading',
+            content: 'More arbitrary text goes here.',
+        },
+        onDone: function() {
+            console.log('The binding is done!');
+        }
+    });
+</script>
+```
 
 
 Author
