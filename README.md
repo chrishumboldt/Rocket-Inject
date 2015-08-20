@@ -151,7 +151,7 @@ Note that you are also be able to bind again with the onDone function and nest c
             '<article>',
                 '<h2>{{heading}}</h2>',
                 '<div>{{content}}</div>',
-                '<div class="comments></div>'
+                '<div class="comments"></div>',
             '</article>'
         ]
     });
@@ -160,7 +160,7 @@ Note that you are also be able to bind again with the onDone function and nest c
         html: [
             '<comment>',
                 '<p>{{comment}}</p>',
-                '<div>By: {{user}}</div>'
+                '<div>By: {{user}}</div>',
             '</comment>'
         ]
     });
