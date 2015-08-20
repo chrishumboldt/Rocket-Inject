@@ -7,6 +7,12 @@ A Javascript component injector.
 Getting Started
 =========
 
+You can either download a fresh copy of the source files or install Injectplate via Bower.
+
+```
+bower install injectplate
+```
+
 Start by including the required Javascript file.
 
 ```
