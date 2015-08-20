@@ -15,6 +15,7 @@ Start by including the required Javascript file.
 </body>
 ```
 
+
 Next initialize the Injectplate before creating your first component.
 
 ```
@@ -33,6 +34,30 @@ Next initialize the Injectplate before creating your first component.
             '</article>'
         ]
     });
+</script>
+```
+
+Once the component has been created, simple bind it to an element and parse in the relevant data.
+
+```
+<script>
+    // Call component
+    $inject.bind({
+        component: 'article',
+        to: '#article-container',
+        data: {
+            heading: 'Great Article Heading',
+            content: 'This will just be some basic text about stuff.'
+        }
+    });
+</script>
+```
+
+If you would like to know what components have been created simply call the component list function, like so:
+
+```
+<script>
+    $inject.log($inject.componentList);
 </script>
 ```
 
