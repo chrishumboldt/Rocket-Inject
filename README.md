@@ -84,7 +84,7 @@ Sometimes you might require elements to be generated dynamically and Injectplate
                 '<h2>{{heading}}</h2>',
                 '<div class="content">', {
                     paragraphs: [
-                        '<p>{{content}}</p>
+                        '<p>{{content}}</p>'
                     ]
                 },
                 '</div>',
