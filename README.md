@@ -157,12 +157,14 @@ Note that you are also be able to bind again with the onDone function and nest c
     });
     $inject.component({
         name: 'comments',
-        html: [
-            '<comment>',
-                '<p>{{comment}}</p>',
-                '<div>By: {{user}}</div>',
-            '</comment>'
-        ]
+        html: [{
+            comments: [
+                '<comment>',
+                    '<p>{{comment}}</p>',
+                    '<div>By: {{user}}</div>',
+                '</comment>'
+            ]
+        }]
     });
     
     // Call component
@@ -178,13 +180,15 @@ Note that you are also be able to bind again with the onDone function and nest c
                 component: 'comments',
                 to: '.comments',
                 data: {
-                    0: {
-                        comment: 'I like this Javascript component',
-                        user: 'Greg McAwesome'
-                    },
-                    1: {
-                        comment: 'Let use this component in our next project',
-                        user: 'Bob Knowsitall'
+                    comments: {
+                        0: {
+                            comment: 'I like this Javascript component',
+                            user: 'Greg McAwesome'
+                        },
+                        1: {
+                            comment: 'Let use this component in our next project',
+                            user: 'Bob Knowsitall'
+                        }
                     }
                 }
             });
