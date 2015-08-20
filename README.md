@@ -121,6 +121,28 @@ Once the component has been injected you might want to execute some code. To do 
 
 ```
 <script>
+    $inject.bind({
+        component: 'article',
+        to: '#article',
+        data: {
+            heading: 'Anther Great Article Heading',
+            content: 'More arbitrary text goes here.',
+        },
+        onDone: function() {
+            console.log('The binding is done!');
+        }
+    });
+</script>
+```
+
+
+Nesting Components
+=========
+
+Note that you are also be able to bind again with the onDone function and nest components.
+
+```
+<script>
     // Create component
     $inject.component({
         name: 'article',
@@ -166,28 +188,6 @@ Once the component has been injected you might want to execute some code. To do 
                     }
                 }
             });
-        }
-    });
-</script>
-```
-
-
-Nesting Components
-=========
-
-Note that you are also be able to bind again with the onDone function and nest components.
-
-```
-<script>
-    $inject.bind({
-        component: 'article',
-        to: '#article',
-        data: {
-            heading: 'Anther Great Article Heading',
-            content: 'More arbitrary text goes here.',
-        },
-        onDone: function() {
-            console.log('The binding is done!');
         }
     });
 </script>
