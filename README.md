@@ -139,7 +139,7 @@ Once the component has been injected you might want to execute some code. To do 
 Nesting Components
 =========
 
-Note that you are also be able to bind again with the onDone function and nest components.
+Note that you are also be able to bind again with the onDone function and nest components. In this case we want to inject some comments into the article component once it has already been injected itself.
 
 ```
 <script>
