@@ -15,8 +15,7 @@ Start by including the required Javascript file.
 </body>
 ```
 
-
-Next initialize the Injectplate before creating your first component.
+Next initialize Injectplate before creating your first component.
 
 ```
 <script>
@@ -26,7 +25,7 @@ Next initialize the Injectplate before creating your first component.
     // Create component
     $inject.component({
         name: 'article',
-        className: 'example-article',
+        className: 'basic-article',
         html: [
             '<article>',
                 '<h2>{{heading}}</h2>',
@@ -44,7 +43,7 @@ Once the component has been created, simple bind it to an element and parse in t
     // Call component
     $inject.bind({
         component: 'article',
-        to: '#article-container',
+        to: '#article',
         data: {
             heading: 'Great Article Heading',
             content: 'This will just be some basic text about stuff.'
@@ -58,6 +57,53 @@ If you would like to know what components have been created simply call the comp
 ```
 <script>
     $inject.log($inject.componentList);
+</script>
+```
+
+Components are completely reusable and highly maintainable.
+
+
+Dynamic Data
+=========
+
+Sometimes you might require elements to be generated dynamically and Injectplate can do this with a JSON based dataset. To do so modify the HTML option of the component, for example:
+
+```
+<script>
+    $inject.component({
+        name: 'articleAdvanced',
+        className: 'advanced-article',
+        html: [
+            '<article>',
+                '<h2>{{heading}}</h2>',
+                '<div class="content">', {
+                    paragraphs: [
+                        '<p>{{content}}</p>
+                    ]
+                },
+                '</div>',
+            '</article>'
+        ]
+    });
+    
+    $inject.bind({
+        component: 'articleAdvanced',
+        to: '#article',
+        data: {
+            heading: 'This Is An Advanced Article',
+            paragraphs: {
+                0: {
+                    content: 'This is paragraph one.'
+                },
+                1: {
+                    content: 'Here goes the paragraphs sequel'
+                },
+                2: {
+                    content: 'Finally the last paragrpah goes here.'
+                }
+            }
+        }
+    });
 </script>
 ```
 
