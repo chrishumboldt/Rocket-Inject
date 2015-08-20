@@ -108,6 +108,30 @@ Sometimes you might require elements to be generated dynamically and Injectplate
 ```
 
 
+On Done
+=========
+
+Once the component has been injected you might want to execute some code. To do so apply the onDone event to your binding.
+
+```
+<script>
+    $inject.bind({
+        component: 'article',
+        to: '#article',
+        data: {
+            heading: 'Anther Great Article Heading',
+            content: 'More arbitrary text goes here.'
+        },
+        onDone: function() {
+            console.log('The binding is done!');
+        }
+    });
+</script>
+```
+
+Note that you are also be able to bind again in the onDone function and nest components.
+
+
 Author
 =========
 
