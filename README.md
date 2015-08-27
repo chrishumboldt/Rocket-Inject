@@ -117,7 +117,7 @@ Sometimes you might require elements to be generated dynamically and Injectplate
 Basic Conditional Statement
 =========
 
-Injectplate has begun including conditional statements namely a true / false conditions on data variables. The syntax is to wrap the statement in "@" signs and declare the condition inside. See an example below.
+Injectplate has begun including conditional statements namely a true / false conditions on data variables. The syntax requires you to wrap the statement in "@" signs and declare the condition inside. See an example below.
 
 ```
 <script>
