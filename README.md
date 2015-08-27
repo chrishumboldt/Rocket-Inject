@@ -136,7 +136,7 @@ Injectplate has begun including conditional statements namely a true / false con
         component: 'article',
         to: '#article',
         data: {
-            content: 'This content will display but the heading will not because it not be provided.',
+            content: 'This content will inject but the heading will not because it has not been provided.',
         }
     });
 </script>
