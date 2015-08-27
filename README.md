@@ -27,7 +27,7 @@ Next initialize Injectplate before creating your first component.
 <script>
     // Initialize
     var $inject = new injectplate();
-    
+
     // Create component
     $inject.component({
         name: 'article',
@@ -91,7 +91,7 @@ Sometimes you might require elements to be generated dynamically and Injectplate
             '</article>'
         ]
     });
-    
+
     $inject.bind({
         component: 'articleAdvanced',
         to: '#article',
@@ -108,6 +108,35 @@ Sometimes you might require elements to be generated dynamically and Injectplate
                     content: 'Finally the last paragrpah goes here.'
                 }
             }
+        }
+    });
+</script>
+```
+
+
+Basic Conditional Statement
+=========
+
+Injectplate has begun including conditional statements namely a true / false conditions on data variables. The syntax is to wrap the statement in "@" signs and declare the condition inside. See an example below.
+
+```
+<script>
+   $inject.component({
+       name: 'article',
+       className: 'basic-article',
+       html: [
+           '<article>',
+              '<h2 @if heading != undefined @>{{heading}}</h2>',
+              '<div>{{content}}</div>',
+           '</article>'
+       ]
+   });
+
+    $inject.bind({
+        component: 'article',
+        to: '#article',
+        data: {
+            content: 'This content will display but the heading will not because it not be provided.',
         }
     });
 </script>
@@ -166,7 +195,7 @@ Note that you are also be able to bind again with the onDone function and nest c
             ]
         }]
     });
-    
+
     // Call component
     $inject.bind({
         component: 'article',

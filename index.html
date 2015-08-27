@@ -23,7 +23,7 @@
 	$inject.component({
 		name: 'text',
 		html: [
-			'<h1>{{heading}}</h1>',
+			'<h1 @if heading != undefined @ class="test">{{heading}}</h1>',
 			'<p>{{text}}</p>'
 		]
 	});
@@ -46,7 +46,7 @@
 		name: 'list',
 		html: [
 			'<ul>',{
-				listItems: ['<li>{{text}}</li>']
+				listItems: ['<li @if state == active @>{{text}}</li>']
 			},
 			'</ul>'
 		]
@@ -98,12 +98,15 @@
 				data: {
 					listItems: {
 						0: {
+							state: 'active',
 							text: 'List Item 1'
 						},
 						1: {
+							state: 'inactive',
 							text: 'List Item 2'
 						},
 						2: {
+							state: 'active',
 							text: 'List Item 3'
 						}
 					}
