@@ -1,7 +1,7 @@
 {
 	"name": "Injectplate",
-	"version": "1.5.0",
-	"description": "A basic message component.",
+	"version": "1.5.1",
+	"description": "A Javascript component injector.",
 	"keywords": [
 		"Javascript Components",
 		"Components",
