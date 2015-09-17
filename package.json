@@ -1,11 +1,10 @@
 {
 	"name": "Injectplate",
-	"version": "1.5.2",
+	"version": "1.5.3",
 	"description": "A Javascript component injector.",
 	"keywords": [
-		"Javascript Components",
-		"Components",
 		"Injector",
+		"Component",
 		"Javascript",
 		"Webplate"
 	],
@@ -20,8 +19,9 @@
 	},
 	"homepage": "https://github.com/chrishumboldt/Injectplate",
 	"devDependencies": {
-		"grunt": "~0.4.5",
-		"grunt-contrib-uglify": "~0.5.1",
-		"grunt-contrib-watch": "~0.6.1"
+		"gulp": "^3.9.0",
+		"gulp-livereload": "^3.8.0",
+		"gulp-sass": "^2.0.4",
+		"gulp-uglify": "^1.3.0"
 	}
 }

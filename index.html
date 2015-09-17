@@ -5,117 +5,164 @@
 	<!-- Meta setup -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
 	<!-- Title -->
 	<title>Injectplate</title>
-
-	<!-- Include Injectplate -->
-	<script src="js/injectplate.js"></script>
+	<!-- Styles -->
+	<link href="css/demo.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
+	<div class="heading">
+      <div class="container"><h2>Injectplate Component</h2></div>
+   </div>
+	<div class="container">
+		<h4>Getting Started</h4>
+		<p>You can either download a copy of the source files or install Injectplate via Bower.</p>
+<pre class="prettyprint linenums">
+bower install injectplate
+</pre>
+		<p>Start by including the necessary files.</p>
+<pre class="prettyprint linenums">
+&lt;body&gt;
+    /* Your content goes here */
+    &lt;script src=&quot;js/min/injectplate.js&quot;>&lt;/script&gt;
+&lt;/body&gt;
+</pre>
+		<br>
+		<h4>Basic Example</h4>
+		<p>Initialize Injectplate before creating your first component.</p>
+<pre class="prettyprint linenums">
+&lt;script&gt;
+// Initialize
+var $inject = new injectplate();
+
+// Create component
+$inject.component({
+    name: 'article',
+    className: 'basic-article',
+    html: [
+        '&lt;article&gt;',
+            '&lt;h2&gt;{{heading}}&lt;/h2&gt;',
+            '&lt;div&gt;{{content}}&lt;/div&gt;',
+        '&lt;/article&gt;'
+    ]
+});
+&lt;/script&gt;
+</pre>
+		<p>Once the component has been created, simple bind it to an element and parse in the relevant data.</p>
+<pre class="prettyprint linenums">
+&lt;script&gt;
+// Call component
+$inject.bind({
+    component: 'article',
+    to: '#article',
+    data: {
+        heading: 'Great Article Heading',
+        content: 'This will just be some basic text about stuff.'
+    }
+});
+&lt;/script&gt;
+</pre>
+		<br>
+		<h4>Dynamic Data</h4>
+		<p>Sometimes you might require elements to be generated dynamically and Injectplate can do this with a JSON based dataset. To do so modify the HTML option of the component, for example:</p>
+<pre class="prettyprint linenums">
+&lt;script&gt;
+$inject.component({
+    name: 'articleAdvanced',
+    className: 'advanced-article',
+    html: [
+        '&lt;article&gt;',
+            '&lt;h2&gt;{{heading}}&lt;/h2&gt;',
+            '&lt;div class="content"&gt;', {
+                paragraphs: [
+                    '&lt;p&gt;{{content}}&lt;/p&gt;'
+                ]
+            },
+            '&lt;/div&gt;',
+        '&lt;/article&gt;'
+    ]
+});
+
+$inject.bind({
+    component: 'articleAdvanced',
+    to: '#article',
+    data: {
+        heading: 'This Is An Advanced Article',
+        paragraphs: {
+            0: {
+                content: 'This is paragraph one.'
+            },
+            1: {
+                content: 'Here goes the paragraphs sequel'
+            },
+            2: {
+                content: 'Finally the last paragrpah goes here.'
+            }
+        }
+    }
+});
+&lt;/script&gt;
+</pre>
+		<br>
+		<h4>Working Example</h4>
+		<p class="note">This example uses the dynamic data example above.</p>
+		<div id="article"></div>
+		<br><br>
+      <h4>Detailed Documentation</h4>
+      <p>For a more detailed look into the available options, you can read the documentation at <a target="_blank" href="https://github.com/chrishumboldt/Injectplate" class="link">https://github.com/chrishumboldt/Injectplate</a></p>
+	</div>
+
+	<footer><div class="container"><div class="col-double">
+		<div class="left">
+			Made by <a href="http://chrishumboldt.com" target="_blank">Chris Humboldt</a>
+		</div>
+		<div class="right">
+			A <a href="http://getwebplate.com" target="_blank">Webplate Project</a>&nbsp;&nbsp;
+			Want updates? <a href="http://twitter.com/webplatetweets" target="_blank">@webplatetweets</a>
+		</div>
+	</div></div></footer>
+
+	<script src="js/injectplate.js"></script>
+   <script src="js/min/demo.js"></script>
 	<script>
 	// Start Inject
 	var $inject = new injectplate();
 
-	// Create components
 	$inject.component({
-		name: 'text',
-		html: [
-			'<h1 @if heading != undefined @ class="test">{{heading}}</h1>',
-			'<p>{{text}}</p>'
-		]
-	});
-	$inject.component({
-		name: 'article',
-		html: [
-			'<div class="textExample">',
-			'<h1>{{heading}}</h1>', {
-				paragraphs: [
-					'<p{{attributes.id}}{{attributes.className}}>',
-					'{{text}}',
-					'</p>'
-				]
-			},
-			'</div>',
-			'<div id="listExample"></div>'
-		]
-	});
-	$inject.component({
-		name: 'list',
-		html: [
-			'<ul>',{
-				listItems: ['<li @if state == active @>{{text}}</li>']
-			},
-			'</ul>'
-		]
+	    name: 'articleAdvanced',
+	    className: 'advanced-article',
+	    html: [
+	        '<article>',
+	            '<h2>{{heading}}</h2>',
+	            '<div class="content">', {
+	                paragraphs: [
+	                    '<p>{{content}}</p>'
+	                ]
+	            },
+	            '</div>',
+	        '</article>'
+	    ]
 	});
 
-	// Show the component list
-	$inject.log($inject.componentList);
-
-	// Inject components
 	$inject.bind({
-		component: 'text',
-		to: 'body',
-		data: {
-			heading: 'Simple Injection',
-			text: 'You can insert lots of different things.'
-		}
-	});
-	$inject.bind({
-		component: 'article',
-		to: 'body',
-		data: {
-			heading: 'Nested Example',
-			paragraphs: {
-				0: {
-					attributes: {
-						id: ' data-attribute="example"',
-						className: ' class="first"'
-					},
-					text: 'This is the first paragraph.'
-				},
-				1: {
-					attributes: {
-						className: ' class="middle"'
-					},
-					text: 'Here is the middle paragraph.'
-				},
-				2: {
-					attributes: {
-						className: ' class="last"'
-					},
-					text: 'And last but not least, the final paragraph.'
-				}
-			}
-		},
-		onDone: function() {
-			$inject.bind({
-				component: 'list',
-				to: '#listExample',
-				data: {
-					listItems: {
-						0: {
-							state: 'active',
-							text: 'List Item 1'
-						},
-						1: {
-							state: 'inactive',
-							text: 'List Item 2'
-						},
-						2: {
-							state: 'active',
-							text: 'List Item 3'
-						}
-					}
-				},
-				onDone: function() {
-					console.log('Done Binding!');
-				}
-			});
-		}
+	    component: 'articleAdvanced',
+	    to: '#article',
+	    data: {
+	        heading: 'This Is An Advanced Article',
+	        paragraphs: {
+	            0: {
+	                content: 'This is paragraph one.'
+	            },
+	            1: {
+	                content: 'Here goes the paragraphs sequel'
+	            },
+	            2: {
+	                content: 'Finally the last paragrpah goes here.'
+	            }
+	        }
+	    }
 	});
 	</script>
 
