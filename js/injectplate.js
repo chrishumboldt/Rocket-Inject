@@ -37,7 +37,11 @@ var injectplate = function() {
 			$element = document.getElementById('inject-' + $objBind.component);
 		} else {
 			if ($selectorType === '#') {
-				$element = document.getElementById($objBind.to.substring(1));
+				if ($objBind.to.split(' ').length === 1) {
+					$element = document.getElementById($objBind.to.substring(1));
+				} else {
+					$element = document.querySelector($objBind.to);
+				}
 			} else if ($selectorType === '.') {
 				$element = document.querySelector($objBind.to);
 			} else {
