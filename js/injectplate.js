@@ -20,7 +20,7 @@ var injectplate = function() {
 		} else {
 			var $container = document.createElement('div');
 			$container.innerHTML = $html;
-			$element.appendChild($container.firstChild);
+			$element.appendChild($container);
 		}
 		$element.setAttribute('data-inject', 'true');
 		if ($onDone !== undefined) {
@@ -110,6 +110,7 @@ var injectplate = function() {
 
 		// Flatten HTML
 		for (var $i = 0, $len = $componentHTML.length; $i < $len; $i++) {
+			// console.log($componentHTML[$i]);
 			if (typeof $componentHTML[$i] === 'object') {
 				for (var $componentHTMLKey in $componentHTML[$i]) {
 					// Inner HTML flat
@@ -183,6 +184,7 @@ var injectplate = function() {
 					}
 				}
 			} else {
+
 				// Check to see if there are any binding options
 				if ($componentHTML[$i].indexOf('@') > -1) {
 					var $conditionState = true;
