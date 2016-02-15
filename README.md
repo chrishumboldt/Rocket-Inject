@@ -189,6 +189,26 @@ $inject.bind({
 });
 ```
 
+You are also able to display flat datasets without having to access a property by simply using `{{.}}`.
+
+```
+$inject.component({
+	name: 'example',
+	html: [
+		'{{#paragraphs}}',
+			'<p>{{.}}</p>',
+		'{{/paragraphs}}'
+	]
+});
+$inject.bind({
+	component: 'example',
+	to: '#example',
+	data: {
+		paragraphs: ['This is paragraph one.', 'This is paragraph two.', 'This is paragraph three.']
+	}
+});
+```
+
 ## Component List
 If you would like to know what components have been created simply call the component list function and view your console, like so:
 
