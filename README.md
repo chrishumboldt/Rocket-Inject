@@ -24,7 +24,9 @@ var $inject = new injectplate();
 </script>
 ```
 
-## Component
+## Components
+A Injectplate component is a predefined HTML template that can accept data. Once created you can reuse this code within your project and app and maintain accordingly. This is a great way to abstract your UI.
+
 Creating a component is dead easy and takes just a few options to complete.
 
 ```
