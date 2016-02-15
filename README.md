@@ -20,10 +20,15 @@ Next initialize Injectplate before creating your first component.
 
 ```
 <script>
-// Initialize
 var $inject = new injectplate();
+</script>
+```
 
-// Create component
+## Component
+Creating a component is dead easy and takes just a few options to complete.
+
+```
+<script>
 $inject.component({
    name: 'article',
    className: 'basic-article',
@@ -37,11 +42,18 @@ $inject.component({
 </script>
 ```
 
+| Option | Description |
+| ---- | ---- |
+| name | Set the name of the component. This is referenced when calling the binding function. |
+| className | Assign a class name to the containing element every time the component is bound. |
+| html | Set the HTML template that will be used when binding data. |
+| onDone | Assign a function that will be called once the component is bound. |
+
+## Bind
 Once the component has been created, simple bind it to an element and parse in the relevant data.
 
 ```
 <script>
-// Call component
 $inject.bind({
    component: 'article',
    to: '#article',
@@ -52,6 +64,14 @@ $inject.bind({
 });
 </script>
 ```
+
+| Option | Default | Description |
+| ---- | ---- | ---- |
+| component | | Choose the component you wish to use. |
+| to | | Declare the selector of the DOM element you to bind to. This can be an id, class or tag. By default it will attempt to find an element with an id that matches the component name. |
+| data | | Parse in a JSON object with the data. This will then match to the HTML template of the component. |
+| onDone | | Assign a function that will be called once the binding is complete. |
+| overwrite | false | By default the component will append to the `to` selector. If set to `true` it will overwrite the inner HTML. |
 
 ## HTML
 Each component has a predefined HTML structure that can render out static and dynamic data. Injectplate does this using the [Mustache.js](https://github.com/janl/mustache.js) templating engine which has some really easy sytax.
