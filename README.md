@@ -134,54 +134,49 @@ Note that you are also be able to bind again with the onDone function and nest c
 <script>
 // Create component
 $inject.component({
-   name: 'article',
-   className: 'article',
-   html: [
-      '<article>',
-          '<h2>{{heading}}</h2>',
-          '<div>{{content}}</div>',
-          '<div class="comments"></div>',
-      '</article>'
-   ]
+	name: 'article',
+	html: [
+		'<article>',
+			'<h2>{{heading}}</h2>',
+			'<div>{{content}}</div>',
+			'<div class="comments"></div>',
+		'</article>'
+	]
 });
 $inject.component({
-   name: 'comments',
-   html: [{
-      comments: [
-          '<comment>',
-              '<p>{{comment}}</p>',
-              '<div>By: {{user}}</div>',
-          '</comment>'
-      ]
-   }]
+	name: 'comments',
+	html: [
+		'<ul>',
+			'{{#comments}}',
+				'<li>{{text}} by {{author}}</li>',
+			{{/comments}},
+		'</ul>'
+	]
 });
 
 // Call component
 $inject.bind({
-   component: 'article',
-   to: '#article',
-   data: {
-      heading: 'Anther Great Article Heading',
-      content: 'More arbitrary text goes here.'
-   },
-   onDone: function() {
-      $inject.bind({
-          component: 'comments',
-          to: '.comments',
-          data: {
-              comments: {
-                  0: {
-                      comment: 'I like this Javascript component',
-                      user: 'Greg McAwesome'
-                  },
-                  1: {
-                      comment: 'Let use this component in our next project',
-                      user: 'Bob Knowsitall'
-                  }
-              }
-          }
-      });
-   }
+	component: 'article',
+	to: '#article',
+	data: {
+		heading: 'Anther Great Article Heading',
+		content: 'More arbitrary text goes here.'
+	},
+	onDone: function() {
+		$inject.bind({
+			component: 'comments',
+			to: '.comments',
+			data: {
+				comments: [{
+					text: 'I like this Javascript component',
+					author: 'Greg McAwesome'
+				}, {
+					text: 'Let use this component in our next project',
+					author: 'Bob Knowsitall'
+				}]
+			}
+		});
+	}
 });
 </script>
 ```
