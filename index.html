@@ -30,6 +30,9 @@ bower install injectplate
 &lt;/body&gt;
 </pre>
 		<br>
+		<h4>What Is This?</h4>
+		<p>Injectplate is a declare once Javascript component injector. This allows you to create HTML components and inject them into the DOM at will. In essence it is a wrapper for the awesome <a href="https://github.com/janl/mustache.js" class="link">Mustache.js</a> library which has a great template sytax.</p>
+		<br>
 		<h4>Basic Example</h4>
 		<p>Initialize Injectplate before creating your first component.</p>
 <pre class="prettyprint linenums">
@@ -66,7 +69,8 @@ $inject.bind({
 </pre>
 		<br>
 		<h4>Dynamic Data</h4>
-		<p>Sometimes you might require elements to be generated dynamically and Injectplate can do this with a JSON based dataset. To do so modify the HTML option of the component, for example:</p>
+		<p>Sometimes you might require elements to be generated dynamically and Injectplate can do this with a JSON based dataset. To do so modify the HTML option of the component. <b>NOTE</b> that the HTML template is defined via an array but can be a basic string.</p>
+		<p>To see how to define templates view the <a href="http://getwebplate.com/#/documentation/injector/" class="link">online documentation</a>. Find an example below:</p>
 <pre class="prettyprint linenums">
 &lt;script&gt;
 $inject.component({
@@ -75,11 +79,10 @@ $inject.component({
     html: [
         '&lt;article&gt;',
             '&lt;h2&gt;{{heading}}&lt;/h2&gt;',
-            '&lt;div class="content"&gt;', {
-                paragraphs: [
-                    '&lt;p&gt;{{content}}&lt;/p&gt;'
-                ]
-            },
+            '&lt;div class="content"&gt;',
+                '{{#paragraphs}}',
+                    '&lt;p&gt;{{content}}&lt;/p&gt;',
+                '{{/paragraphs}}',
             '&lt;/div&gt;',
         '&lt;/article&gt;'
     ]
@@ -90,17 +93,13 @@ $inject.bind({
     to: '#article',
     data: {
         heading: 'This Is An Advanced Article',
-        paragraphs: {
-            0: {
-                content: 'This is paragraph one.'
-            },
-            1: {
-                content: 'Here goes the paragraphs sequel'
-            },
-            2: {
-                content: 'Finally the last paragrpah goes here.'
-            }
-        }
+        paragraphs: [{
+            content: 'This is paragraph one.'
+        }, {
+            content: 'Here goes the paragraphs sequel'
+        }, {
+            content: 'Finally the last paragrpah goes here.'
+        }]
     }
 });
 &lt;/script&gt;
@@ -109,6 +108,7 @@ $inject.bind({
 		<h4>Working Example</h4>
 		<p class="note">This example uses the dynamic data example above.</p>
 		<div id="article"></div>
+		<div id="example"></div>
 		<br><br>
       <h4>Detailed Documentation</h4>
       <p>For a more detailed look into the available options, you can read the documentation at <a target="_blank" href="https://github.com/chrishumboldt/Injectplate" class="link">https://github.com/chrishumboldt/Injectplate</a></p>
@@ -130,39 +130,36 @@ $inject.bind({
 	// Start Inject
 	var $inject = new injectplate();
 
+	// Component
 	$inject.component({
-	    name: 'articleAdvanced',
-	    className: 'advanced-article',
-	    html: [
-	        '<article>',
-	            '<h2>{{heading}}</h2>',
-	            '<div class="content">', {
-	                paragraphs: [
-	                    '<p>{{content}}</p>'
-	                ]
-	            },
-	            '</div>',
-	        '</article>'
-	    ]
+		name: 'articleAdvanced',
+		className: 'advanced-article',
+		html: [
+			'<article>',
+			'<h2>{{heading}}</h2>',
+			'<div class="content">',
+				'{{#paragraphs}}',
+					'<p>{{content}}</p>',
+				'{{/paragraphs}}',
+			'</div>',
+			'</article>'
+		]
 	});
 
+	// Bind
 	$inject.bind({
-	    component: 'articleAdvanced',
-	    to: '#article',
-	    data: {
-	        heading: 'This Is An Advanced Article',
-	        paragraphs: {
-	            0: {
-	                content: 'This is paragraph one.'
-	            },
-	            1: {
-	                content: 'Here goes the paragraphs sequel'
-	            },
-	            2: {
-	                content: 'Finally the last paragrpah goes here.'
-	            }
-	        }
-	    }
+		component: 'articleAdvanced',
+		to: '#article',
+		data: {
+			heading: 'This Is An Advanced Article',
+			paragraphs: [{
+				content: 'This is paragraph one.'
+			}, {
+				content: 'Here goes the paragraphs sequel'
+			}, {
+				content: 'Finally the last paragrpah goes here.'
+			}]
+		}
 	});
 	</script>
 
