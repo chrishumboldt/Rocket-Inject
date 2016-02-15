@@ -141,7 +141,7 @@ $inject.bind({
 ```
 
 #### Function Return Values
-Another great feature is the ability to return back data within a function on the binding. For example:
+Another great feature is the ability to return data within a function on binding. For example:
 
 ```
 $inject.component({
@@ -162,7 +162,7 @@ $inject.bind({
 ```
 
 #### Dynamic Data / Sections
-If you wish to display dynamic data you need to declare a section inside the HTML with a name that correlates to the dataset on binding. Opening the section requires the `pound` sign (#) and closing the loop requires the `slash` sign (/).
+If you wish to display dynamic data you need to declare a section inside the HTML with a name that correlates to the dataset. Opening the section requires the `pound` sign (#) and closing the loop requires the `slash` sign (/).
 
 ```
 $inject.component({
