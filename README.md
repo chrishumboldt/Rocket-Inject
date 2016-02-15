@@ -68,18 +68,18 @@ Sometimes you might require elements to be generated dynamically and Injectplate
 ```
 <script>
 $inject.component({
-   name: 'articleAdvanced',
-   className: 'advanced-article',
-   html: [
-      '<article>',
-          '<h2>{{heading}}</h2>',
-          '<div class="content">',
-			 	'{{#paragraphs}}',
-            	'<p>{{content}}</p>',
+	name: 'articleAdvanced',
+	className: 'advanced-article',
+	html: [
+		'<article>',
+			'<h2>{{heading}}</h2>',
+			'<div class="content">',
+				'{{#paragraphs}}',
+					'<p>{{content}}</p>',
 				'{{/paragraphs}}',
-          '</div>',
-      '</article>'
-   ]
+			'</div>',
+		'</article>'
+	]
 });
 
 $inject.bind({
