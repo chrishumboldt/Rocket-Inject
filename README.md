@@ -132,14 +132,14 @@ Note that you are also be able to bind again with the onDone function and nest c
 
 ```
 <script>
-// Create component
+// Create components
 $inject.component({
 	name: 'article',
 	html: [
 		'<article>',
 			'<h2>{{heading}}</h2>',
 			'<div>{{content}}</div>',
-			'<div class="comments"></div>',
+			'<div id="comments"></div>',
 		'</article>'
 	]
 });
@@ -154,7 +154,7 @@ $inject.component({
 	]
 });
 
-// Call component
+// Call components
 $inject.bind({
 	component: 'article',
 	to: '#article',
@@ -165,7 +165,7 @@ $inject.bind({
 	onDone: function() {
 		$inject.bind({
 			component: 'comments',
-			to: '.comments',
+			to: '#comments',
 			data: {
 				comments: [{
 					text: 'I like this Javascript component',
