@@ -1,5 +1,5 @@
 # Injectplate
-A Javascript component injector.
+A declare once Javascript component injector. This allows you to create HTML components and inject them into the DOM at will. In essence it is a wrapper for the awesome [Mustache.js](https://github.com/janl/mustache.js) library which has a great template sytax.
 
 ## Getting Started
 You can either download a fresh copy of the source files or install Injectplate via Bower.
@@ -54,11 +54,11 @@ $inject.bind({
 ```
 
 ## Component List
-If you would like to know what components have been created simply call the component list function, like so:
+If you would like to know what components have been created simply call the component list function and view your console, like so:
 
 ```
 <script>
-$inject.log($inject.componentList);
+$inject.componentList();
 </script>
 ```
 
@@ -73,68 +73,53 @@ $inject.component({
    html: [
       '<article>',
           '<h2>{{heading}}</h2>',
-          '<div class="content">', {
-              paragraphs: [
-                  '<p>{{content}}</p>'
-              ]
-          },
+          '<div class="content">',
+			 	'{{#paragraphs}}',
+            	'<p>{{content}}</p>',
+				'{{/paragraphs}}',
           '</div>',
       '</article>'
    ]
 });
 
 $inject.bind({
-   component: 'articleAdvanced',
-   to: '#article',
-   data: {
-      heading: 'This Is An Advanced Article',
-      paragraphs: {
-          0: {
-              content: 'This is paragraph one.'
-          },
-          1: {
-              content: 'Here goes the paragraphs sequel'
-          },
-          2: {
-              content: 'Finally the last paragrpah goes here.'
-          }
-      }
-   }
-});
-</script>
-```
-
-## Basic Conditional Statement
-Injectplate has begun including conditional statements namely a true / false conditions on data variables. The syntax requires you to wrap the statement in "@" signs and declare the condition inside. See an example below.
-
-```
-<script>
-$inject.component({
-    name: 'article',
-    className: 'basic-article',
-    html: [
-        '<article>',
-           '<h2 @if heading != undefined @>{{heading}}</h2>',
-           '<div>{{content}}</div>',
-        '</article>'
-    ]
-});
-
-$inject.bind({
-   component: 'article',
-   to: '#article',
-   data: {
-      content: 'This content will inject but the heading will not because it has not been provided.',
-   }
+	component: 'articleAdvanced',
+	to: '#article',
+	data: {
+		heading: 'This Is An Advanced Article',
+		paragraphs: [{
+			content: 'This is paragraph one.'
+		}, {
+			content: 'Here goes the paragraph two.'
+		}, {
+			content: 'Finally the last paragraph goes here.'
+		}]
+	}
 });
 </script>
 ```
 
 ## On Done
-Once the component has been injected you might want to execute some code. To do so apply the onDone event to your binding.
+Once the component has been injected you might want to execute some code. To do so apply the onDone event to your component or binding. Assigning the event to the component will execute it every time the component is bound, while assigning it to the binding will only call it on that particular binding instance.
+
+Also note that the onDone function return a **$this** variable which is essentially the DOM element you just bound to. This is an optional return on the callback.
 
 ```
 <script>
+// On component
+$inject.bind({
+   component: 'article',
+   to: '#article',
+   data: {
+      heading: 'Great Article Heading',
+      content: 'This will just be some basic text about stuff.'
+   },
+	onDone: function($this) {
+		console.log('This will output each time this component is used.');
+	}
+});
+
+// On binding
 $inject.bind({
    component: 'article',
    to: '#article',
@@ -142,7 +127,7 @@ $inject.bind({
       heading: 'Anther Great Article Heading',
       content: 'More arbitrary text goes here.',
    },
-   onDone: function() {
+   onDone: function($this) {
       console.log('The binding is done!');
    }
 });
