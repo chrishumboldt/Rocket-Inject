@@ -102,7 +102,7 @@ $inject.bind({
 ## On Done
 Once the component has been injected you might want to execute some code. To do so apply the onDone event to your component or binding. Assigning the event to the component will execute it every time the component is bound, while assigning it to the binding will only call it on that particular binding instance.
 
-Also note that the onDone function return a **$this** variable which is essentially the DOM element you just bound to. This is an optional return on the callback.
+Also note that the onDone function returns a **$this** variable which is the newly bound DOM element. This is an optional return on the callback.
 
 ```
 <script>
