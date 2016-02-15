@@ -25,7 +25,7 @@ var $inject = new injectplate();
 ```
 
 ## Components
-A Injectplate component is a predefined HTML template that can accept data. Once created you can reuse this code within your project and app and maintain accordingly. This is a great way to abstract your UI.
+A Injectplate component is a predefined HTML template that can accept data. Once created you can reuse this component within your project and app and maintain accordingly. This is a great way to abstract your UI.
 
 Creating a component is dead easy and takes just a few options to complete.
 
@@ -52,7 +52,7 @@ $inject.component({
 | onDone | Assign a function that will be called once the component is bound. |
 
 ## Bind
-Once the component has been created, simple bind it to an element and parse in the relevant data.
+Once the component has been created, simply bind it to an element and parse in the relevant data.
 
 ```
 <script>
@@ -70,7 +70,7 @@ $inject.bind({
 | Option | Default | Description |
 | ---- | ---- | ---- |
 | component | | Choose the component you wish to use. |
-| to | | Declare the selector of the DOM element you to bind to. This can be an id, class or tag. By default it will attempt to find an element with an id that matches the component name. |
+| to | | Declare the selector of the DOM element you want to bind to. This can be an `id`, `class` or `tag name`. By default it will attempt to find an element with an id that matches the component name. |
 | data | | Parse in a JSON object with the data. This will then match to the HTML template of the component. |
 | onDone | | Assign a function that will be called once the binding is complete. |
 | overwrite | false | By default the component will append to the `to` selector. If set to `true` it will overwrite the inner HTML. |
