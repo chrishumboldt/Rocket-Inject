@@ -99,9 +99,9 @@ $inject.component({
 ```
 
 #### Static Values
-Displaying static values inside your HTML requires the `{{value}}` syntax as seen earlier. The double curly braces is the basis for all the templating rules and the value inside will be the name of the key inside the data you parse when binding.
+Displaying static values inside your HTML requires the `{{value}}` syntax. The double curly braces is the basis for all the templating rules and the value inside will be the name of the key inside the data you parse when binding.
 
-All variables are escaped when using the double curly braces and are unescaped if you use the triple curly braces, `{{{value}}}`.
+All variables are escaped by default but can be unescaped if you use the triple curly braces, `{{{value}}}`.
 
 ```
 $inject.component({
