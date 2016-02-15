@@ -53,6 +53,40 @@ $inject.bind({
 </script>
 ```
 
+## HTML
+Each component has a predefined HTML structure that can render out static and dynamic data. Injectplate does this using the [Mustache.js](https://github.com/janl/mustache.js) templating engine which has some really easy sytax.
+
+**Note** that you declare your HTML as either a string or as an array of HTML elements. The array just makes it easier to nested large complex HTML. For example
+```
+// As string
+$inject.component({
+	name: 'example',
+	html: '<p>This is some text.</p>'
+});
+
+// As array
+$inject.component({
+	name: 'example',
+	html: [
+		'<p>',
+			'This is some text.',
+		'</p>'
+	]
+});
+```
+
+#### Static Values
+Displaying static values inside your HTML requires the {{value}} syntax as seen earlier. The double curly braces is the basis for all the templating rules.
+
+```
+$inject.component({
+	name: 'example',
+	html: [
+		'<p>{{value}}</p>'
+	]
+});
+```
+
 ## Component List
 If you would like to know what components have been created simply call the component list function and view your console, like so:
 
