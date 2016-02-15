@@ -98,7 +98,7 @@ $inject.bind({
 ```
 
 #### Function Return Values
-Another great feature of [Mustache.js](https://github.com/janl/mustache.js) is the ability to return back data within a function on the binding. For example:
+Another great feature is the ability to return back data within a function on the binding. For example:
 
 ```
 $inject.component({
@@ -118,7 +118,76 @@ $inject.bind({
 });
 ```
 
-####
+#### Dynamic Data
+If you wish to display dynamic data you need to delcare a loop inside the HTML. Opening the loop requires the `pound` sign (#) and closing the loop requires the `slash` sign (/).
+
+```
+$inject.component({
+	name: 'example',
+	html: [
+		'{{#paragraphs}}',
+			'<p>{{text}}</p>',
+		'{{/paragraphs}}'
+	]
+});
+$inject.bind({
+	component: 'example',
+	to: '#example',
+	data: {
+		paragraphs: [{
+			text: 'This is paragraph one.'
+		}, {
+			text: 'This is paragraph two.'
+		}, {
+			text: 'This is paragraph three.'
+		}]
+	}
+});
+```
+
+At this point you can also nest data loops. For example:
+
+```
+$inject.component({
+	name: 'example',
+	html: [
+		'{{#articles}}',
+			'<h1>{{heading}}</h1>',
+			'<p>{{content}}</p>',
+			'<div class="comments">',
+				'{{#comments}}',
+					'<p>{{text}}</p>'.
+				'{{/comments}}',
+			'</div>',
+		'{{/articles}}'
+	]
+});
+$inject.bind({
+	component: 'example',
+	to: '#example',
+	data: {
+		articles: [{
+			heading: 'Article One',
+			content: 'This is some text.',
+			comments: [{
+				text: 'This is comment one.'
+			}, {
+				text: 'This is comment two.'
+			}, {
+				text: 'This is comment three.'
+			}]
+		}, {
+			heading: 'Article two',
+			content: 'This is some text.',
+			comments: [{
+				text: 'This is comment one.'
+			}, {
+				text: 'This is comment two.'
+			}]
+		}]
+	}
+});
+```
 
 ## Component List
 If you would like to know what components have been created simply call the component list function and view your console, like so:
@@ -126,43 +195,6 @@ If you would like to know what components have been created simply call the comp
 ```
 <script>
 $inject.componentList();
-</script>
-```
-
-## Dynamic Data
-Sometimes you might require elements to be generated dynamically and Injectplate can do this with a JSON based dataset. To do so modify the HTML option of the component, for example:
-
-```
-<script>
-$inject.component({
-	name: 'articleAdvanced',
-	className: 'advanced-article',
-	html: [
-		'<article>',
-			'<h2>{{heading}}</h2>',
-			'<div class="content">',
-				'{{#paragraphs}}',
-					'<p>{{content}}</p>',
-				'{{/paragraphs}}',
-			'</div>',
-		'</article>'
-	]
-});
-
-$inject.bind({
-	component: 'articleAdvanced',
-	to: '#article',
-	data: {
-		heading: 'This Is An Advanced Article',
-		paragraphs: [{
-			content: 'This is paragraph one.'
-		}, {
-			content: 'Here goes the paragraph two.'
-		}, {
-			content: 'Finally the last paragraph goes here.'
-		}]
-	}
-});
 </script>
 ```
 
