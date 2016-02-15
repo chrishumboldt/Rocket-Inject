@@ -108,12 +108,12 @@ Also note that the onDone function returns a **$this** variable which is the new
 <script>
 // On component
 $inject.bind({
-   component: 'article',
-   to: '#article',
-   data: {
-      heading: 'Great Article Heading',
-      content: 'This will just be some basic text about stuff.'
-   },
+	component: 'article',
+	to: '#article',
+	data: {
+		heading: 'Great Article Heading',
+		content: 'This will just be some basic text about stuff.'
+	},
 	onDone: function($this) {
 		console.log('This will output each time this component is used.');
 	}
@@ -121,15 +121,15 @@ $inject.bind({
 
 // On binding
 $inject.bind({
-   component: 'article',
-   to: '#article',
-   data: {
-      heading: 'Anther Great Article Heading',
-      content: 'More arbitrary text goes here.',
-   },
-   onDone: function($this) {
-      console.log('The binding is done!');
-   }
+	component: 'article',
+	to: '#article',
+	data: {
+		heading: 'Anther Great Article Heading',
+		content: 'More arbitrary text goes here.',
+	},
+	onDone: function($this) {
+		console.log('The binding is done!');
+	}
 });
 </script>
 ```
