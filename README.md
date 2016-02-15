@@ -119,7 +119,7 @@ $inject.bind({
 ```
 
 #### Dynamic Data
-If you wish to display dynamic data you need to delcare a loop inside the HTML. Opening the loop requires the `pound` sign (#) and closing the loop requires the `slash` sign (/).
+If you wish to display dynamic data you need to declare a loop inside the HTML with a name that correlates to the data set on binding. Opening the loop requires the `pound` sign (#) and closing the loop requires the `slash` sign (/).
 
 ```
 $inject.component({
@@ -156,7 +156,7 @@ $inject.component({
 			'<p>{{content}}</p>',
 			'<div class="comments">',
 				'{{#comments}}',
-					'<p>{{text}}</p>'.
+					'<p>{{text}}</p>',
 				'{{/comments}}',
 			'</div>',
 		'{{/articles}}'
