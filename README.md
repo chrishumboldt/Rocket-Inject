@@ -1,6 +1,20 @@
 # Injectplate
 A declare once Javascript component injector. This allows you to create HTML components and inject them into the DOM at will. In essence it is a wrapper for the awesome [Mustache.js](https://github.com/janl/mustache.js) library which has a great template sytax.
 
+## Table of Contents
+
+* [Getting Started](#getting-started)
+* [Components](#components)
+* [Bind](#bind)
+* [HTML](#html)
+	* [Static Values](#static-values)
+	* [Return Values](#return-values)
+	* [Data Sections](#data-sections)
+	* [Inverted Sections](#inverted-sections)
+* [Component List](#component-list)
+* [On Done](#on-done)
+* [Nesting Components](#nesting-components)
+
 ## Getting Started
 You can either download a fresh copy of the source files or install Injectplate via Bower.
 
@@ -140,7 +154,7 @@ $inject.bind({
 });
 ```
 
-#### Function Return Values
+#### Return Values
 Another great feature is the ability to return data within a function on binding. For example:
 
 ```
@@ -161,7 +175,7 @@ $inject.bind({
 });
 ```
 
-#### Dynamic Data / Sections
+#### Data Sections
 If you wish to display dynamic data you need to declare a section inside the HTML with a name that correlates to the dataset. Opening the section requires the `pound` sign (#) and closing the section requires the `slash` sign (/).
 
 ```
@@ -252,7 +266,7 @@ $inject.bind({
 });
 ```
 
-## Inverted Sections
+#### Inverted Sections
 An inverted section is a rendering fallback for if the dataset is `null`, `undefined` or `false`. It requires a different opening declaration of `{{^}}`. For example.
 
 ```
@@ -309,7 +323,7 @@ $inject.bind({
 
 
 ## Nesting Components
-Note that you are also be able to bind again with the onDone function and nest components. In this case we want to inject some comments into the article component once it has already been injected itself.
+Note that you are also be able to bind again with the onDone function and nest components. In this case we want to inject some comments into an article component only once it has already been injected itself.
 
 ```
 <script>
