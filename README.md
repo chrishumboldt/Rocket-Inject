@@ -97,6 +97,27 @@ $inject.bind({
 });
 ```
 
+You can also access data using the Javascript dot notation.
+
+```
+$inject.component({
+	name: 'example',
+	html: [
+		'<p>{{user.firstname}} {{user.lastname}}</p>'
+	]
+});
+$inject.bind({
+	component: 'example',
+	to: '#example',
+	data: {
+		user: {
+			firstname: 'Joe',
+			lastname: 'Awesome'
+		}
+	}
+});
+```
+
 #### Function Return Values
 Another great feature is the ability to return back data within a function on the binding. For example:
 
