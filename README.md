@@ -119,7 +119,7 @@ $inject.bind({
 ```
 
 #### Dynamic Data / Sections
-If you wish to display dynamic data you need to declare a section inside the HTML with a name that correlates to the data set on binding. Opening the section requires the `pound` sign (#) and closing the loop requires the `slash` sign (/).
+If you wish to display dynamic data you need to declare a section inside the HTML with a name that correlates to the dataset on binding. Opening the section requires the `pound` sign (#) and closing the loop requires the `slash` sign (/).
 
 ```
 $inject.component({
