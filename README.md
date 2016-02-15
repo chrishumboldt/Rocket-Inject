@@ -149,7 +149,7 @@ $inject.component({
 		'<ul>',
 			'{{#comments}}',
 				'<li>{{text}} by {{author}}</li>',
-			{{/comments}},
+			'{{/comments}}',
 		'</ul>'
 	]
 });
