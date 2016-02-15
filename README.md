@@ -12,7 +12,7 @@ Simply start by including the required Javascript file.
 
 ```
 <body>
-   <script src="js/min/injectplate.min.js"></script>
+   <script src="js/min/injectplate.js"></script>
 </body>
 ```
 
