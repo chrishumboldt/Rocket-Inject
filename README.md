@@ -77,7 +77,9 @@ $inject.component({
 ```
 
 #### Static Values
-Displaying static values inside your HTML requires the {{value}} syntax as seen earlier. The double curly braces is the basis for all the templating rules and the value inside will be the name of the key inside the data you parse when binding.
+Displaying static values inside your HTML requires the `{{value}}` syntax as seen earlier. The double curly braces is the basis for all the templating rules and the value inside will be the name of the key inside the data you parse when binding.
+
+All variables are escaped when using the double curly braces and are unescaped if you use the triple curly braces, `{{{value}}}`.
 
 ```
 $inject.component({
@@ -94,6 +96,29 @@ $inject.bind({
 	}
 });
 ```
+
+#### Function Return Values
+Another great feature of [Mustache.js](https://github.com/janl/mustache.js) is the ability to return back data within a function on the binding. For example:
+
+```
+$inject.component({
+	name: 'example',
+	html: [
+		'<p>{{calculation}}</p>'
+	]
+});
+$inject.bind({
+	component: 'example',
+	to: '#example',
+	data: {
+		calculation: function() {
+			return 2 + 4;
+		}
+	}
+});
+```
+
+####
 
 ## Component List
 If you would like to know what components have been created simply call the component list function and view your console, like so:
