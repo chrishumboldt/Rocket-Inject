@@ -118,8 +118,8 @@ $inject.bind({
 });
 ```
 
-#### Dynamic Data
-If you wish to display dynamic data you need to declare a loop inside the HTML with a name that correlates to the data set on binding. Opening the loop requires the `pound` sign (#) and closing the loop requires the `slash` sign (/).
+#### Dynamic Data / Sections
+If you wish to display dynamic data you need to declare a section inside the HTML with a name that correlates to the data set on binding. Opening the section requires the `pound` sign (#) and closing the loop requires the `slash` sign (/).
 
 ```
 $inject.component({
@@ -145,7 +145,7 @@ $inject.bind({
 });
 ```
 
-At this point you can also nest data loops. For example:
+At this point you can also nest data sections. For example:
 
 ```
 $inject.component({
@@ -206,6 +206,25 @@ $inject.bind({
 	data: {
 		paragraphs: ['This is paragraph one.', 'This is paragraph two.', 'This is paragraph three.']
 	}
+});
+```
+
+## Inverted Sections
+An inverted section is a rendering fallback for if the dataset is `null`, `undefined` or `false`. It requires a different opening declaration of `{{^}}`. For example.
+
+```
+$inject.component({
+	name: 'example',
+	html: [
+		'{{#paragraphs}}',
+			'<p>{{.}}</p>',
+		'{{/paragraphs}}',
+		'{{^paragraphs}}There are no paragraphs to show.{{/paragraphs}}'
+	]
+});
+$inject.bind({
+	component: 'example',
+	to: '#example'
 });
 ```
 
