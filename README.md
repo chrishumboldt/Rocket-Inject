@@ -76,7 +76,7 @@ $inject.bind({
 | overwrite | false | By default the component will append to the `to` selector. If set to `true` it will overwrite the inner HTML. |
 
 ## HTML
-Each component has a predefined HTML structure that can render out static and dynamic data. Injectplate does this using the [Mustache.js](https://github.com/janl/mustache.js) templating engine which has some really easy sytax.
+Each component has a predefined HTML structure that can render out static and dynamic data. Injectplate does this using the [Mustache.js](https://github.com/janl/mustache.js) templating engine.
 
 **Note** that you declare your HTML as either a string or as an array of HTML elements. The array just makes it easier to nest large complex HTML. For example:
 
