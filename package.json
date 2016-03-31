@@ -1,6 +1,6 @@
 {
 	"name": "Injectplate",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "A declare once Javascript component injector.",
 	"keywords": [
       "Injector",
