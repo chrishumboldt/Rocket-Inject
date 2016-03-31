@@ -297,9 +297,9 @@ Also note that the onDone function returns a **$this** variable which is the new
 
 ```javascript
 // On component
-$inject.bind({
-	component: 'article',
-	to: '#article',
+$inject.component({
+   name: 'article',
+	html: '<article>{{value}}</article>',
 	onDone: function($this) {
 		console.log('This will output each time this component is used.');
 	}
@@ -309,6 +309,9 @@ $inject.bind({
 $inject.bind({
 	component: 'article',
 	to: '#article',
+	data: {
+		value: 'Something here.'
+	},
 	onDone: function($this) {
 		console.log('The binding is done!');
 	}
