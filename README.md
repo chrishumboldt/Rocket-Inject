@@ -92,7 +92,7 @@ $inject.bind({
 ## HTML
 Each component has a predefined HTML structure that can render out static and dynamic data. Injectplate does this using the [Mustache.js](https://github.com/janl/mustache.js) templating engine.
 
-**Note** that you declare your HTML as either a string or as an array of HTML elements. The array just makes it easier to nest large complex HTML. For example:
+**Note** that you declare your HTML as either a string, a multiline string or as an array of HTML elements. The multiline string and array just makes it easier to nest large complex HTML. For example:
 
 ```
 // As a string
@@ -101,7 +101,7 @@ $inject.component({
 	html: '<p>This is some text.</p>'
 });
 
-// As an array
+// As a multiline string
 $inject.component({
 	name: 'example',
 	html: `
@@ -109,6 +109,16 @@ $inject.component({
 			This is some text.
 		</p>
 	`
+});
+
+// As an array
+$inject.component({
+	name: 'example',
+	html: [
+		'<p>',
+			'This is some text.',
+		'</p>'
+	]
 });
 ```
 
@@ -120,9 +130,7 @@ All variables are escaped by default but can be unescaped if you use the triple 
 ```
 $inject.component({
 	name: 'example',
-	html: `
-		<p>{{value}}</p>
-	`
+	html: '<p>{{value}}</p>'
 });
 $inject.bind({
 	component: 'example',
