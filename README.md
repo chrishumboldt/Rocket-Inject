@@ -26,16 +26,14 @@ Simply start by including the required Javascript file.
 
 ```html
 <body>
-   <script src="js/min/injectplate.js"></script>
+   <script src="js/injectplate.min.js"></script>
 </body>
 ```
 
 Next initialize Injectplate before creating your first component.
 
-```html
-<script>
+```javascript
 var $inject = new injectplate();
-</script>
 ```
 
 ## Components
@@ -43,8 +41,7 @@ A Injectplate component is a predefined HTML template that can accept data. Once
 
 Creating a component is dead easy and takes just a few options to complete.
 
-```html
-<script>
+```javascript
 $inject.component({
    name: 'article',
    className: 'basic-article',
@@ -55,7 +52,6 @@ $inject.component({
       </article>
    `
 });
-</script>
 ```
 
 | Option | Description |
@@ -68,8 +64,7 @@ $inject.component({
 ## Bind
 Once the component has been created, simply bind it to an element and parse in the relevant data.
 
-```html
-<script>
+```javascript
 $inject.bind({
    component: 'article',
    to: '#article',
@@ -78,7 +73,6 @@ $inject.bind({
       content: 'This will just be some basic text about stuff.'
    }
 });
-</script>
 ```
 
 | Option | Default | Description |
