@@ -26,7 +26,7 @@ Simply start by including the required Javascript file.
 
 ```html
 <body>
-   <script src="js/min/injectplate.js"></script>
+   <script src="js/injectplate.min.js"></script>
 </body>
 ```
 
