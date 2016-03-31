@@ -24,7 +24,7 @@ bower install injectplate
 
 Simply start by including the required Javascript file.
 
-```
+```html
 <body>
    <script src="js/min/injectplate.js"></script>
 </body>
@@ -32,7 +32,7 @@ Simply start by including the required Javascript file.
 
 Next initialize Injectplate before creating your first component.
 
-```
+```html
 <script>
 var $inject = new injectplate();
 </script>
@@ -43,7 +43,7 @@ A Injectplate component is a predefined HTML template that can accept data. Once
 
 Creating a component is dead easy and takes just a few options to complete.
 
-```
+```html
 <script>
 $inject.component({
    name: 'article',
@@ -68,7 +68,7 @@ $inject.component({
 ## Bind
 Once the component has been created, simply bind it to an element and parse in the relevant data.
 
-```
+```html
 <script>
 $inject.bind({
    component: 'article',
@@ -94,7 +94,7 @@ Each component has a predefined HTML structure that can render out static and dy
 
 **Note** that you declare your HTML as either a string, a multiline string or as an array of HTML elements. The multiline string and array just makes it easier to nest large complex HTML. For example:
 
-```
+```javascript
 // As a string
 $inject.component({
 	name: 'example',
@@ -127,7 +127,7 @@ Displaying static values inside your HTML requires the `{{value}}` syntax. The d
 
 All variables are escaped by default but can be unescaped if you use the triple curly braces, `{{{value}}}`.
 
-```
+```javascript
 $inject.component({
 	name: 'example',
 	html: '<p>{{value}}</p>'
@@ -143,7 +143,7 @@ $inject.bind({
 
 You can also access data using the Javascript dot notation.
 
-```
+```javascript
 $inject.component({
 	name: 'example',
 	html: '<p>{{user.firstname}} {{user.lastname}}</p>'
@@ -163,7 +163,7 @@ $inject.bind({
 #### Return Values
 Another great feature is the ability to return data within a function on binding. For example:
 
-```
+```javascript
 $inject.component({
 	name: 'example',
 	html: '<p>{{calculation}}</p>'
@@ -182,7 +182,7 @@ $inject.bind({
 #### Data Sections
 If you wish to display dynamic data you need to declare a section inside the HTML with a name that correlates to the dataset. Opening the section requires the `pound` sign (#) and closing the section requires the `slash` sign (/).
 
-```
+```javascript
 $inject.component({
 	name: 'example',
 	html: `
@@ -208,7 +208,7 @@ $inject.bind({
 
 At this point you can also nest data sections. For example:
 
-```
+```javascript
 $inject.component({
 	name: 'example',
 	html: `
@@ -252,7 +252,7 @@ $inject.bind({
 
 You are also able to display flat datasets without having to access a property by simply using `{{.}}`.
 
-```
+```javascript
 $inject.component({
 	name: 'example',
 	html: `
@@ -273,7 +273,7 @@ $inject.bind({
 #### Inverted Sections
 An inverted section is a rendering fallback for if the dataset is `null`, `undefined` or `false`. It requires a different opening declaration of `{{^}}`. For example.
 
-```
+```javascript
 $inject.component({
 	name: 'example',
 	html: `
@@ -292,10 +292,8 @@ $inject.bind({
 ## Component List
 If you would like to know what components have been created simply call the component list function and view your console, like so:
 
-```
-<script>
+```html
 $inject.componentList();
-</script>
 ```
 
 ## On Done
@@ -303,8 +301,7 @@ Once the component has been injected you might want to execute some code. To do 
 
 Also note that the onDone function returns a **$this** variable which is the newly bound DOM element. This is an optional return on the callback.
 
-```
-<script>
+```javascript
 // On component
 $inject.bind({
 	component: 'article',
@@ -322,15 +319,13 @@ $inject.bind({
 		console.log('The binding is done!');
 	}
 });
-</script>
 ```
 
 
 ## Nesting Components
 Note that you are also be able to bind again with the onDone function and nest components. In this case we want to inject some comments into an article component only once it has already been injected itself.
 
-```
-<script>
+```javascript
 // Create components
 $inject.component({
 	name: 'article',
@@ -377,7 +372,6 @@ $inject.bind({
 		});
 	}
 });
-</script>
 ```
 
 ## Author
