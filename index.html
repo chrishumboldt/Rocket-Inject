@@ -8,7 +8,7 @@
 	<!-- Title -->
 	<title>Injectplate</title>
 	<!-- Styles -->
-	<link href="css/demo.css" rel="stylesheet" type="text/css">
+	<link href="css/demo.min.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -44,12 +44,12 @@ var $inject = new injectplate();
 $inject.component({
     name: 'article',
     className: 'basic-article',
-    html: [
-        '&lt;article&gt;',
-            '&lt;h2&gt;{{heading}}&lt;/h2&gt;',
-            '&lt;div&gt;{{content}}&lt;/div&gt;',
-        '&lt;/article&gt;'
-    ]
+    html: `
+        &lt;article&gt;
+            &lt;h2&gt;{{heading}}&lt;/h2&gt;
+            &lt;div&gt;{{content}}&lt;/div&gt;
+        &lt;/article&gt;
+    `
 });
 &lt;/script&gt;
 </pre>
@@ -76,16 +76,16 @@ $inject.bind({
 $inject.component({
     name: 'articleAdvanced',
     className: 'advanced-article',
-    html: [
-        '&lt;article&gt;',
-            '&lt;h2&gt;{{heading}}&lt;/h2&gt;',
-            '&lt;div class="content"&gt;',
-                '{{#paragraphs}}',
-                    '&lt;p&gt;{{content}}&lt;/p&gt;',
-                '{{/paragraphs}}',
-            '&lt;/div&gt;',
-        '&lt;/article&gt;'
-    ]
+    html: `
+        &lt;article&gt;
+            &lt;h2&gt;{{heading}}&lt;/h2&gt;
+            &lt;div class="content"&gt;
+                {{#paragraphs}}
+                    &lt;p&gt;{{content}}&lt;/p&gt;
+                {{/paragraphs}}
+            &lt;/div&gt;
+        &lt;/article&gt;
+    `
 });
 
 $inject.bind({
@@ -124,8 +124,8 @@ $inject.bind({
 		</div>
 	</div></div></footer>
 
-	<script src="js/injectplate.js"></script>
-   <script src="js/min/demo.js"></script>
+	<script src="js/injectplate.min.js"></script>
+   <script src="js/demo.min.js"></script>
 	<script>
 	// Start Inject
 	var $inject = new injectplate();
@@ -134,16 +134,16 @@ $inject.bind({
 	$inject.component({
 		name: 'articleAdvanced',
 		className: 'advanced-article',
-		html: [
-			'<article>',
-			'<h2>{{heading}}</h2>',
-			'<div class="content">',
-				'{{#paragraphs}}',
-					'<p>{{content}}</p>',
-				'{{/paragraphs}}',
-			'</div>',
-			'</article>'
-		]
+		html: `
+			<article>
+				<h2>{{heading}}</h2>
+				<div class="content">
+					{{#paragraphs}}
+						<p>{{content}}</p>
+					{{/paragraphs}}
+				</div>
+			</article>
+		`
 	});
 
 	// Bind

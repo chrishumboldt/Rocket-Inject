@@ -48,12 +48,12 @@ Creating a component is dead easy and takes just a few options to complete.
 $inject.component({
    name: 'article',
    className: 'basic-article',
-   html: [
-      '<article>',
-          '<h2>{{heading}}</h2>',
-          '<div>{{content}}</div>',
-      '</article>'
-   ]
+   html: `
+      <article>
+          <h2>{{heading}}</h2>
+          <div>{{content}}</div>
+      </article>
+   `
 });
 </script>
 ```
@@ -104,11 +104,11 @@ $inject.component({
 // As an array
 $inject.component({
 	name: 'example',
-	html: [
-		'<p>',
-			'This is some text.',
-		'</p>'
-	]
+	html: `
+		<p>
+			This is some text.
+		</p>
+	`
 });
 ```
 
@@ -120,9 +120,9 @@ All variables are escaped by default but can be unescaped if you use the triple 
 ```
 $inject.component({
 	name: 'example',
-	html: [
-		'<p>{{value}}</p>'
-	]
+	html: `
+		<p>{{value}}</p>
+	`
 });
 $inject.bind({
 	component: 'example',
@@ -138,9 +138,7 @@ You can also access data using the Javascript dot notation.
 ```
 $inject.component({
 	name: 'example',
-	html: [
-		'<p>{{user.firstname}} {{user.lastname}}</p>'
-	]
+	html: '<p>{{user.firstname}} {{user.lastname}}</p>'
 });
 $inject.bind({
 	component: 'example',
@@ -160,9 +158,7 @@ Another great feature is the ability to return data within a function on binding
 ```
 $inject.component({
 	name: 'example',
-	html: [
-		'<p>{{calculation}}</p>'
-	]
+	html: '<p>{{calculation}}</p>'
 });
 $inject.bind({
 	component: 'example',
@@ -181,11 +177,11 @@ If you wish to display dynamic data you need to declare a section inside the HTM
 ```
 $inject.component({
 	name: 'example',
-	html: [
-		'{{#paragraphs}}',
-			'<p>{{text}}</p>',
-		'{{/paragraphs}}'
-	]
+	html: `
+		{{#paragraphs}}
+			<p>{{text}}</p>
+		{{/paragraphs}}
+	`
 });
 $inject.bind({
 	component: 'example',
@@ -207,17 +203,17 @@ At this point you can also nest data sections. For example:
 ```
 $inject.component({
 	name: 'example',
-	html: [
-		'{{#articles}}',
-			'<h1>{{heading}}</h1>',
-			'<p>{{content}}</p>',
-			'<div class="comments">',
-				'{{#comments}}',
-					'<p>{{text}}</p>',
-				'{{/comments}}',
-			'</div>',
-		'{{/articles}}'
-	]
+	html: `
+		{{#articles}}
+			<h1>{{heading}}</h1>
+			<p>{{content}}</p>
+			<div class="comments">
+				{{#comments}}
+					<p>{{text}}</p>
+				{{/comments}}
+			</div>
+		{{/articles}}
+	`
 });
 $inject.bind({
 	component: 'example',
@@ -251,11 +247,11 @@ You are also able to display flat datasets without having to access a property b
 ```
 $inject.component({
 	name: 'example',
-	html: [
-		'{{#paragraphs}}',
-			'<p>{{.}}</p>',
-		'{{/paragraphs}}'
-	]
+	html: `
+		{{#paragraphs}}
+			<p>{{.}}</p>
+		{{/paragraphs}}
+	`
 });
 $inject.bind({
 	component: 'example',
@@ -272,12 +268,12 @@ An inverted section is a rendering fallback for if the dataset is `null`, `undef
 ```
 $inject.component({
 	name: 'example',
-	html: [
-		'{{#paragraphs}}',
-			'<p>{{.}}</p>',
-		'{{/paragraphs}}',
-		'{{^paragraphs}}There are no paragraphs to show.{{/paragraphs}}'
-	]
+	html: `
+		{{#paragraphs}}
+			<p>{{.}}</p>
+		{{/paragraphs}}
+		{{^paragraphs}}There are no paragraphs to show.{{/paragraphs}}
+	`
 });
 $inject.bind({
 	component: 'example',
@@ -330,23 +326,23 @@ Note that you are also be able to bind again with the onDone function and nest c
 // Create components
 $inject.component({
 	name: 'article',
-	html: [
-		'<article>',
-			'<h2>{{heading}}</h2>',
-			'<div>{{content}}</div>',
-			'<div id="comments"></div>',
-		'</article>'
-	]
+	html: `
+		<article>
+			<h2>{{heading}}</h2>
+			<div>{{content}}</div>
+			<div id="comments"></div>
+		</article>
+	`
 });
 $inject.component({
 	name: 'comments',
-	html: [
-		'<ul>',
-			'{{#comments}}',
-				'<li>{{text}} by {{author}}</li>',
-			'{{/comments}}',
-		'</ul>'
-	]
+	html: `
+		<ul>
+			{{#comments}}
+				<li>{{text}} by {{author}}</li>
+			{{/comments}}
+		</ul>
+	`
 });
 
 // Call components
