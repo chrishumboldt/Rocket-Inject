@@ -298,7 +298,7 @@ Also note that the onDone function returns a **$this** variable which is the new
 ```javascript
 // On component
 $inject.component({
-   name: 'article',
+	name: 'article',
 	html: '<article>{{value}}</article>',
 	onDone: function($this) {
 		console.log('This will output each time this component is used.');
