@@ -28,7 +28,8 @@
     "bower.json",
     "build",
     "css",
-    "js/demo.min.js"
+    "js/demo.min.js",
+	 "index.js"
   ],
 	"devDependencies": {
 		"blueplate": "^1.6.7"
