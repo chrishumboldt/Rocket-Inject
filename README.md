@@ -37,13 +37,13 @@ var inject = new injectplate();
 ```
 
 ## Getting Started with NPM
-If you instead wish to use Injectplate as a Node module simple install using the following command.
+If you instead wish to use Injectplate as a Node module simply install using the following command.
 
 ```
 npm install injectplate
 ```
 
-Once done simply require Injectplate as you would any other module.
+Once done require Injectplate as you would any other module.
 
 ```javascript
 var inject = require('injectplate');
