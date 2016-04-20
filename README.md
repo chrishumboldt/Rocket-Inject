@@ -36,6 +36,13 @@ Next initialize Injectplate before creating your first component.
 var $inject = new injectplate();
 ```
 
+## Use with NPM
+If you wish to use Injectplate as a Node module simple install using the following command.
+
+```
+npm install injectplate
+```
+
 ## Components
 Injectplate components are predefined HTML templates that can accept data. Once created you can reuse this component within your project and app and maintain accordingly. This is a great way to abstract your UI.
 
@@ -47,8 +54,8 @@ $inject.component({
    className: 'basic-article',
    html: `
       <article>
-          <h2>{{heading}}</h2>
-          <div>{{content}}</div>
+         <h2>{{heading}}</h2>
+         <div>{{content}}</div>
       </article>
    `
 });

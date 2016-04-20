@@ -692,9 +692,9 @@ var injectplate = function() {
 
 	// Show component list
 	var componentList = function() {
-		if (window.console) {
+		// if (window.console) {
 			console.log($componentList);
-		}
+		// }
 	};
 
 	// Register component
