@@ -102,14 +102,14 @@ If you simply wish to generate the HTML based on the component and data you can 
 
 ```javascript
 inject.generate({
-	component: 'article',
-	data: {
-		heading: 'Great Article Heading',
+   component: 'article',
+   data: {
+      heading: 'Great Article Heading',
       content: 'This will just be some basic text about stuff.'
-	},
-	onDone: function($html) {
-		console.log($html);
-	}
+   },
+   onDone: function($html) {
+      console.log($html);
+   }
 });
 ```
 
@@ -129,28 +129,28 @@ Each component has a predefined HTML structure that can render out static and dy
 ```javascript
 // As a string
 inject.component({
-	name: 'example',
-	html: '<p>This is some text.</p>'
+   name: 'example',
+   html: '<p>This is some text.</p>'
 });
 
 // As a multiline string
 inject.component({
-	name: 'example',
-	html: `
-		<p>
-			This is some text.
-		</p>
-	`
+   name: 'example',
+   html: `
+      <p>
+         This is some text.
+      </p>
+   `
 });
 
 // As an array
 inject.component({
-	name: 'example',
-	html: [
-		'<p>',
-			'This is some text.',
-		'</p>'
-	]
+   name: 'example',
+   html: [
+      '<p>',
+         'This is some text.',
+      '</p>'
+   ]
 });
 ```
 
@@ -163,15 +163,15 @@ All variables are escaped by default but can be unescaped if you use the triple 
 
 ```javascript
 inject.component({
-	name: 'example',
-	html: '<p>{{value}}</p>'
+   name: 'example',
+   html: '<p>{{value}}</p>'
 });
 inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		value: 'This is some text.'
-	}
+   component: 'example',
+   to: '#example',
+   data: {
+      value: 'This is some text.'
+   }
 });
 ```
 
@@ -179,18 +179,18 @@ You can also access data using the Javascript dot notation.
 
 ```javascript
 inject.component({
-	name: 'example',
-	html: '<p>{{user.firstname}} {{user.lastname}}</p>'
+   name: 'example',
+   html: '<p>{{user.firstname}} {{user.lastname}}</p>'
 });
 inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		user: {
-			firstname: 'Joe',
-			lastname: 'Awesome'
-		}
-	}
+   component: 'example',
+   to: '#example',
+   data: {
+      user: {
+         firstname: 'Joe',
+         lastname: 'Awesome'
+      }
+   }
 });
 ```
 
@@ -199,17 +199,17 @@ Another great feature is the ability to return data within a function on binding
 
 ```javascript
 inject.component({
-	name: 'example',
-	html: '<p>{{calculation}}</p>'
+   name: 'example',
+   html: '<p>{{calculation}}</p>'
 });
 inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		calculation: function() {
-			return 2 + 4;
-		}
-	}
+   component: 'example',
+   to: '#example',
+   data: {
+      calculation: function() {
+         return 2 + 4;
+      }
+   }
 });
 ```
 
@@ -218,25 +218,25 @@ If you wish to display dynamic data you need to declare a section inside the HTM
 
 ```javascript
 inject.component({
-	name: 'example',
-	html: `
-		{{#paragraphs}}
-			<p>{{text}}</p>
-		{{/paragraphs}}
-	`
+   name: 'example',
+   html: `
+      {{#paragraphs}}
+         <p>{{text}}</p>
+      {{/paragraphs}}
+   `
 });
 inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		paragraphs: [{
-			text: 'This is paragraph one.'
-		}, {
-			text: 'This is paragraph two.'
-		}, {
-			text: 'This is paragraph three.'
-		}]
-	}
+   component: 'example',
+   to: '#example',
+   data: {
+      paragraphs: [{
+         text: 'This is paragraph one.'
+      }, {
+         text: 'This is paragraph two.'
+      }, {
+         text: 'This is paragraph three.'
+      }]
+   }
 });
 ```
 
@@ -244,43 +244,43 @@ At this point you can also nest data sections. For example:
 
 ```javascript
 inject.component({
-	name: 'example',
-	html: `
-		{{#articles}}
-			<h1>{{heading}}</h1>
-			<p>{{content}}</p>
-			<div class="comments">
-				{{#comments}}
-					<p>{{text}}</p>
-				{{/comments}}
-			</div>
-		{{/articles}}
-	`
+   name: 'example',
+   html: `
+      {{#articles}}
+         <h1>{{heading}}</h1>
+         <p>{{content}}</p>
+         <div class="comments">
+            {{#comments}}
+               <p>{{text}}</p>
+            {{/comments}}
+         </div>
+      {{/articles}}
+   `
 });
 inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		articles: [{
-			heading: 'Article One',
-			content: 'This is some text.',
-			comments: [{
-				text: 'This is comment one.'
-			}, {
-				text: 'This is comment two.'
-			}, {
-				text: 'This is comment three.'
-			}]
-		}, {
-			heading: 'Article two',
-			content: 'This is some text.',
-			comments: [{
-				text: 'This is comment one.'
-			}, {
-				text: 'This is comment two.'
-			}]
-		}]
-	}
+   component: 'example',
+   to: '#example',
+   data: {
+      articles: [{
+         heading: 'Article One',
+         content: 'This is some text.',
+         comments: [{
+            text: 'This is comment one.'
+         }, {
+            text: 'This is comment two.'
+         }, {
+            text: 'This is comment three.'
+         }]
+      }, {
+         heading: 'Article two',
+         content: 'This is some text.',
+         comments: [{
+            text: 'This is comment one.'
+         }, {
+            text: 'This is comment two.'
+         }]
+      }]
+   }
 });
 ```
 
@@ -288,19 +288,19 @@ You are also able to display flat datasets without having to access a property b
 
 ```javascript
 inject.component({
-	name: 'example',
-	html: `
-		{{#paragraphs}}
-			<p>{{.}}</p>
-		{{/paragraphs}}
-	`
+   name: 'example',
+   html: `
+      {{#paragraphs}}
+         <p>{{.}}</p>
+      {{/paragraphs}}
+   `
 });
 inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		paragraphs: ['This is paragraph one.', 'This is paragraph two.', 'This is paragraph three.']
-	}
+   component: 'example',
+   to: '#example',
+   data: {
+      paragraphs: ['This is paragraph one.', 'This is paragraph two.', 'This is paragraph three.']
+   }
 });
 ```
 
@@ -309,17 +309,17 @@ An inverted section is a rendering fallback for if the dataset is `null`, `undef
 
 ```javascript
 inject.component({
-	name: 'example',
-	html: `
-		{{#paragraphs}}
-			<p>{{.}}</p>
-		{{/paragraphs}}
-		{{^paragraphs}}There are no paragraphs to show.{{/paragraphs}}
-	`
+   name: 'example',
+   html: `
+      {{#paragraphs}}
+         <p>{{.}}</p>
+      {{/paragraphs}}
+      {{^paragraphs}}There are no paragraphs to show.{{/paragraphs}}
+   `
 });
 inject.bind({
-	component: 'example',
-	to: '#example'
+   component: 'example',
+   to: '#example'
 });
 ```
 
@@ -338,36 +338,36 @@ Also note that the onDone function returns a **$element** variable on binding wh
 ```javascript
 // On component
 inject.component({
-	name: 'article',
-	html: '<article>{{value}}</article>',
-	onDone: function($this) {
-		console.log('This will output each time this component is used.');
-	}
+   name: 'article',
+   html: '<article>{{value}}</article>',
+   onDone: function($this) {
+      console.log('This will output each time this component is used.');
+   }
 });
 
 // On binding
 inject.bind({
-	component: 'article',
-	to: '#article',
-	data: {
-		value: 'Something here.'
-	},
-	onDone: function($element) {
-		console.log('It is done!');
-		console.log($element);
-	}
+   component: 'article',
+   to: '#article',
+   data: {
+      value: 'Something here.'
+   },
+   onDone: function($element) {
+      console.log('It is done!');
+      console.log($element);
+   }
 });
 
 // On generation
 inject.generate({
-	component: 'article',
-	data: {
-		value: 'Something here.'
-	},
-	onDone: function($html) {
-		console.log('It is done!');
-		console.log($html);
-	}
+   component: 'article',
+   data: {
+      value: 'Something here.'
+   },
+   onDone: function($html) {
+      console.log('It is done!');
+      console.log($html);
+   }
 });
 ```
 
@@ -378,49 +378,49 @@ Note that you are also be able to bind again with the onDone function and nest c
 ```javascript
 // Create components
 inject.component({
-	name: 'article',
-	html: `
-		<article>
-			<h2>{{heading}}</h2>
-			<div>{{content}}</div>
-			<div id="comments"></div>
-		</article>
+   name: 'article',
+   html: `
+      <article>
+         <h2>{{heading}}</h2>
+         <div>{{content}}</div>
+         <div id="comments"></div>
+      </article>
 	`
 });
 inject.component({
-	name: 'comments',
-	html: `
-		<ul>
-			{{#comments}}
-				<li>{{text}} by {{author}}</li>
-			{{/comments}}
-		</ul>
-	`
+   name: 'comments',
+   html: `
+      <ul>
+         {{#comments}}
+            <li>{{text}} by {{author}}</li>
+         {{/comments}}
+      </ul>
+   `
 });
 
 // Call components
 inject.bind({
-	component: 'article',
-	to: '#article',
-	data: {
-		heading: 'Anther Great Article Heading',
-		content: 'More arbitrary text goes here.'
-	},
-	onDone: function() {
-		inject.bind({
-			component: 'comments',
-			to: '#comments',
-			data: {
-				comments: [{
-					text: 'I like this Javascript component',
-					author: 'Greg McAwesome'
-				}, {
-					text: 'Let use this component in our next project',
-					author: 'Bob Knowsitall'
-				}]
-			}
-		});
-	}
+   component: 'article',
+   to: '#article',
+   data: {
+      heading: 'Anther Great Article Heading',
+      content: 'More arbitrary text goes here.'
+   },
+   onDone: function() {
+      inject.bind({
+         component: 'comments',
+         to: '#comments',
+         data: {
+            comments: [{
+               text: 'I like this Javascript component',
+               author: 'Greg McAwesome'
+            }, {
+               text: 'Let use this component in our next project',
+               author: 'Bob Knowsitall'
+            }]
+         }
+      });
+   }
 });
 ```
 
