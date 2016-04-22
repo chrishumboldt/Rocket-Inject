@@ -4,6 +4,7 @@ A declare once Javascript component injector. This allows you to create HTML com
 ## Table of Contents
 
 * [Getting Started](#getting-started)
+* [Getting Started With NPM](#getting-started-with-npm)
 * [Components](#components)
 * [Bind](#bind)
 * [Generate](#generate)
@@ -37,7 +38,7 @@ Next initialize Injectplate before creating your first component.
 var inject = new injectplate();
 ```
 
-## Getting Started with NPM
+## Getting Started With NPM
 If you instead wish to use Injectplate as a Node module simply install using the following command.
 
 ```
