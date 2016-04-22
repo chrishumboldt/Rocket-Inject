@@ -113,6 +113,12 @@ inject.generate({
 });
 ```
 
+| Option | Default | Description |
+| ---- | ---- | ---- |
+| component | | Choose the component you wish to use. |
+| data | | Parse in a JSON object with the data. This will then match to the HTML template of the component. |
+| onDone | | Assign a function that will be called once the generation is complete. The return value in the callback is the generated HTML. |
+
 **Note** that the onDone function (which is available on both the generate and bind functions) needs to be used to return the generated HTML. For more on the onDone function [read here](#on-done).
 
 ## HTML
