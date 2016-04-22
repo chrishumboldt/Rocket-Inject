@@ -6,6 +6,7 @@ A declare once Javascript component injector. This allows you to create HTML com
 * [Getting Started](#getting-started)
 * [Components](#components)
 * [Bind](#bind)
+* [Generate](#generate)
 * [HTML](#html)
 	* [Static Values](#static-values)
 	* [Return Values](#return-values)
@@ -100,8 +101,19 @@ inject.bind({
 If you simply wish to generate the HTML based on the component and data you can do so using the generate function. This is especially useful when using Injectplate as a Node module.
 
 ```javascript
-inject.
+inject.generate({
+	component: 'article',
+	data: {
+		heading: 'Great Article Heading',
+      content: 'This will just be some basic text about stuff.'
+	},
+	onDone: function($html) {
+		console.log($html);
+	}
+});
 ```
+
+**Note** that the onDone function (which is available on both the generate and bind functions) needs to be used to return the generated HTML. For more on the onDone function [read here](#on-done).
 
 ## HTML
 Each component has a predefined HTML structure that can render out static and dynamic data. Injectplate does this using the [Mustache.js](https://github.com/janl/mustache.js) templating engine.
@@ -135,6 +147,8 @@ inject.component({
 	]
 });
 ```
+
+All HTML will be flattened into a single line template meaning that no indentation is maintained.
 
 #### Static Values
 Displaying static values inside your HTML requires the `{{value}}` syntax. The double curly braces is the basis for all the templating rules and the value inside will be the name of the key inside the data you parse when binding.
@@ -311,9 +325,9 @@ inject.componentList();
 ```
 
 ## On Done
-Once the component has been injected you might want to execute some code. To do so apply the onDone event to your component or binding. Assigning the event to the component will execute it every time the component is bound, while assigning it to the binding will only call it on that particular binding instance.
+Once the component has been injected you might want to execute some code. To do so apply the onDone event to your component, binding or generator. Assigning the event to the component will execute it every time the component is bound, while assigning it to the binding or generator will only call it on that particular binding instance.
 
-Also note that the onDone function returns a **$this** variable which is the newly bound DOM element. This is an optional return on the callback.
+Also note that the onDone function returns a **$element** variable on binding which is the newly bound DOM element, while it returns the generated HTML on the generator function.
 
 ```javascript
 // On component
@@ -332,8 +346,21 @@ inject.bind({
 	data: {
 		value: 'Something here.'
 	},
-	onDone: function($this) {
-		console.log('The binding is done!');
+	onDone: function($element) {
+		console.log('It is done!');
+		console.log($element);
+	}
+});
+
+// On generation
+inject.generate({
+	component: 'article',
+	data: {
+		value: 'Something here.'
+	},
+	onDone: function($html) {
+		console.log('It is done!');
+		console.log($html);
 	}
 });
 ```
