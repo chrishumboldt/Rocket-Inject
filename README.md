@@ -332,7 +332,7 @@ inject.componentList();
 ```
 
 ## On Done
-Once the component has been injected you might want to execute some code. To do so apply the onDone event to your component, binding or generator. Assigning the event to the component will execute it every time the component is bound, while assigning it to the binding or generator will only call it on that particular binding instance.
+Once the component has been injected you might want to execute some code. To do so apply the onDone event to your component, binding or generator. Assigning the event to the component will execute it every time the component is used, while assigning it to the binding or generator will only call it on that particular instance.
 
 Also note that the onDone function returns a **$element** variable on binding which is the newly bound DOM element, while it returns the generated HTML on the generator function.
 
