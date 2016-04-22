@@ -26,8 +26,14 @@ bower install injectplate
 <pre class="prettyprint linenums">
 &lt;body&gt;
     /* Your content goes here */
-    &lt;script src=&quot;js/min/injectplate.js&quot;>&lt;/script&gt;
+    &lt;script src=&quot;js/injectplate.min.js&quot;>&lt;/script&gt;
 &lt;/body&gt;
+</pre>
+		<br>
+		<h4>Getting Started With NPM</h4>
+		<p>If you instead wish to use Injectplate as a Node module simply install using the following command.</p>
+<pre class="prettyprint linenums">
+npm install injectplate
 </pre>
 		<br>
 		<h4>What Is This?</h4>
@@ -38,10 +44,10 @@ bower install injectplate
 <pre class="prettyprint linenums">
 &lt;script&gt;
 // Initialize
-var $inject = new injectplate();
+var inject = new injectplate();
 
 // Create component
-$inject.component({
+inject.component({
     name: 'article',
     className: 'basic-article',
     html: `
@@ -53,16 +59,27 @@ $inject.component({
 });
 &lt;/script&gt;
 </pre>
-		<p>Once the component has been created, simple bind it to an element and parse in the relevant data.</p>
+		<p>Once the component has been created, simply bind it to an element or generate the HTML and parse in the relevant data.</p>
 <pre class="prettyprint linenums">
 &lt;script&gt;
-// Call component
-$inject.bind({
+// Bind component
+inject.bind({
     component: 'article',
     to: '#article',
     data: {
         heading: 'Great Article Heading',
         content: 'This will just be some basic text about stuff.'
+    }
+});
+// Generate component HTML
+inject.generate({
+    component: 'article',
+    data: {
+        heading: 'Great Article Heading',
+        content: 'This will just be some basic text about stuff.'
+    },
+    onDone: function($html) {
+        console.log($html);
     }
 });
 &lt;/script&gt;
@@ -73,7 +90,7 @@ $inject.bind({
 		<p>To see how to define templates view the <a href="http://getwebplate.com/#/documentation/injector/" class="link">online documentation</a>. Find an example below:</p>
 <pre class="prettyprint linenums">
 &lt;script&gt;
-$inject.component({
+inject.component({
     name: 'articleAdvanced',
     className: 'advanced-article',
     html: `
@@ -88,7 +105,7 @@ $inject.component({
     `
 });
 
-$inject.bind({
+inject.bind({
     component: 'articleAdvanced',
     to: '#article',
     data: {
@@ -128,10 +145,10 @@ $inject.bind({
    <script src="js/demo.min.js"></script>
 	<script>
 	// Start Inject
-	var $inject = new injectplate();
+	var inject = new injectplate();
 
 	// Component
-	$inject.component({
+	inject.component({
 		name: 'articleAdvanced',
 		className: 'advanced-article',
 		html: `
@@ -147,7 +164,7 @@ $inject.bind({
 	});
 
 	// Bind
-	$inject.bind({
+	inject.bind({
 		component: 'articleAdvanced',
 		to: '#article',
 		data: {
