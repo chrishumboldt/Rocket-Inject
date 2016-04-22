@@ -692,9 +692,7 @@ var injectplate = function() {
 
 	// Show component list
 	var componentList = function() {
-		if (window.console) {
-			console.log($componentList);
-		}
+		console.log($componentList);
 	};
 
 	// Register component
@@ -716,7 +714,23 @@ var injectplate = function() {
 			}
 			return $template;
 		} else if (typeof $templateInp === 'string') {
-			return $templateInp;
+			var $template = '';
+			var $templateInpSplit = $templateInp.split(/(?:\r\n|\n|\r)/);
+			for (var $i = 0, $len = $templateInpSplit.length; $i < $len; $i++) {
+			   $template += $templateInpSplit[$i].trim();
+			}
+			return $template;
+		}
+	};
+
+	// Generate
+	var generate = function($objGenerate) {
+		var $objGenerate = $objGenerate || false;
+		if ($objGenerate !== false && $objGenerate.component) {
+			var $data = $objGenerate.data || '';
+			if ($objGenerate.onDone !== undefined) {
+				$objGenerate.onDone(Mustache.render($componentList[$objGenerate.component]['html'], $data));
+			}
 		}
 	};
 
@@ -735,6 +749,7 @@ var injectplate = function() {
 	return {
 		bind: bind,
 		component: component,
-		componentList: componentList
+		componentList: componentList,
+		generate: generate
 	};
 };

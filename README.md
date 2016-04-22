@@ -6,6 +6,7 @@ A declare once Javascript component injector. This allows you to create HTML com
 * [Getting Started](#getting-started)
 * [Components](#components)
 * [Bind](#bind)
+* [Generate](#generate)
 * [HTML](#html)
 	* [Static Values](#static-values)
 	* [Return Values](#return-values)
@@ -33,7 +34,20 @@ Simply start by including the required Javascript file.
 Next initialize Injectplate before creating your first component.
 
 ```javascript
-var $inject = new injectplate();
+var inject = new injectplate();
+```
+
+## Getting Started with NPM
+If you instead wish to use Injectplate as a Node module simply install using the following command.
+
+```
+npm install injectplate
+```
+
+Once done require Injectplate as you would any other module.
+
+```javascript
+var inject = require('injectplate');
 ```
 
 ## Components
@@ -42,13 +56,13 @@ Injectplate components are predefined HTML templates that can accept data. Once 
 Creating a component is dead easy and takes just a few options to complete.
 
 ```javascript
-$inject.component({
+inject.component({
    name: 'article',
    className: 'basic-article',
    html: `
       <article>
-          <h2>{{heading}}</h2>
-          <div>{{content}}</div>
+         <h2>{{heading}}</h2>
+         <div>{{content}}</div>
       </article>
    `
 });
@@ -65,7 +79,7 @@ $inject.component({
 Once the component has been created, simply bind it to an element and parse in the relevant data.
 
 ```javascript
-$inject.bind({
+inject.bind({
    component: 'article',
    to: '#article',
    data: {
@@ -83,6 +97,30 @@ $inject.bind({
 | onDone | | Assign a function that will be called once the binding is complete. |
 | overwrite | false | By default the component will append to the `to` selector. If set to `true` it will overwrite the inner HTML. |
 
+## Generate
+If you simply wish to generate the HTML based on the component and data you can do so using the generate function. This is especially useful when using Injectplate as a Node module.
+
+```javascript
+inject.generate({
+   component: 'article',
+   data: {
+      heading: 'Great Article Heading',
+      content: 'This will just be some basic text about stuff.'
+   },
+   onDone: function($html) {
+      console.log($html);
+   }
+});
+```
+
+| Option | Default | Description |
+| ---- | ---- | ---- |
+| component | | Choose the component you wish to use. |
+| data | | Parse in a JSON object with the data. This will then match to the HTML template of the component. |
+| onDone | | Assign a function that will be called once the generation is complete. The return value in the callback is the generated HTML. |
+
+**Note** that the onDone function (which is available on both the generate and bind functions) needs to be used to return the generated HTML. For more on the onDone function [read here](#on-done).
+
 ## HTML
 Each component has a predefined HTML structure that can render out static and dynamic data. Injectplate does this using the [Mustache.js](https://github.com/janl/mustache.js) templating engine.
 
@@ -90,31 +128,33 @@ Each component has a predefined HTML structure that can render out static and dy
 
 ```javascript
 // As a string
-$inject.component({
-	name: 'example',
-	html: '<p>This is some text.</p>'
+inject.component({
+   name: 'example',
+   html: '<p>This is some text.</p>'
 });
 
 // As a multiline string
-$inject.component({
-	name: 'example',
-	html: `
-		<p>
-			This is some text.
-		</p>
-	`
+inject.component({
+   name: 'example',
+   html: `
+      <p>
+         This is some text.
+      </p>
+   `
 });
 
 // As an array
-$inject.component({
-	name: 'example',
-	html: [
-		'<p>',
-			'This is some text.',
-		'</p>'
-	]
+inject.component({
+   name: 'example',
+   html: [
+      '<p>',
+         'This is some text.',
+      '</p>'
+   ]
 });
 ```
+
+All HTML will be flattened into a single line template meaning that no indentation is maintained.
 
 #### Static Values
 Displaying static values inside your HTML requires the `{{value}}` syntax. The double curly braces is the basis for all the templating rules and the value inside will be the name of the key inside the data you parse when binding.
@@ -122,35 +162,35 @@ Displaying static values inside your HTML requires the `{{value}}` syntax. The d
 All variables are escaped by default but can be unescaped if you use the triple curly braces, `{{{value}}}`.
 
 ```javascript
-$inject.component({
-	name: 'example',
-	html: '<p>{{value}}</p>'
+inject.component({
+   name: 'example',
+   html: '<p>{{value}}</p>'
 });
-$inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		value: 'This is some text.'
-	}
+inject.bind({
+   component: 'example',
+   to: '#example',
+   data: {
+      value: 'This is some text.'
+   }
 });
 ```
 
 You can also access data using the Javascript dot notation.
 
 ```javascript
-$inject.component({
-	name: 'example',
-	html: '<p>{{user.firstname}} {{user.lastname}}</p>'
+inject.component({
+   name: 'example',
+   html: '<p>{{user.firstname}} {{user.lastname}}</p>'
 });
-$inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		user: {
-			firstname: 'Joe',
-			lastname: 'Awesome'
-		}
-	}
+inject.bind({
+   component: 'example',
+   to: '#example',
+   data: {
+      user: {
+         firstname: 'Joe',
+         lastname: 'Awesome'
+      }
+   }
 });
 ```
 
@@ -158,18 +198,18 @@ $inject.bind({
 Another great feature is the ability to return data within a function on binding. For example:
 
 ```javascript
-$inject.component({
-	name: 'example',
-	html: '<p>{{calculation}}</p>'
+inject.component({
+   name: 'example',
+   html: '<p>{{calculation}}</p>'
 });
-$inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		calculation: function() {
-			return 2 + 4;
-		}
-	}
+inject.bind({
+   component: 'example',
+   to: '#example',
+   data: {
+      calculation: function() {
+         return 2 + 4;
+      }
+   }
 });
 ```
 
@@ -177,90 +217,90 @@ $inject.bind({
 If you wish to display dynamic data you need to declare a section inside the HTML with a name that correlates to the dataset. Opening the section requires the `pound` sign (#) and closing the section requires the `slash` sign (/).
 
 ```javascript
-$inject.component({
-	name: 'example',
-	html: `
-		{{#paragraphs}}
-			<p>{{text}}</p>
-		{{/paragraphs}}
-	`
+inject.component({
+   name: 'example',
+   html: `
+      {{#paragraphs}}
+         <p>{{text}}</p>
+      {{/paragraphs}}
+   `
 });
-$inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		paragraphs: [{
-			text: 'This is paragraph one.'
-		}, {
-			text: 'This is paragraph two.'
-		}, {
-			text: 'This is paragraph three.'
-		}]
-	}
+inject.bind({
+   component: 'example',
+   to: '#example',
+   data: {
+      paragraphs: [{
+         text: 'This is paragraph one.'
+      }, {
+         text: 'This is paragraph two.'
+      }, {
+         text: 'This is paragraph three.'
+      }]
+   }
 });
 ```
 
 At this point you can also nest data sections. For example:
 
 ```javascript
-$inject.component({
-	name: 'example',
-	html: `
-		{{#articles}}
-			<h1>{{heading}}</h1>
-			<p>{{content}}</p>
-			<div class="comments">
-				{{#comments}}
-					<p>{{text}}</p>
-				{{/comments}}
-			</div>
-		{{/articles}}
-	`
+inject.component({
+   name: 'example',
+   html: `
+      {{#articles}}
+         <h1>{{heading}}</h1>
+         <p>{{content}}</p>
+         <div class="comments">
+            {{#comments}}
+               <p>{{text}}</p>
+            {{/comments}}
+         </div>
+      {{/articles}}
+   `
 });
-$inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		articles: [{
-			heading: 'Article One',
-			content: 'This is some text.',
-			comments: [{
-				text: 'This is comment one.'
-			}, {
-				text: 'This is comment two.'
-			}, {
-				text: 'This is comment three.'
-			}]
-		}, {
-			heading: 'Article two',
-			content: 'This is some text.',
-			comments: [{
-				text: 'This is comment one.'
-			}, {
-				text: 'This is comment two.'
-			}]
-		}]
-	}
+inject.bind({
+   component: 'example',
+   to: '#example',
+   data: {
+      articles: [{
+         heading: 'Article One',
+         content: 'This is some text.',
+         comments: [{
+            text: 'This is comment one.'
+         }, {
+            text: 'This is comment two.'
+         }, {
+            text: 'This is comment three.'
+         }]
+      }, {
+         heading: 'Article two',
+         content: 'This is some text.',
+         comments: [{
+            text: 'This is comment one.'
+         }, {
+            text: 'This is comment two.'
+         }]
+      }]
+   }
 });
 ```
 
 You are also able to display flat datasets without having to access a property by simply using `{{.}}`.
 
 ```javascript
-$inject.component({
-	name: 'example',
-	html: `
-		{{#paragraphs}}
-			<p>{{.}}</p>
-		{{/paragraphs}}
-	`
+inject.component({
+   name: 'example',
+   html: `
+      {{#paragraphs}}
+         <p>{{.}}</p>
+      {{/paragraphs}}
+   `
 });
-$inject.bind({
-	component: 'example',
-	to: '#example',
-	data: {
-		paragraphs: ['This is paragraph one.', 'This is paragraph two.', 'This is paragraph three.']
-	}
+inject.bind({
+   component: 'example',
+   to: '#example',
+   data: {
+      paragraphs: ['This is paragraph one.', 'This is paragraph two.', 'This is paragraph three.']
+   }
 });
 ```
 
@@ -268,18 +308,18 @@ $inject.bind({
 An inverted section is a rendering fallback for if the dataset is `null`, `undefined` or `false`. It requires a different opening declaration of `{{^}}`. For example.
 
 ```javascript
-$inject.component({
-	name: 'example',
-	html: `
-		{{#paragraphs}}
-			<p>{{.}}</p>
-		{{/paragraphs}}
-		{{^paragraphs}}There are no paragraphs to show.{{/paragraphs}}
-	`
+inject.component({
+   name: 'example',
+   html: `
+      {{#paragraphs}}
+         <p>{{.}}</p>
+      {{/paragraphs}}
+      {{^paragraphs}}There are no paragraphs to show.{{/paragraphs}}
+   `
 });
-$inject.bind({
-	component: 'example',
-	to: '#example'
+inject.bind({
+   component: 'example',
+   to: '#example'
 });
 ```
 
@@ -287,34 +327,47 @@ $inject.bind({
 If you would like to know what components have been created simply call the component list function and view your console, like so:
 
 ```html
-$inject.componentList();
+inject.componentList();
 ```
 
 ## On Done
-Once the component has been injected you might want to execute some code. To do so apply the onDone event to your component or binding. Assigning the event to the component will execute it every time the component is bound, while assigning it to the binding will only call it on that particular binding instance.
+Once the component has been injected you might want to execute some code. To do so apply the onDone event to your component, binding or generator. Assigning the event to the component will execute it every time the component is bound, while assigning it to the binding or generator will only call it on that particular binding instance.
 
-Also note that the onDone function returns a **$this** variable which is the newly bound DOM element. This is an optional return on the callback.
+Also note that the onDone function returns a **$element** variable on binding which is the newly bound DOM element, while it returns the generated HTML on the generator function.
 
 ```javascript
 // On component
-$inject.component({
-	name: 'article',
-	html: '<article>{{value}}</article>',
-	onDone: function($this) {
-		console.log('This will output each time this component is used.');
-	}
+inject.component({
+   name: 'article',
+   html: '<article>{{value}}</article>',
+   onDone: function($this) {
+      console.log('This will output each time this component is used.');
+   }
 });
 
 // On binding
-$inject.bind({
-	component: 'article',
-	to: '#article',
-	data: {
-		value: 'Something here.'
-	},
-	onDone: function($this) {
-		console.log('The binding is done!');
-	}
+inject.bind({
+   component: 'article',
+   to: '#article',
+   data: {
+      value: 'Something here.'
+   },
+   onDone: function($element) {
+      console.log('It is done!');
+      console.log($element);
+   }
+});
+
+// On generation
+inject.generate({
+   component: 'article',
+   data: {
+      value: 'Something here.'
+   },
+   onDone: function($html) {
+      console.log('It is done!');
+      console.log($html);
+   }
 });
 ```
 
@@ -324,50 +377,50 @@ Note that you are also be able to bind again with the onDone function and nest c
 
 ```javascript
 // Create components
-$inject.component({
-	name: 'article',
-	html: `
-		<article>
-			<h2>{{heading}}</h2>
-			<div>{{content}}</div>
-			<div id="comments"></div>
-		</article>
+inject.component({
+   name: 'article',
+   html: `
+      <article>
+         <h2>{{heading}}</h2>
+         <div>{{content}}</div>
+         <div id="comments"></div>
+      </article>
 	`
 });
-$inject.component({
-	name: 'comments',
-	html: `
-		<ul>
-			{{#comments}}
-				<li>{{text}} by {{author}}</li>
-			{{/comments}}
-		</ul>
-	`
+inject.component({
+   name: 'comments',
+   html: `
+      <ul>
+         {{#comments}}
+            <li>{{text}} by {{author}}</li>
+         {{/comments}}
+      </ul>
+   `
 });
 
 // Call components
-$inject.bind({
-	component: 'article',
-	to: '#article',
-	data: {
-		heading: 'Anther Great Article Heading',
-		content: 'More arbitrary text goes here.'
-	},
-	onDone: function() {
-		$inject.bind({
-			component: 'comments',
-			to: '#comments',
-			data: {
-				comments: [{
-					text: 'I like this Javascript component',
-					author: 'Greg McAwesome'
-				}, {
-					text: 'Let use this component in our next project',
-					author: 'Bob Knowsitall'
-				}]
-			}
-		});
-	}
+inject.bind({
+   component: 'article',
+   to: '#article',
+   data: {
+      heading: 'Anther Great Article Heading',
+      content: 'More arbitrary text goes here.'
+   },
+   onDone: function() {
+      inject.bind({
+         component: 'comments',
+         to: '#comments',
+         data: {
+            comments: [{
+               text: 'I like this Javascript component',
+               author: 'Greg McAwesome'
+            }, {
+               text: 'Let use this component in our next project',
+               author: 'Bob Knowsitall'
+            }]
+         }
+      });
+   }
 });
 ```
 
