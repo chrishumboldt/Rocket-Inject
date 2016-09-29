@@ -5,42 +5,45 @@
 	<!-- Meta setup -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-	<!-- Title -->
 	<title>Injectplate</title>
-	<!-- Styles -->
-	<link href="css/demo.min.css" rel="stylesheet" type="text/css">
+	<link href="bower_components/webplate-demo/css/demo.min.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
-	<div class="heading">
-      <div class="container"><h2>Injectplate Component</h2></div>
-   </div>
-	<div class="container">
-		<h4>Getting Started</h4>
-		<p>You can either download a copy of the source files or install Injectplate via Bower.</p>
+	<div id="web-demo-message">
+		You need to run "bower install" and include the neccessary demo files in order to view this file.
+	</div>
+
+	<div id="web-demo" style="display:none;">
+		<div class="heading">
+	      <div class="container"><h2>Injectplate Component</h2></div>
+	   </div>
+		<div class="container">
+			<h4>Getting Started</h4>
+			<p>You can either download a copy of the source files or install Injectplate via Bower.</p>
 <pre class="prettyprint linenums">
 bower install injectplate
 </pre>
-		<p>Start by including the necessary files.</p>
+			<p>Start by including the necessary files.</p>
 <pre class="prettyprint linenums">
 &lt;body&gt;
     /* Your content goes here */
     &lt;script src=&quot;js/injectplate.min.js&quot;>&lt;/script&gt;
 &lt;/body&gt;
 </pre>
-		<br>
-		<h4>Getting Started With NPM</h4>
-		<p>If you instead wish to use Injectplate as a Node module simply install using the following command.</p>
+			<br>
+			<h4>Getting Started With NPM</h4>
+			<p>If you instead wish to use Injectplate as a Node module simply install using the following command.</p>
 <pre class="prettyprint linenums">
 npm install injectplate
 </pre>
-		<br>
-		<h4>What Is This?</h4>
-		<p>Injectplate is a declare once Javascript component injector. This allows you to create HTML components and inject them into the DOM at will. In essence it is a wrapper for the awesome <a href="https://github.com/janl/mustache.js" class="link">Mustache.js</a> library which has a great template sytax.</p>
-		<br>
-		<h4>Basic Example</h4>
-		<p>Initialize Injectplate before creating your first component.</p>
+			<br>
+			<h4>What Is This?</h4>
+			<p>Injectplate is a declare once Javascript component injector. This allows you to create HTML components and inject them into the DOM at will. In essence it is a wrapper for the awesome <a href="https://github.com/janl/mustache.js" class="link">Mustache.js</a> library which has a great template sytax.</p>
+			<br>
+			<h4>Basic Example</h4>
+			<p>Initialize Injectplate before creating your first component.</p>
 <pre class="prettyprint linenums">
 &lt;script&gt;
 // Initialize
@@ -59,7 +62,7 @@ inject.component({
 });
 &lt;/script&gt;
 </pre>
-		<p>Once the component has been created, simply bind it to an element or generate the HTML and parse in the relevant data.</p>
+			<p>Once the component has been created, simply bind it to an element or generate the HTML and parse in the relevant data.</p>
 <pre class="prettyprint linenums">
 &lt;script&gt;
 // Bind component
@@ -84,10 +87,10 @@ inject.generate({
 });
 &lt;/script&gt;
 </pre>
-		<br>
-		<h4>Dynamic Data</h4>
-		<p>Sometimes you might require elements to be generated dynamically and Injectplate can do this with a JSON based dataset. To do so modify the HTML option of the component. <b>NOTE</b> that the HTML template is defined via an array but can be a basic string.</p>
-		<p>To see how to define templates view the <a href="http://getwebplate.com/#/documentation/injector/" class="link">online documentation</a>. Find an example below:</p>
+			<br>
+			<h4>Dynamic Data</h4>
+			<p>Sometimes you might require elements to be generated dynamically and Injectplate can do this with a JSON based dataset. To do so modify the HTML option of the component. <b>NOTE</b> that the HTML template is defined via an array but can be a basic string.</p>
+			<p>To see how to define templates view the <a href="http://getwebplate.com/#/documentation/injector/" class="link">online documentation</a>. Find an example below:</p>
 <pre class="prettyprint linenums">
 &lt;script&gt;
 inject.component({
@@ -121,28 +124,29 @@ inject.bind({
 });
 &lt;/script&gt;
 </pre>
-		<br>
-		<h4>Working Example</h4>
-		<p class="note">This example uses the dynamic data example above.</p>
-		<div id="article"></div>
-		<div id="example"></div>
-		<br><br>
-      <h4>Detailed Documentation</h4>
-      <p>For a more detailed look into the available options, you can read the documentation at <a target="_blank" href="https://github.com/chrishumboldt/Injectplate" class="link">https://github.com/chrishumboldt/Injectplate</a></p>
+			<br>
+			<h4>Working Example</h4>
+			<p class="note">This example uses the dynamic data example above.</p>
+			<div id="article"></div>
+			<div id="example"></div>
+			<br><br>
+	      <h4>Detailed Documentation</h4>
+	      <p>For a more detailed look into the available options, you can read the documentation at <a target="_blank" href="https://github.com/chrishumboldt/Injectplate" class="link">https://github.com/chrishumboldt/Injectplate</a></p>
+		</div>
+
+		<footer><div class="container"><div class="col-double">
+			<div class="left">
+				Made by <a href="http://chrishumboldt.com" target="_blank">Chris Humboldt</a>
+			</div>
+			<div class="right">
+				A <a href="http://getwebplate.com" target="_blank">Webplate Project</a>&nbsp;&nbsp;
+				Want updates? <a href="http://twitter.com/webplatetweets" target="_blank">@webplatetweets</a>
+			</div>
+		</div></div></footer>
 	</div>
 
-	<footer><div class="container"><div class="col-double">
-		<div class="left">
-			Made by <a href="http://chrishumboldt.com" target="_blank">Chris Humboldt</a>
-		</div>
-		<div class="right">
-			A <a href="http://getwebplate.com" target="_blank">Webplate Project</a>&nbsp;&nbsp;
-			Want updates? <a href="http://twitter.com/webplatetweets" target="_blank">@webplatetweets</a>
-		</div>
-	</div></div></footer>
-
+	<script src="bower_components/webplate-demo/js/demo.min.js"></script>
 	<script src="js/injectplate.min.js"></script>
-   <script src="js/demo.min.js"></script>
 	<script>
 	// Start Inject
 	var inject = new injectplate();

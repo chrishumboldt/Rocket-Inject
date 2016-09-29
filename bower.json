@@ -15,23 +15,17 @@
     "Javascript",
     "Webplate"
   ],
-	"license": "Apache License, Version 2.0",
+	"license": "Apache-2.0",
 	"ignore": [
     "**/.*",
-    "node_modules",
     "bower_components",
-    "test",
-    "tests",
-    "gulpfile.js",
     "package.json",
     "index.html",
     "bower.json",
     "build",
-    "css",
-    "js/demo.min.js",
 	 "index.js"
   ],
 	"devDependencies": {
-		"blueplate": "^1.6.7"
+		"webplate-demo": "^1.0.0"
 	}
 }
