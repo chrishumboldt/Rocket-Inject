@@ -1,14 +1,10 @@
 {
 	"name": "injectplate",
-	"version": "2.2.0",
-	"homepage": "https://github.com/chrishumboldt/Injectplate",
 	"authors": [
     "Chris Humboldt <chrismodem@gmail.com>"
   ],
 	"description": "A declare once Javascript component injector.",
-	"main": [
-    "js/injectplate.min.js"
-  ],
+	"main": ["js/injectplate.min.js"],
 	"keywords": [
     "Injector",
     "Component",
