@@ -35,7 +35,7 @@ Simply start by including the required Javascript file.
 Next initialize Injectplate before creating your first component.
 
 ```javascript
-var inject = new injectplate();
+var Inject = Injectplate.init();
 ```
 
 ## Getting Started With NPM
@@ -48,7 +48,7 @@ npm install injectplate
 Once done require Injectplate as you would any other module.
 
 ```javascript
-var inject = require('injectplate');
+var Inject = require('injectplate');
 ```
 
 ## Components
@@ -57,7 +57,7 @@ Injectplate components are predefined HTML templates that can accept data. Once 
 Creating a component is dead easy and takes just a few options to complete.
 
 ```javascript
-inject.component({
+Inject.component({
    name: 'article',
    className: 'basic-article',
    html: `
@@ -80,7 +80,7 @@ inject.component({
 Once the component has been created, simply bind it to an element and parse in the relevant data.
 
 ```javascript
-inject.bind({
+Inject.bind({
    component: 'article',
    to: '#article',
    data: {
@@ -102,7 +102,7 @@ inject.bind({
 If you simply wish to generate the HTML based on the component and data you can do so using the generate function. This is especially useful when using Injectplate as a Node module.
 
 ```javascript
-inject.generate({
+Inject.generate({
    component: 'article',
    data: {
       heading: 'Great Article Heading',
@@ -129,13 +129,13 @@ Each component has a predefined HTML structure that can render out static and dy
 
 ```javascript
 // As a string
-inject.component({
+Inject.component({
    name: 'example',
    html: '<p>This is some text.</p>'
 });
 
 // As a multiline string
-inject.component({
+Inject.component({
    name: 'example',
    html: `
       <p>
@@ -145,7 +145,7 @@ inject.component({
 });
 
 // As an array
-inject.component({
+Inject.component({
    name: 'example',
    html: [
       '<p>',
@@ -163,11 +163,11 @@ Displaying static values inside your HTML requires the `{{value}}` syntax. The d
 All variables are escaped by default but can be unescaped if you use the triple curly braces, `{{{value}}}`.
 
 ```javascript
-inject.component({
+Inject.component({
    name: 'example',
    html: '<p>{{value}}</p>'
 });
-inject.bind({
+Inject.bind({
    component: 'example',
    to: '#example',
    data: {
@@ -179,11 +179,11 @@ inject.bind({
 You can also access data using the Javascript dot notation.
 
 ```javascript
-inject.component({
+Inject.component({
    name: 'example',
    html: '<p>{{user.firstname}} {{user.lastname}}</p>'
 });
-inject.bind({
+Inject.bind({
    component: 'example',
    to: '#example',
    data: {
@@ -199,11 +199,11 @@ inject.bind({
 Another great feature is the ability to return data within a function on binding. For example:
 
 ```javascript
-inject.component({
+Inject.component({
    name: 'example',
    html: '<p>{{calculation}}</p>'
 });
-inject.bind({
+Inject.bind({
    component: 'example',
    to: '#example',
    data: {
@@ -218,7 +218,7 @@ inject.bind({
 If you wish to display dynamic data you need to declare a section inside the HTML with a name that correlates to the dataset. Opening the section requires the `pound` sign (#) and closing the section requires the `slash` sign (/).
 
 ```javascript
-inject.component({
+Inject.component({
    name: 'example',
    html: `
       {{#paragraphs}}
@@ -226,7 +226,7 @@ inject.component({
       {{/paragraphs}}
    `
 });
-inject.bind({
+Inject.bind({
    component: 'example',
    to: '#example',
    data: {
@@ -244,7 +244,7 @@ inject.bind({
 At this point you can also nest data sections. For example:
 
 ```javascript
-inject.component({
+Inject.component({
    name: 'example',
    html: `
       {{#articles}}
@@ -258,7 +258,7 @@ inject.component({
       {{/articles}}
    `
 });
-inject.bind({
+Inject.bind({
    component: 'example',
    to: '#example',
    data: {
@@ -288,7 +288,7 @@ inject.bind({
 You are also able to display flat datasets without having to access a property by simply using `{{.}}`.
 
 ```javascript
-inject.component({
+Inject.component({
    name: 'example',
    html: `
       {{#paragraphs}}
@@ -296,7 +296,7 @@ inject.component({
       {{/paragraphs}}
    `
 });
-inject.bind({
+Inject.bind({
    component: 'example',
    to: '#example',
    data: {
@@ -309,7 +309,7 @@ inject.bind({
 An inverted section is a rendering fallback for if the dataset is `null`, `undefined` or `false`. It requires a different opening declaration of `{{^}}`. For example.
 
 ```javascript
-inject.component({
+Inject.component({
    name: 'example',
    html: `
       {{#paragraphs}}
@@ -318,7 +318,7 @@ inject.component({
       {{^paragraphs}}There are no paragraphs to show.{{/paragraphs}}
    `
 });
-inject.bind({
+Inject.bind({
    component: 'example',
    to: '#example'
 });
@@ -328,7 +328,7 @@ inject.bind({
 If you would like to know what components have been created simply call the component list function and view your console, like so:
 
 ```html
-inject.componentList();
+Inject.componentList();
 ```
 
 ## On Done
@@ -338,7 +338,7 @@ Also note that the onDone function returns a **$element** variable on binding wh
 
 ```javascript
 // On component
-inject.component({
+Inject.component({
    name: 'article',
    html: '<article>{{value}}</article>',
    onDone: function($this) {
@@ -347,7 +347,7 @@ inject.component({
 });
 
 // On binding
-inject.bind({
+Inject.bind({
    component: 'article',
    to: '#article',
    data: {
@@ -360,7 +360,7 @@ inject.bind({
 });
 
 // On generation
-inject.generate({
+Inject.generate({
    component: 'article',
    data: {
       value: 'Something here.'
@@ -378,7 +378,7 @@ Note that you are also be able to bind again with the onDone function and nest c
 
 ```javascript
 // Create components
-inject.component({
+Inject.component({
    name: 'article',
    html: `
       <article>
@@ -388,7 +388,7 @@ inject.component({
       </article>
 	`
 });
-inject.component({
+Inject.component({
    name: 'comments',
    html: `
       <ul>
@@ -400,7 +400,7 @@ inject.component({
 });
 
 // Call components
-inject.bind({
+Inject.bind({
    component: 'article',
    to: '#article',
    data: {
@@ -408,7 +408,7 @@ inject.bind({
       content: 'More arbitrary text goes here.'
    },
    onDone: function() {
-      inject.bind({
+      Inject.bind({
          component: 'comments',
          to: '#comments',
          data: {

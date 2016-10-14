@@ -1,15 +1,15 @@
 {
 	"name": "injectplate",
-	"version": "2.2.0",
+	"version": "3.0.0",
 	"description": "A declare once Javascript component injector.",
 	"keywords": [
-      "Injector",
+		"Webplate",
       "Component",
-      "Javascript",
-      "Webplate"
+      "Injector",
+      "Javascript"
    ],
 	"author": "Chris Humboldt",
-	"license": "Apache License, Version 2.0",
+	"license": "Apache-2.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/chrishumboldt/Injectplate.git"
