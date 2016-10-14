@@ -47,10 +47,10 @@ npm install injectplate
 <pre class="prettyprint linenums">
 &lt;script&gt;
 // Initialize
-var inject = new injectplate();
+var Inject = Injectplate.init();
 
 // Create component
-inject.component({
+Inject.component({
     name: 'article',
     className: 'basic-article',
     html: `
@@ -66,7 +66,7 @@ inject.component({
 <pre class="prettyprint linenums">
 &lt;script&gt;
 // Bind component
-inject.bind({
+Inject.bind({
     component: 'article',
     to: '#article',
     data: {
@@ -75,7 +75,7 @@ inject.bind({
     }
 });
 // Generate component HTML
-inject.generate({
+Inject.generate({
     component: 'article',
     data: {
         heading: 'Great Article Heading',
@@ -93,7 +93,7 @@ inject.generate({
 			<p>To see how to define templates view the <a href="http://getwebplate.com/#/documentation/injector/" class="link">online documentation</a>. Find an example below:</p>
 <pre class="prettyprint linenums">
 &lt;script&gt;
-inject.component({
+Inject.component({
     name: 'articleAdvanced',
     className: 'advanced-article',
     html: `
@@ -108,7 +108,7 @@ inject.component({
     `
 });
 
-inject.bind({
+Inject.bind({
     component: 'articleAdvanced',
     to: '#article',
     data: {
@@ -149,10 +149,10 @@ inject.bind({
 	<script src="js/injectplate.min.js"></script>
 	<script>
 	// Start Inject
-	var inject = new injectplate();
+	var Inject = Injectplate.init();
 
 	// Component
-	inject.component({
+	Inject.component({
 		name: 'articleAdvanced',
 		className: 'advanced-article',
 		html: `
@@ -164,11 +164,14 @@ inject.bind({
 					{{/paragraphs}}
 				</div>
 			</article>
-		`
+		`,
+		onDone: function (thisComponent) {
+			console.log(thisComponent);
+		}
 	});
 
 	// Bind
-	inject.bind({
+	Inject.bind({
 		component: 'articleAdvanced',
 		to: '#article',
 		data: {
