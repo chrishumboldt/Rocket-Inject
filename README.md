@@ -99,7 +99,7 @@ Inject.bind({
 | overwrite | false | By default the component will append to the `to` selector. If set to `true` it will overwrite the inner HTML. |
 
 #### Generate
-If you simply wish to generate the HTML based on the component and data you can do so using the generate function. This is especially useful when using Injectplate as a Node module.
+If you simply wish to generate the HTML based on the component and data you can do so by using the generate function. This is especially useful when using Injectplate as a Node module.
 
 ```javascript
 var myComponent = Inject.generate({
