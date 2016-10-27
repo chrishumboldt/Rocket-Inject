@@ -115,9 +115,9 @@ var myComponent = Inject.generate({
 | ---- | ---- | ---- |
 | component | | Choose the component you wish to use. |
 | data | | Parse in a JSON object with the data. This will then match to the HTML template of the component. |
-| onDone | | Assign a function that will be called once the generation is complete. The return value in the callback is the generated HTML. |
+| onDone | | Assign a callback function that will be executed once the generation is complete. The return value in the callback is the generated HTML. |
 
-**Note** that the onDone function (which is available on both the generate and bind functions) needs to be used to return the generated HTML. For more on the onDone function [read here](#on-done).
+**Notice** that the onDone function (which is also available on the component, generate and bind methods) can be used to return the generated HTML. For more on the onDone function [read here](#on-done). The HTML is however always returned and can be assigned to a variable as shown above. Both approaches have a place.
 
 #### List & Edit
 If you would like to know what components have been created simply reference the list property to gain access to the components object. This also gives you the ability to modify the component should you wish to, although it is not recommended. **NOTE** that if you edit the component HTML, you will need to parse it first through the flatten method. An example is shown below:
