@@ -1,6 +1,6 @@
 {
 	"name": "injectplate",
-	"version": "3.1.1",
+	"version": "3.1.2",
 	"description": "A declare once Javascript component injector.",
 	"keywords": [
 		"Webplate",
@@ -17,5 +17,8 @@
 	"bugs": {
 		"url": "https://github.com/chrishumboldt/Injectplate/issues"
 	},
-	"homepage": "https://github.com/chrishumboldt/Injectplate"
+	"homepage": "https://github.com/chrishumboldt/Injectplate",
+	"dependencies": {
+		"mustache": ">=2.2.0"
+	}
 }
