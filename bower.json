@@ -14,8 +14,12 @@
 	"license": "Apache-2.0",
 	"ignore": [
 		"**/.*",
+		".gitignore",
 		"index.html",
-		"bower.json"
+		"index.js",
+		"bower.json",
+		"build",
+		"package.json"
 	],
 	"devDependencies": {
 		"webplate-demo": "^1.0.0"
