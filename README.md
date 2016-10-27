@@ -122,7 +122,7 @@ var myComponent = Inject.generate({
 #### List & Edit
 If you would like to know what components have been created simply reference the list property to gain access to the components object. This also gives you the ability to edit a component, although it is not recommended. **NOTE** that if you edit the component HTML, you will need to parse it first through the flatten method. An example is shown below:
 
-```html
+```javascript
 // View the components available
 console.log(Inject.list);
 
