@@ -1,8 +1,8 @@
 /**
- * File: js/injectplate.js
- * Type: Javascript component
+ * File: build/js/injectplate.js
+ * Type: Javascript component file
  * Author: Chris Humboldt
- */
+**/
 
 // Table of contents
 // Mustache.js
@@ -643,122 +643,242 @@
 
 }));
 
-// Injectplate
-var Injectplate = function () {
-	return {
-		init: function () {
-			return new InjectplateComponent();
-		}
+// Webplate tools module extension
+var Web = (function (Web) {
+	// Basic checks
+	if (!Web.exists) {
+		var exists = function (check) {
+			return (check === null || check === false || typeof (check) == 'undefined') ? false : true;
+		};
+		Web.exists = exists;
 	}
-}();
-var InjectplateComponent = function () {
-	// Variables
-	var componentList = {};
-
-	// Bind
-	var bind = function (objBind) {
-		var objBind = objBind || false;
-		if (objBind !== false && objBind.component) {
-			var bindTo;
-			var data = objBind.data || '';
-
-			bindTo = (objBind.to !== undefined) ? select(objBind.to) : select('#' + objBind.component);
-
-			if (bindTo) {
-				for (var i = 0, len = bindTo.length; i < len; i++) {
-					var componentEl = Mustache.render(componentList[objBind.component]['html'], data);
-					if (objBind.overwrite === true) {
-						bindTo[i].innerHTML = componentEl;
+	if (!Web.has) {
+		var has = {
+			spaces: function (check) {
+				return /\s/.test(check);
+			},
+			class: function (element, className) {
+				return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
+			}
+		};
+		Web.has = has;
+	}
+	// Classes
+	if (!Web.class) {
+		var classMethods = {
+			add: function (element, className) {
+				if (exists(element)) {
+					if (typeof className === 'object') {
+						for (var i = 0, len = className.length; i < len; i++) {
+							classMethods.addExecute(element, className[i]);
+						}
+					} else if (has.spaces(className)) {
+						var classes = className.split(' ');
+						for (var i = 0, len = classes.length; i < len; i++) {
+							classMethods.addExecute(element, classes[i]);
+						}
 					} else {
-						bindTo[i].insertAdjacentHTML('beforeend', componentEl);
+						classMethods.addExecute(element, className);
 					}
-					bindTo[i].setAttribute('data-inject', 'true');
-					if (componentList[objBind.component]['id']) {
-						bindTo[i].id = componentList[objBind.component]['id'];
+				}
+			},
+			addExecute: function (element, className) {
+				var crtClass = element.className;
+				if (crtClass.match(new RegExp('\\b' + className + '\\b', 'g')) === null) {
+					element.className = crtClass === '' ? className : crtClass + ' ' + className;
+				}
+			},
+			clear: function (element) {
+				if (exists(element)) {
+					element.removeAttribute('class');
+				}
+			},
+			remove: function (element, className) {
+				if (exists(element)) {
+					if (typeof className === 'object') {
+						for (var i = className.length - 1; i >= 0; i--) {
+							classMethods.removeExecute(element, className[i]);
+						}
+					} else if (has.spaces(className)) {
+						var classes = className.split(' ');
+						for (var i = 0, len = classes.length; i < len; i++) {
+							classMethods.removeExecute(element, classes[i]);
+						}
+					} else {
+						classMethods.removeExecute(element, className);
 					}
-					if (componentList[objBind.component]['className']) {
-						classAdd(bindTo[i], componentList[objBind.component]['className']);
-					}
-					if (componentList[objBind.component]['onDone']) {
-						callback = componentList[objBind.component]['onDone'](bindTo[i]);
-					}
-					if (objBind.onDone !== undefined) {
-						callback = objBind.onDone(bindTo[i]);
+				}
+			},
+			removeExecute: function (element, className) {
+				if (element.className.indexOf(className) > -1) {
+					element.className = element.className.split(' ').filter(function (val) {
+						return val != className;
+					}).toString().replace(/,/g, ' ');
+					if (element.className === '') {
+						classMethods.clear(element);
 					}
 				}
 			}
+		};
+		Web.class = classMethods;
+	}
+	// DOM
+	if (!Web.dom) {
+		Web.dom = {};
+	}
+	if (!Web.dom.select) {
+		Web.dom.select = function (selector) {
+			if (selector.indexOf('.') > -1 || has.spaces(selector)) {
+				var returnElements = document.querySelectorAll(selector);
+				if (returnElements.length > 0) {
+					return returnElements;
+				}
+				return false;
+			} else {
+				if (selector.indexOf('#') > -1) {
+					return [document.getElementById(selector.substring(1))];
+				} else {
+					var returnElements = document.getElementsByTagName(selector);
+					if (returnElements.length > 0) {
+						return returnElements;
+					}
+					return false;
+				}
+			}
 		}
+	}
+
+	return Web;
+})(Web || {});
+
+// Injectplate
+var Injectplate = (function () {
+	// Defaults
+	var defaults = {
+		errors: true
 	};
 
-	// Class add
-	var classAdd = function (element, class) {
-		var crtClass = element.className;
-		if (crtClass.match(new RegExp('\\b' + class + '\\b', 'g')) === null) {
-			element.className = crtClass === '' ? class : crtClass + ' ' + class;
+	// Inner component
+	var component = function () {
+		// Variables
+		var components = {};
+
+		// Functions
+		var bindComponent = function (obj) {
+			// Catch
+			if (typeof obj !== 'object' || obj.component == undefined) {
+				return false;
+			}
+			/*
+			Determine what the component needs to bind to in the DOM. If nothing in
+			the DOM is found then kill the binding here and don't execute anuthing else
+			unnecessarily so.
+			*/
+			var bindTo = (typeof obj.to != undefined) ? Web.dom.select(obj.to) : Web.dom.select('#' + obj.component);
+			if (!bindTo || bindTo.length < 1) {
+				return false;
+			}
+
+			var html = Mustache.render(components[obj.component].html, (typeof obj.data) ? obj.data : '');
+			for (var i = 0, len = bindTo.length; i < len; i++) {
+			   // Overwrite or append
+				if (obj.overwrite === true) {
+					bindTo[i].innerHTML = html;
+				} else {
+					bindTo[i].insertAdjacentHTML('beforeend', html);
+				}
+				bindTo[i].setAttribute('data-inject', 'true');
+				// Set an id on the container (bindTo element)
+				if (typeof components[obj.component].id === 'string') {
+					bindTo[i].id = components[obj.components].id;
+				}
+				// Set a class on the container (bindTo element)
+				if (typeof components[obj.component].className === 'string') {
+					Web.class.add(bindTo[i], components[obj.component].className);
+				}
+				// Component onDone function
+				if (typeof components[obj.component].onDone === 'function') {
+					components[obj.component].onDone(bindTo[i]);
+				}
+				// Binding onDone function
+				if (typeof obj.onDone === 'function') {
+					obj.onDone(bindTo[i]);
+				}
+			}
+
+			// if (typeof obj.onDone === 'function') {
+			// 	obj.onDone(html);
+			// }
 		}
-	};
+		var flattenHTML = function (html, name) {
+			if (typeof html === 'object') {
+				var htmlFlat = '';
+				for (var i = 0, len = html.length; i < len; i++) {
+					htmlFlat += html[i];
+				}
+				return htmlFlat;
+			} else if (typeof html === 'string') {
+				var htmlFlat = '';
+				var htmlFlatSplit = html.split(/(?:\r\n|\n|\r)/);
+				for (var i = 0, len = htmlFlatSplit.length; i < len; i++) {
+					htmlFlat += htmlFlatSplit[i].trim();
+				}
+				return htmlFlat;
+			} else {
+				if (defaults.errors) {
+					throw new Error('Injectplate: The HTML provided to create the component "' + name + '" is not valid.');
+					return false;
+				} else {
+					return '';
+				}
+			}
+		}
+		var generateComponent = function (obj) {
+			// Catch
+			if (typeof obj !== 'object' || obj.component == undefined) {
+				return false;
+			}
+			var html = Mustache.render(components[obj.component].html, (typeof obj.data) ? obj.data : '');
+			if (typeof obj.onDone === 'function') {
+				obj.onDone(html);
+			}
+			return html;
+		}
+		var registerComponent = function (obj) {
+			// Catch
+			if (typeof obj !== 'object' || obj.name == undefined) {
+				if (defaults.errors) {
+					throw new Error('Injectplate: Please provide a valid component name.');
+				}
+				return false;
+			}
+			// Register the new component
+			components[obj.name] = {
+				className: (typeof obj.className === 'string') ? obj.className : false,
+				id: (typeof obj.id === 'string') ? obj.id : false,
+				html: flattenHTML(obj.html, obj.name),
+				onDone: (typeof obj.onDone === 'function') ? obj.onDone : false,
+				overwrite: (typeof obj.overwrite === 'boolean') ? obj.overwrite : false
+			};
+		}
 
-	// Show component list
-	var componentList = function () {
-		console.log(componentList);
-	};
-
-	// Register component
-	var component = function (objComponent) {
-		componentList[objComponent.name] = {
-			className: objComponent.className || false,
-			id: objComponent.id || false,
-			html: flattenTemplate(objComponent.html),
-			onDone: objComponent.onDone || false,
-			overwrite: objComponent.overwrite || false
+		// Return
+		return {
+			bind: bindComponent,
+			component: registerComponent,
+			generate: generateComponent,
+			list: components
 		};
 	};
 
-	// Flatten template
-	var flattenTemplate = function (templateInp) {
-		if (typeof templateInp === 'object') {
-			var template = '';
-			for (var i = 0, len = templateInp.length; i < len; i++) {
-				template += templateInp[i];
-			}
-			return template;
-		} else if (typeof templateInp === 'string') {
-			var template = '';
-			var templateInpSplit = templateInp.split(/(?:\r\n|\n|\r)/);
-			for (var i = 0, len = templateInpSplit.length; i < len; i++) {
-				template += templateInpSplit[i].trim();
-			}
-			return template;
-		}
-	};
-
-	// Generate
-	var generate = function (objGenerate) {
-		var objGenerate = objGenerate || false;
-		if (objGenerate !== false && objGenerate.component) {
-			var data = objGenerate.data || '';
-			if (objGenerate.onDone !== undefined) {
-				objGenerate.onDone(Mustache.render(componentList[objGenerate.component]['html'], data));
-			}
-		}
-	};
-
-	// Select
-	var select = function (selector) {
-		if (selector.indexOf('.') > -1) {
-			return document.querySelectorAll(selector);
-		} else if (selector.indexOf('#') > -1) {
-			return [document.getElementById(selector.substring(1))];
-		} else {
-			return document.getElementsByTagName(selector);
-		}
+	// Initiliser
+	var init = function () {
+		return new component();
 	};
 
 	// Return
 	return {
-		bind: bind,
-		component: component,
-		componentList: componentList,
-		generate: generate
+		defaults: defaults,
+		init: init
 	};
-};
+})();
