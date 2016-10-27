@@ -102,14 +102,11 @@ Inject.bind({
 If you simply wish to generate the HTML based on the component and data you can do so using the generate function. This is especially useful when using Injectplate as a Node module.
 
 ```javascript
-Inject.generate({
+var myComponent = Inject.generate({
    component: 'article',
    data: {
       heading: 'Great Article Heading',
       content: 'This will just be some basic text about stuff.'
-   },
-   onDone: function($html) {
-      console.log($html);
    }
 });
 ```

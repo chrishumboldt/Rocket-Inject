@@ -1,26 +1,22 @@
 {
 	"name": "injectplate",
 	"authors": [
-    "Chris Humboldt <chrismodem@gmail.com>"
-  ],
+		"Chris Humboldt <chrismodem@gmail.com>"
+	],
 	"description": "A declare once Javascript component injector.",
 	"main": ["js/injectplate.min.js"],
 	"keywords": [
-    "Injector",
-    "Component",
-    "Javascript",
-    "Webplate"
-  ],
+		"Webplate",
+		"Component",
+		"Injector",
+		"Javascript"
+	],
 	"license": "Apache-2.0",
 	"ignore": [
-    "**/.*",
-    "bower_components",
-    "package.json",
-    "index.html",
-    "bower.json",
-    "build",
-	 "index.js"
-  ],
+		"**/.*",
+		"index.html",
+		"bower.json"
+	],
 	"devDependencies": {
 		"webplate-demo": "^1.0.0"
 	}
