@@ -805,10 +805,6 @@ var Injectplate = (function () {
 					obj.onDone(bindTo[i]);
 				}
 			}
-
-			// if (typeof obj.onDone === 'function') {
-			// 	obj.onDone(html);
-			// }
 		}
 		var flattenHTML = function (html, name) {
 			if (typeof html === 'object') {

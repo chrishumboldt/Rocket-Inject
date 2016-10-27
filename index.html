@@ -75,14 +75,11 @@ Inject.bind({
     }
 });
 // Generate component HTML
-Inject.generate({
+var myComponent = Inject.generate({
     component: 'article',
     data: {
         heading: 'Great Article Heading',
         content: 'This will just be some basic text about stuff.'
-    },
-    onDone: function($html) {
-        console.log($html);
     }
 });
 &lt;/script&gt;
