@@ -6,9 +6,9 @@ A declare once Javascript component injector. This allows you to create HTML com
 * [Getting Started](#getting-started)
 * [Getting Started With NPM](#getting-started-with-npm)
 * [Components](#components)
-* [Bind](#bind)
-* [Generate](#generate)
-* [Component List & Edit](#component-list-edit)
+	* [Bind](#bind)
+	* [Generate](#generate)
+	* [List & Edit](#list--edit)
 * [HTML](#html)
 	* [Static Values](#static-values)
 	* [Return Values](#return-values)
@@ -76,7 +76,7 @@ Inject.component({
 | html | Set the HTML template that will be used when binding data. |
 | onDone | Assign a function that will be called once the component is bound. |
 
-## Bind
+#### Bind
 Once the component has been created, simply bind it to an element and parse in the relevant data.
 
 ```javascript
@@ -98,7 +98,7 @@ Inject.bind({
 | onDone | | Assign a function that will be called once the binding is complete. |
 | overwrite | false | By default the component will append to the `to` selector. If set to `true` it will overwrite the inner HTML. |
 
-## Generate
+#### Generate
 If you simply wish to generate the HTML based on the component and data you can do so using the generate function. This is especially useful when using Injectplate as a Node module.
 
 ```javascript
@@ -119,7 +119,7 @@ var myComponent = Inject.generate({
 
 **Note** that the onDone function (which is available on both the generate and bind functions) needs to be used to return the generated HTML. For more on the onDone function [read here](#on-done).
 
-## Component List & Edit
+#### List & Edit
 If you would like to know what components have been created simply reference the list property to gain access to the components object. This also gives you the ability to modify the component should you wish to, although it is not recommended. **NOTE** that if you edit the component HTML, you will need to parse it first through the flatten method. An example is shown below:
 
 ```html
