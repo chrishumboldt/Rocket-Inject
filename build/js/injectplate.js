@@ -862,6 +862,7 @@ var Injectplate = (function () {
 		return {
 			bind: bindComponent,
 			component: registerComponent,
+			flatten: flattenHTML,
 			generate: generateComponent,
 			list: components
 		};

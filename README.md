@@ -8,12 +8,12 @@ A declare once Javascript component injector. This allows you to create HTML com
 * [Components](#components)
 * [Bind](#bind)
 * [Generate](#generate)
+* [Component List & Edit](#component-list-edit)
 * [HTML](#html)
 	* [Static Values](#static-values)
 	* [Return Values](#return-values)
 	* [Data Sections](#data-sections)
 	* [Inverted Sections](#inverted-sections)
-* [Component List](#component-list)
 * [On Done](#on-done)
 * [Nesting Components](#nesting-components)
 
@@ -118,6 +118,23 @@ var myComponent = Inject.generate({
 | onDone | | Assign a function that will be called once the generation is complete. The return value in the callback is the generated HTML. |
 
 **Note** that the onDone function (which is available on both the generate and bind functions) needs to be used to return the generated HTML. For more on the onDone function [read here](#on-done).
+
+## Component List & Edit
+If you would like to know what components have been created simply reference the list property to gain access to the components object. This also gives you the ability to modify the component should you wish to, although it is not recommended. **NOTE** that if you edit the component HTML, you will need to parse it first through the flatten method. An example is shown below:
+
+```html
+// View the components available
+console.log(Inject.list);
+
+// Edit a component
+var newHTML = `
+	<div>
+		<h2>{{heading}}</h2>
+	</div>
+`;
+Inject.list.componentName.html = Inject.flatten(newHTML); // Notice the flatten method used here
+Inject.list.componentName.overwrite = true;
+```
 
 ## HTML
 Each component has a predefined HTML structure that can render out static and dynamic data. Injectplate does this using the [Mustache.js](https://github.com/janl/mustache.js) templating engine.
@@ -319,13 +336,6 @@ Inject.bind({
    component: 'example',
    to: '#example'
 });
-```
-
-## Component List
-If you would like to know what components have been created simply call the component list function and view your console, like so:
-
-```html
-Inject.componentList();
 ```
 
 ## On Done
