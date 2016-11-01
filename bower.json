@@ -4,7 +4,9 @@
 		"Chris Humboldt <chrismodem@gmail.com>"
 	],
 	"description": "A declare once Javascript component injector.",
-	"main": ["js/injectplate.min.js"],
+	"main": [
+		"build/js/injectplate.js"
+	],
 	"keywords": [
 		"Webplate",
 		"Component",
@@ -17,8 +19,6 @@
 		".gitignore",
 		"index.html",
 		"index.js",
-		"bower.json",
-		"build",
 		"package.json"
 	],
 	"devDependencies": {
