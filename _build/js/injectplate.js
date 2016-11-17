@@ -648,7 +648,7 @@ var Web = (function (Web) {
 	// Basic checks
 	if (!Web.exists) {
 		var exists = function (check) {
-			return (check === null || check === false || typeof (check) == 'undefined') ? false : true;
+			return (check === null || check === false || typeof (check) === 'undefined') ? false : true;
 		};
 		Web.exists = exists;
 	}
@@ -751,7 +751,7 @@ var Web = (function (Web) {
 	return Web;
 })(Web || {});
 
-// Injectplate
+// Component container
 var Injectplate = (function () {
 	// Defaults
 	var defaults = {
@@ -766,20 +766,20 @@ var Injectplate = (function () {
 		// Functions
 		var bindComponent = function (obj) {
 			// Catch
-			if (typeof obj !== 'object' || obj.component == undefined) {
+			if (typeof obj !== 'object' || obj.component === 'undefined') {
 				return false;
 			}
 			/*
 			Determine what the component needs to bind to in the DOM. If nothing in
-			the DOM is found then kill the binding here and don't execute anuthing else
+			the DOM is found then kill the binding here and don't execute anything else
 			unnecessarily so.
 			*/
-			var bindTo = (typeof obj.to != undefined) ? Web.dom.select(obj.to) : Web.dom.select('#' + obj.component);
+			var bindTo = (typeof obj.to !== 'undefined') ? Web.dom.select(obj.to) : Web.dom.select('#' + obj.component);
 			if (!bindTo || bindTo.length < 1) {
 				return false;
 			}
 
-			var html = Mustache.render(components[obj.component].html, (typeof obj.data) ? obj.data : '');
+			var html = Mustache.render(components[obj.component].html, (typeof obj.data !== 'undefined') ? obj.data : '');
 			for (var i = 0, len = bindTo.length; i < len; i++) {
 			   // Overwrite or append
 				if (obj.overwrite === true) {
@@ -831,7 +831,7 @@ var Injectplate = (function () {
 		}
 		var generateComponent = function (obj) {
 			// Catch
-			if (typeof obj !== 'object' || obj.component == undefined) {
+			if (typeof obj !== 'object' || obj.component === 'undefined') {
 				return false;
 			}
 			var html = Mustache.render(components[obj.component].html, (typeof obj.data) ? obj.data : '');
@@ -842,7 +842,7 @@ var Injectplate = (function () {
 		}
 		var registerComponent = function (obj) {
 			// Catch
-			if (typeof obj !== 'object' || obj.name == undefined) {
+			if (typeof obj !== 'object' || obj.name === 'undefined') {
 				if (defaults.errors) {
 					throw new Error('Injectplate: Please provide a valid component name.');
 				}

@@ -28,6 +28,7 @@ Simply start by including the required Javascript file.
 
 ```html
 <body>
+	/* Your content goes here */
    <script src="js/injectplate.min.js"></script>
 </body>
 ```
