@@ -6,16 +6,16 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 	<title>Injectplate</title>
-	<link href="bower_components/webplate-demo/css/demo.min.css" rel="stylesheet" type="text/css">
+	<link href="node_modules/rocket-demo/css/demo.min.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
-	<div id="web-demo-message">
+	<div id="rocket-demo-message">
 		You need to run "bower install" and include the neccessary demo files in order to view this file.
 	</div>
 
-	<div id="web-demo" style="display:none;">
+	<div id="rocket-demo" style="display:none;">
 		<div class="heading">
 	      <div class="container"><h2>Injectplate Component</h2></div>
 	   </div>
@@ -142,14 +142,16 @@ Inject.bind({
 		</div></div></footer>
 	</div>
 
-	<script src="bower_components/webplate-demo/js/demo.min.js"></script>
-	<script src="js/injectplate.min.js"></script>
+	<script src="node_modules/rocket-demo/js/demo.min.js"></script>
+	<script src="build/js/mustach.js"></script>
+	<script src="build/js/inject.js"></script>
 	<script>
-	// Start Inject
-	var Inject = Injectplate.init();
-
+	console.log(Rocket.inject.list);
+	// // Start Inject
+	// var Inject = Injectplate.init();
+	//
 	// Component
-	Inject.component({
+	Rocket.inject.component({
 		name: 'articleAdvanced',
 		className: 'advanced-article',
 		html: `
@@ -166,22 +168,22 @@ Inject.bind({
 			console.log(thisComponent);
 		}
 	});
-
-	// Bind
-	Inject.bind({
-		component: 'articleAdvanced',
-		to: '#article',
-		data: {
-			heading: 'This Is An Advanced Article',
-			paragraphs: [{
-				content: 'This is paragraph one.'
-			}, {
-				content: 'Here goes the paragraphs sequel'
-			}, {
-				content: 'Finally the last paragrpah goes here.'
-			}]
-		}
-	});
+	//
+	// // Bind
+	// Inject.bind({
+	// 	component: 'articleAdvanced',
+	// 	to: '#article',
+	// 	data: {
+	// 		heading: 'This Is An Advanced Article',
+	// 		paragraphs: [{
+	// 			content: 'This is paragraph one.'
+	// 		}, {
+	// 			content: 'Here goes the paragraphs sequel'
+	// 		}, {
+	// 			content: 'Finally the last paragrpah goes here.'
+	// 		}]
+	// 	}
+	// });
 	</script>
 
 </body>

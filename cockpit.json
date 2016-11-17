@@ -1,0 +1,6 @@
+{
+   "build": [{
+      "name": "inject",
+      "js": ["mustache.js", "inject.js"]
+   }]
+}
