@@ -27,14 +27,5 @@
    },
    "devDependencies": {
       "rocket-demo": "^2.0.0"
-   },
-   "rocket": {
-      "build": [
-         "build/js/mustache.js",
-         "build/js/inject.js"
-      ],
-      "production": [
-         "js/inject.min.js"
-      ]
    }
 }
