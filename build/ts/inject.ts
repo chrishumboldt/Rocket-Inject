@@ -62,33 +62,33 @@ module RocketInjectComponent {
          }
          for (let bindTo of listBindTo) {
             // Overwrite or append
-				if (obj.overwrite === true) {
-					bindTo.innerHTML = html;
-				} else {
-					bindTo.insertAdjacentHTML('beforeend', html);
-				}
-				bindTo.setAttribute('data-inject', 'true');
+            if (obj.overwrite === true) {
+               bindTo.innerHTML = html;
+            } else {
+               bindTo.insertAdjacentHTML('beforeend', html);
+            }
+            bindTo.setAttribute('data-inject', 'true');
             // Set an id on the container (bindTo element)
-				if (typeof components[obj.component].id === 'string') {
-					bindTo.id = components[obj.component].id;
-				}
-				// Set a class on the container (bindTo element)
-				if (typeof components[obj.component].className === 'string') {
+            if (typeof components[obj.component].id === 'string') {
+               bindTo.id = components[obj.component].id;
+            }
+            // Set a class on the container (bindTo element)
+            if (typeof components[obj.component].className === 'string') {
                let listClassNames = bindTo.className.split(' ');
                listClassNames.push(components[obj.component].className);
                listClassNames = listClassNames.filter(function (value, index, self) {
-      				return self.indexOf(value) === index;
-      			});
-					bindTo.className = listClassNames.join(' ');
-				}
-				// Component onDone function
-				if (typeof components[obj.component].onDone === 'function') {
-					components[obj.component].onDone(bindTo);
-				}
-				// Binding onDone function
-				if (typeof obj.onDone === 'function') {
-					obj.onDone(bindTo);
-				}
+                  return self.indexOf(value) === index;
+               });
+               bindTo.className = listClassNames.join(' ');
+            }
+            // Component onDone function
+            if (typeof components[obj.component].onDone === 'function') {
+               components[obj.component].onDone(bindTo);
+            }
+            // Binding onDone function
+            if (typeof obj.onDone === 'function') {
+               obj.onDone(bindTo);
+            }
          }
       },
       generate: function (obj:component) {
@@ -107,18 +107,18 @@ module RocketInjectComponent {
          // Catch
          if (!validate.register(obj)) {
             if (Rocket.defaults.errors) {
-   				throw new Error('Injectplate: Please provide a valid component name.');
-   			}
-   			return false;
+               throw new Error('Injectplate: Please provide a valid component name.');
+            }
+            return false;
          }
          // Continue
          components[obj.name] = {
-   			className: (typeof obj.className === 'string') ? obj.className : false,
-   			id: (typeof obj.id === 'string') ? obj.id : false,
-   			html: flattenHTML(obj.html, obj.name),
-   			onDone: (typeof obj.onDone === 'function') ? obj.onDone : false,
-   			overwrite: (typeof obj.overwrite === 'boolean') ? obj.overwrite : false
-   		};
+            className: (typeof obj.className === 'string') ? obj.className : false,
+            id: (typeof obj.id === 'string') ? obj.id : false,
+            html: flattenHTML(obj.html, obj.name),
+            onDone: (typeof obj.onDone === 'function') ? obj.onDone : false,
+            overwrite: (typeof obj.overwrite === 'boolean') ? obj.overwrite : false
+         };
       }
    };
    /*
@@ -128,9 +128,11 @@ module RocketInjectComponent {
       bind: function (obj:componentBind) {
          if (typeof obj !== 'object') {
             return false;
-         } else if (typeof obj.component !== 'string') {
+         }
+         else if (typeof obj.component !== 'string') {
             return false;
-         } else if (typeof components[obj.component] !== 'object') {
+         }
+         else if (typeof components[obj.component] !== 'object') {
             return false;
          }
          return true;
@@ -138,7 +140,8 @@ module RocketInjectComponent {
       generate: function (obj:component) {
          if (typeof obj !== 'object') {
             return false;
-         } else if (typeof obj.component === 'undefined') {
+         }
+         else if (typeof obj.component === 'undefined') {
             return false;
          }
          return true;
@@ -146,7 +149,8 @@ module RocketInjectComponent {
       register: function (obj:componentNew) {
          if (typeof obj !== 'object') {
             return false;
-         } else if (typeof obj.name === 'undefined') {
+         }
+         else if (typeof obj.name === 'undefined') {
             return false;
          }
          return true;
