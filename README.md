@@ -31,7 +31,7 @@ Simply start by including the required Javascript file.
 ```html
 <body>
 	/* Your content goes here */
-   <script src="js/inject.min.js"></script>
+   <script src="rocket-inject/js/inject.min.js"></script>
 </body>
 ```
 
@@ -40,7 +40,7 @@ This includes a minified version of Mustache.js. If you already have Mustache.js
 ```html
 <body>
 	/* Your content goes here */
-   <script src="js/inject-lean.min.js"></script>
+   <script src="rocket-inject/js/inject-lean.min.js"></script>
 </body>
 ```
 
