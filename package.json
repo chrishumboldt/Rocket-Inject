@@ -1,26 +1,29 @@
 {
-	"name": "rocket-inject",
-	"version": "4.0.0",
-	"description": "A declare once Javascript component injector.",
-	"keywords": [
-		"Rocket",
-		"Part",
+   "name": "rocket-inject",
+   "version": "4.0.1",
+   "description": "A declare once Javascript component injector.",
+   "keywords": [
+      "Rocket",
+      "Part",
       "Component",
       "Injector",
       "Javascript"
    ],
-	"author": "Chris Humboldt",
-	"license": "Apache-2.0",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/chrishumboldt/Rocket-Inject.git"
-	},
-	"bugs": {
-		"url": "https://github.com/chrishumboldt/Rocket-Inject/issues"
-	},
-	"homepage": "https://github.com/chrishumboldt/Rocket-Inject#readme",
-	"engines": {
+   "author": "Chris Humboldt",
+   "license": "Apache-2.0",
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/chrishumboldt/Rocket-Inject.git"
+   },
+   "bugs": {
+      "url": "https://github.com/chrishumboldt/Rocket-Inject/issues"
+   },
+   "homepage": "https://github.com/chrishumboldt/Rocket-Inject#readme",
+   "engines": {
       "npm": "^3.0.0"
+   },
+   "dependencies": {
+      "mustache": "^2.3.0"
    },
    "devDependencies": {
       "rocket-demo": "^2.0.0"

@@ -124,7 +124,7 @@ Inject.bind({
 			<br>
 			<h4>Working Example</h4>
 			<p class="note">This example uses the dynamic data example above.</p>
-			<div id="article"></div>
+			<div id="article" class="working"></div>
 			<div id="example"></div>
 			<br><br>
 	      <h4>Detailed Documentation</h4>
@@ -143,16 +143,12 @@ Inject.bind({
 	</div>
 
 	<script src="node_modules/rocket-demo/js/demo.min.js"></script>
-	<script src="build/js/mustach.js"></script>
+	<script src="build/js/mustache.js"></script>
 	<script src="build/js/inject.js"></script>
 	<script>
-	console.log(Rocket.inject.list);
-	// // Start Inject
-	// var Inject = Injectplate.init();
-	//
 	// Component
 	Rocket.inject.component({
-		name: 'articleAdvanced',
+		name: 'ArticleAdvanced',
 		className: 'advanced-article',
 		html: `
 			<article>
@@ -168,22 +164,23 @@ Inject.bind({
 			console.log(thisComponent);
 		}
 	});
-	//
-	// // Bind
-	// Inject.bind({
-	// 	component: 'articleAdvanced',
-	// 	to: '#article',
-	// 	data: {
-	// 		heading: 'This Is An Advanced Article',
-	// 		paragraphs: [{
-	// 			content: 'This is paragraph one.'
-	// 		}, {
-	// 			content: 'Here goes the paragraphs sequel'
-	// 		}, {
-	// 			content: 'Finally the last paragrpah goes here.'
-	// 		}]
-	// 	}
-	// });
+
+	// Bind
+	Rocket.inject.bind({
+		component: 'ArticleAdvanced',
+		to: '#article',
+		className: 'somethingCool',
+		data: {
+			heading: 'This Is An Advanced Article',
+			paragraphs: [{
+				content: 'This is paragraph one.'
+			}, {
+				content: 'Here goes the paragraphs sequel'
+			}, {
+				content: 'Finally the last paragrpah goes here.'
+			}]
+		}
+	});
 	</script>
 
 </body>

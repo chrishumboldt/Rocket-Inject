@@ -2,5 +2,8 @@
    "build": [{
       "name": "inject",
       "js": ["mustache.js", "inject.js"]
+   }, {
+      "name": "inject-lean",
+      "js": ["inject.js"]
    }]
 }
