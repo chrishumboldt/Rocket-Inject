@@ -20,7 +20,7 @@ A declare once Javascript component injector. This allows you to create HTML com
 * [Injectplate Deprecated](#injectplate-deprecated)
 
 ## Getting Started
-You can either download a fresh copy of the source files or install Rocket Inject via NPM.
+You can either download a fresh copy of the [source files](https://github.com/chrishumboldt/Rocket-Inject/archive/master.zip) or install Rocket Inject via NPM.
 
 ```
 npm install rocket-inject
@@ -58,7 +58,7 @@ Creating a component is dead easy and takes just a few options to complete.
 
 ```javascript
 Rocket.inject.component({
-   name: 'article',
+   name: 'Article',
    className: 'basic-article',
    html: `
       <article>
@@ -81,7 +81,7 @@ Once the component has been created, simply bind it to an element and parse in t
 
 ```javascript
 Rocket.inject.bind({
-   component: 'article',
+   component: 'Article',
    to: '#article',
    data: {
       heading: 'Great Article Heading',
@@ -103,7 +103,7 @@ If you simply wish to generate the HTML based on the component and data you can 
 
 ```javascript
 var myComponent = Rocket.inject.generate({
-   component: 'article',
+   component: 'Article',
    data: {
       heading: 'Great Article Heading',
       content: 'This will just be some basic text about stuff.'
@@ -132,8 +132,8 @@ var newHTML = `
 		<h2>{{heading}}</h2>
 	</div>
 `;
-Rocket.inject.list.componentName.html = Rocket.inject.flatten(newHTML); // Notice the flatten method used here
-Rocket.inject.list.componentName.overwrite = true;
+Rocket.inject.list.ComponentName.html = Rocket.inject.flatten(newHTML); // Notice the flatten method used here
+Rocket.inject.list.ComponentName.overwrite = true;
 ```
 
 ## HTML
@@ -144,13 +144,13 @@ Each component has a predefined HTML structure that can render out static and dy
 ```javascript
 // As a string
 Rocket.inject.component({
-   name: 'example',
+   name: 'Example',
    html: '<p>This is some text.</p>'
 });
 
 // As a multiline string
 Rocket.inject.component({
-   name: 'example',
+   name: 'Example',
    html: `
       <p>
          This is some text.
@@ -160,7 +160,7 @@ Rocket.inject.component({
 
 // As an array
 Rocket.inject.component({
-   name: 'example',
+   name: 'Example',
    html: [
       '<p>',
          'This is some text.',
@@ -178,11 +178,11 @@ All variables are escaped by default but can be unescaped if you use the triple 
 
 ```javascript
 Rocket.inject.component({
-   name: 'example',
+   name: 'Example',
    html: '<p>{{value}}</p>'
 });
 Rocket.inject.bind({
-   component: 'example',
+   component: 'Example',
    to: '#example',
    data: {
       value: 'This is some text.'
@@ -194,11 +194,11 @@ You can also access data using the Javascript dot notation.
 
 ```javascript
 Rocket.inject.component({
-   name: 'example',
+   name: 'Example',
    html: '<p>{{user.firstname}} {{user.lastname}}</p>'
 });
 Rocket.inject.bind({
-   component: 'example',
+   component: 'Example',
    to: '#example',
    data: {
       user: {
@@ -214,11 +214,11 @@ Another great feature is the ability to return data within a function on binding
 
 ```javascript
 Rocket.inject.component({
-   name: 'example',
+   name: 'Example',
    html: '<p>{{calculation}}</p>'
 });
 Rocket.inject.bind({
-   component: 'example',
+   component: 'Example',
    to: '#example',
    data: {
       calculation: function() {
@@ -233,7 +233,7 @@ If you wish to display dynamic data you need to declare a section inside the HTM
 
 ```javascript
 Rocket.inject.component({
-   name: 'example',
+   name: 'Example',
    html: `
       {{#paragraphs}}
          <p>{{text}}</p>
@@ -241,7 +241,7 @@ Rocket.inject.component({
    `
 });
 Rocket.inject.bind({
-   component: 'example',
+   component: 'Example',
    to: '#example',
    data: {
       paragraphs: [{
@@ -259,7 +259,7 @@ At this point you can also nest data sections. For example:
 
 ```javascript
 Rocket.inject.component({
-   name: 'example',
+   name: 'Example',
    html: `
       {{#articles}}
          <h1>{{heading}}</h1>
@@ -273,7 +273,7 @@ Rocket.inject.component({
    `
 });
 Rocket.inject.bind({
-   component: 'example',
+   component: 'Example',
    to: '#example',
    data: {
       articles: [{
@@ -303,7 +303,7 @@ You are also able to display flat datasets without having to access a property b
 
 ```javascript
 Rocket.inject.component({
-   name: 'example',
+   name: 'Example',
    html: `
       {{#paragraphs}}
          <p>{{.}}</p>
@@ -311,7 +311,7 @@ Rocket.inject.component({
    `
 });
 Rocket.inject.bind({
-   component: 'example',
+   component: 'Example',
    to: '#example',
    data: {
       paragraphs: ['This is paragraph one.', 'This is paragraph two.', 'This is paragraph three.']
@@ -324,7 +324,7 @@ An inverted section is a rendering fallback for if the dataset is `null`, `undef
 
 ```javascript
 Rocket.inject.component({
-   name: 'example',
+   name: 'Example',
    html: `
       {{#paragraphs}}
          <p>{{.}}</p>
@@ -333,7 +333,7 @@ Rocket.inject.component({
    `
 });
 Rocket.inject.bind({
-   component: 'example',
+   component: 'Example',
    to: '#example'
 });
 ```
@@ -346,7 +346,7 @@ Also note that the onDone function returns a **$element** variable on binding wh
 ```javascript
 // On component
 Rocket.inject.component({
-   name: 'article',
+   name: 'Article',
    html: '<article>{{value}}</article>',
    onDone: function($this) {
       console.log('This will output each time this component is used.');
@@ -355,7 +355,7 @@ Rocket.inject.component({
 
 // On binding
 Rocket.inject.bind({
-   component: 'article',
+   component: 'Article',
    to: '#article',
    data: {
       value: 'Something here.'
@@ -368,7 +368,7 @@ Rocket.inject.bind({
 
 // On generation
 Rocket.inject.generate({
-   component: 'article',
+   component: 'Article',
    data: {
       value: 'Something here.'
    },
@@ -386,7 +386,7 @@ Note that you are also be able to bind again with the onDone function and nest c
 ```javascript
 // Create components
 Rocket.inject.component({
-   name: 'article',
+   name: 'Article',
    html: `
       <article>
          <h2>{{heading}}</h2>
@@ -396,7 +396,7 @@ Rocket.inject.component({
 	`
 });
 Rocket.inject.component({
-   name: 'comments',
+   name: 'Comments',
    html: `
       <ul>
          {{#comments}}
@@ -408,7 +408,7 @@ Rocket.inject.component({
 
 // Call components
 Rocket.inject.bind({
-   component: 'article',
+   component: 'Article',
    to: '#article',
    data: {
       heading: 'Anther Great Article Heading',
@@ -416,7 +416,7 @@ Rocket.inject.bind({
    },
    onDone: function() {
       Rocket.inject.bind({
-         component: 'comments',
+         component: 'Comments',
          to: '#comments',
          data: {
             comments: [{

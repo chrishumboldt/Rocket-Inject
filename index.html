@@ -5,53 +5,56 @@
 	<!-- Meta setup -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-	<title>Injectplate</title>
+	<title>Rocket Inject</title>
 	<link href="node_modules/rocket-demo/css/demo.min.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
 	<div id="rocket-demo-message">
-		You need to run "bower install" and include the neccessary demo files in order to view this file.
+		You need to run "npm install" and include the neccessary demo files in order to view this file.
 	</div>
 
 	<div id="rocket-demo" style="display:none;">
 		<div class="heading">
-	      <div class="container"><h2>Injectplate Component</h2></div>
+	      <div class="container"><h2>Rocket Inject</h2></div>
 	   </div>
 		<div class="container">
 			<h4>Getting Started</h4>
-			<p>You can either download a copy of the source files or install Injectplate via Bower.</p>
+			<p>You can either download a copy of the <a class="link" href="https://github.com/chrishumboldt/Rocket-Inject/archive/master.zip">source files</a> or install Rocket Inject via NPM.</p>
 <pre class="prettyprint linenums">
-bower install injectplate
+npm install rocket-inject
 </pre>
 			<p>Start by including the necessary files.</p>
 <pre class="prettyprint linenums">
 &lt;body&gt;
     /* Your content goes here */
-    &lt;script src=&quot;js/injectplate.min.js&quot;>&lt;/script&gt;
+    &lt;script src=&quot;js/inject.min.js&quot;>&lt;/script&gt;
+&lt;/body&gt;
+</pre>
+			<p>This includes a minified version of <a href="https://github.com/janl/mustache.js" class="link">Mustache.js</a>. If you already have Mustache.js loaded, just use the lean version of the injector.</p>
+<pre class="prettyprint linenums">
+&lt;body&gt;
+    /* Your content goes here */
+    &lt;script src=&quot;js/inject-lean.min.js&quot;>&lt;/script&gt;
 &lt;/body&gt;
 </pre>
 			<br>
 			<h4>Getting Started With NPM</h4>
-			<p>If you instead wish to use Injectplate as a Node module simply install using the following command.</p>
+			<p>If you instead wish to use Rocket Inject as a Node module simply require it as you would any other module.</p>
 <pre class="prettyprint linenums">
-npm install injectplate
+var Inject = require('rocket-inject');
 </pre>
 			<br>
 			<h4>What Is This?</h4>
-			<p>Injectplate is a declare once Javascript component injector. This allows you to create HTML components and inject them into the DOM at will. In essence it is a wrapper for the awesome <a href="https://github.com/janl/mustache.js" class="link">Mustache.js</a> library which has a great template sytax.</p>
+			<p>Rocket Inject is a declare once Javascript component injector. This allows you to create HTML components and inject them into the DOM at will. In essence it is a wrapper for the awesome <a href="https://github.com/janl/mustache.js" class="link">Mustache.js</a> library which has a great template sytax.</p>
 			<br>
 			<h4>Basic Example</h4>
-			<p>Initialize Injectplate before creating your first component.</p>
 <pre class="prettyprint linenums">
 &lt;script&gt;
-// Initialize
-var Inject = Injectplate.init();
-
 // Create component
-Inject.component({
-    name: 'article',
+Rocket.inject.component({
+    name: 'Article',
     className: 'basic-article',
     html: `
         &lt;article&gt;
@@ -66,8 +69,8 @@ Inject.component({
 <pre class="prettyprint linenums">
 &lt;script&gt;
 // Bind component
-Inject.bind({
-    component: 'article',
+Rocket.inject.bind({
+    component: 'Article',
     to: '#article',
     data: {
         heading: 'Great Article Heading',
@@ -75,8 +78,8 @@ Inject.bind({
     }
 });
 // Generate component HTML
-var myComponent = Inject.generate({
-    component: 'article',
+var myComponent = Rocket.inject.generate({
+    component: 'Article',
     data: {
         heading: 'Great Article Heading',
         content: 'This will just be some basic text about stuff.'
@@ -86,12 +89,12 @@ var myComponent = Inject.generate({
 </pre>
 			<br>
 			<h4>Dynamic Data</h4>
-			<p>Sometimes you might require elements to be generated dynamically and Injectplate can do this with a JSON based dataset. To do so modify the HTML option of the component. <b>NOTE</b> that the HTML template is defined via an array but can be a basic string.</p>
-			<p>To see how to define templates view the <a href="http://getwebplate.com/#/documentation/injector/" class="link">online documentation</a>. Find an example below:</p>
+			<p>Sometimes you might require elements to be generated dynamically and Rocket Inject can do this with a JSON based dataset. To do so modify the HTML option of the component. <b>NOTE</b> that the HTML template is defined via an array but can be a basic string.</p>
+			<p>To see how to define templates view the <a href="https://github.com/chrishumboldt/Rocket-Inject" class="link">online documentation</a>. Find an example below:</p>
 <pre class="prettyprint linenums">
 &lt;script&gt;
-Inject.component({
-    name: 'articleAdvanced',
+Rocket.inject.component({
+    name: 'ArticleAdvanced',
     className: 'advanced-article',
     html: `
         &lt;article&gt;
@@ -105,8 +108,8 @@ Inject.component({
     `
 });
 
-Inject.bind({
-    component: 'articleAdvanced',
+Rocket.inject.bind({
+    component: 'ArticleAdvanced',
     to: '#article',
     data: {
         heading: 'This Is An Advanced Article',
@@ -128,17 +131,17 @@ Inject.bind({
 			<div id="example"></div>
 			<br><br>
 	      <h4>Detailed Documentation</h4>
-	      <p>For a more detailed look into the available options, you can read the documentation at <a target="_blank" href="https://github.com/chrishumboldt/Injectplate" class="link">https://github.com/chrishumboldt/Injectplate</a></p>
+	      <p>For a more detailed look into the available options, you can read the documentation at <a target="_blank" href="https://github.com/chrishumboldt/Rocket-Inject" class="link">https://github.com/chrishumboldt/Rocket-Inject</a></p>
 		</div>
 
 		<footer><div class="container"><div class="col-double">
 			<div class="left">
 				Made by <a href="http://chrishumboldt.com" target="_blank">Chris Humboldt</a>
 			</div>
-			<div class="right">
+			<!-- <div class="right">
 				A <a href="http://getwebplate.com" target="_blank">Webplate Project</a>&nbsp;&nbsp;
 				Want updates? <a href="http://twitter.com/webplatetweets" target="_blank">@webplatetweets</a>
-			</div>
+			</div> -->
 		</div></div></footer>
 	</div>
 
