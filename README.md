@@ -1,4 +1,4 @@
-# Injectplate
+# Rocket Inject
 A declare once Javascript component injector. This allows you to create HTML components and inject them into the DOM at will. In essence it is a wrapper for the awesome [Mustache.js](https://github.com/janl/mustache.js) library which has a great template syntax.
 
 ## Table of Contents
@@ -16,49 +16,49 @@ A declare once Javascript component injector. This allows you to create HTML com
 	* [Inverted Sections](#inverted-sections)
 * [On Done](#on-done)
 * [Nesting Components](#nesting-components)
+* [Rocket Tools](#rocket-tools)
+* [Injectplate Deprecated](#injectplate-deprecated)
 
 ## Getting Started
-You can either download a fresh copy of the source files or install Injectplate via Bower.
+You can either download a fresh copy of the [source files](https://github.com/chrishumboldt/Rocket-Inject/archive/master.zip) or install Rocket Inject via NPM.
 
 ```
-bower install injectplate
+npm install rocket-inject
 ```
 
 Simply start by including the required Javascript file.
 
 ```html
 <body>
-   <script src="js/injectplate.min.js"></script>
+	/* Your content goes here */
+   <script src="js/inject.min.js"></script>
 </body>
 ```
 
-Next initialize Injectplate before creating your first component.
+This includes a minified version of Mustache.js. If you already have Mustache.js loaded, just use the lean version of the injector.
 
-```javascript
-var Inject = Injectplate.init();
+```html
+<body>
+	/* Your content goes here */
+   <script src="js/inject-lean.min.js"></script>
+</body>
 ```
 
 ## Getting Started With NPM
-If you instead wish to use Injectplate as a Node module simply install using the following command.
-
-```
-npm install injectplate
-```
-
-Once done require Injectplate as you would any other module.
+If you instead wish to use Rocket Inject as a Node module simply require it as you would any other module.
 
 ```javascript
-var Inject = require('injectplate');
+var Inject = require('rocket-inject');
 ```
 
 ## Components
-Injectplate components are predefined HTML templates that can accept data. Once created you can reuse this component within your project and app and maintain accordingly. This is a great way to abstract your UI.
+Rocket Inject components are predefined HTML templates that can accept data. Once created you can reuse this component within your project and app and maintain accordingly. This is a great way to abstract your UI.
 
 Creating a component is dead easy and takes just a few options to complete.
 
 ```javascript
-Inject.component({
-   name: 'article',
+Rocket.inject.component({
+   name: 'Article',
    className: 'basic-article',
    html: `
       <article>
@@ -80,8 +80,8 @@ Inject.component({
 Once the component has been created, simply bind it to an element and parse in the relevant data.
 
 ```javascript
-Inject.bind({
-   component: 'article',
+Rocket.inject.bind({
+   component: 'Article',
    to: '#article',
    data: {
       heading: 'Great Article Heading',
@@ -99,11 +99,11 @@ Inject.bind({
 | overwrite | false | By default the component will append to the `to` selector. If set to `true` it will overwrite the inner HTML. |
 
 #### Generate
-If you simply wish to generate the HTML based on the component and data you can do so by using the generate method. This is especially useful when using Injectplate as a Node module.
+If you simply wish to generate the HTML based on the component and data you can do so by using the generate method. This is especially useful when using Rocket Inject as a Node module.
 
 ```javascript
-var myComponent = Inject.generate({
-   component: 'article',
+var myComponent = Rocket.inject.generate({
+   component: 'Article',
    data: {
       heading: 'Great Article Heading',
       content: 'This will just be some basic text about stuff.'
@@ -124,7 +124,7 @@ If you would like to know what components have been created simply reference the
 
 ```javascript
 // View the components available
-console.log(Inject.list);
+console.log(Rocket.inject.list);
 
 // Edit a component
 var newHTML = `
@@ -132,25 +132,25 @@ var newHTML = `
 		<h2>{{heading}}</h2>
 	</div>
 `;
-Inject.list.componentName.html = Inject.flatten(newHTML); // Notice the flatten method used here
-Inject.list.componentName.overwrite = true;
+Rocket.inject.list.ComponentName.html = Rocket.inject.flatten(newHTML); // Notice the flatten method used here
+Rocket.inject.list.ComponentName.overwrite = true;
 ```
 
 ## HTML
-Each component has a predefined HTML structure that can render out static and dynamic data. Injectplate does this using the [Mustache.js](https://github.com/janl/mustache.js) templating engine.
+Each component has a predefined HTML structure that can render out static and dynamic data. Rocket Inject does this using the [Mustache.js](https://github.com/janl/mustache.js) templating engine.
 
 **Note** that you declare your HTML as either a string, a multiline string or as an array of HTML elements. The multiline string and array just makes it easier to nest large complex HTML. For example:
 
 ```javascript
 // As a string
-Inject.component({
-   name: 'example',
+Rocket.inject.component({
+   name: 'Example',
    html: '<p>This is some text.</p>'
 });
 
 // As a multiline string
-Inject.component({
-   name: 'example',
+Rocket.inject.component({
+   name: 'Example',
    html: `
       <p>
          This is some text.
@@ -159,8 +159,8 @@ Inject.component({
 });
 
 // As an array
-Inject.component({
-   name: 'example',
+Rocket.inject.component({
+   name: 'Example',
    html: [
       '<p>',
          'This is some text.',
@@ -177,12 +177,12 @@ Displaying static values inside your HTML requires the `{{value}}` syntax. The d
 All variables are escaped by default but can be unescaped if you use the triple curly braces, `{{{value}}}`.
 
 ```javascript
-Inject.component({
-   name: 'example',
+Rocket.inject.component({
+   name: 'Example',
    html: '<p>{{value}}</p>'
 });
-Inject.bind({
-   component: 'example',
+Rocket.inject.bind({
+   component: 'Example',
    to: '#example',
    data: {
       value: 'This is some text.'
@@ -193,12 +193,12 @@ Inject.bind({
 You can also access data using the Javascript dot notation.
 
 ```javascript
-Inject.component({
-   name: 'example',
+Rocket.inject.component({
+   name: 'Example',
    html: '<p>{{user.firstname}} {{user.lastname}}</p>'
 });
-Inject.bind({
-   component: 'example',
+Rocket.inject.bind({
+   component: 'Example',
    to: '#example',
    data: {
       user: {
@@ -213,12 +213,12 @@ Inject.bind({
 Another great feature is the ability to return data within a function on binding. For example:
 
 ```javascript
-Inject.component({
-   name: 'example',
+Rocket.inject.component({
+   name: 'Example',
    html: '<p>{{calculation}}</p>'
 });
-Inject.bind({
-   component: 'example',
+Rocket.inject.bind({
+   component: 'Example',
    to: '#example',
    data: {
       calculation: function() {
@@ -232,16 +232,16 @@ Inject.bind({
 If you wish to display dynamic data you need to declare a section inside the HTML with a name that correlates to the dataset. Opening the section requires the `pound` sign (#) and closing the section requires the `slash` sign (/).
 
 ```javascript
-Inject.component({
-   name: 'example',
+Rocket.inject.component({
+   name: 'Example',
    html: `
       {{#paragraphs}}
          <p>{{text}}</p>
       {{/paragraphs}}
    `
 });
-Inject.bind({
-   component: 'example',
+Rocket.inject.bind({
+   component: 'Example',
    to: '#example',
    data: {
       paragraphs: [{
@@ -258,8 +258,8 @@ Inject.bind({
 At this point you can also nest data sections. For example:
 
 ```javascript
-Inject.component({
-   name: 'example',
+Rocket.inject.component({
+   name: 'Example',
    html: `
       {{#articles}}
          <h1>{{heading}}</h1>
@@ -272,8 +272,8 @@ Inject.component({
       {{/articles}}
    `
 });
-Inject.bind({
-   component: 'example',
+Rocket.inject.bind({
+   component: 'Example',
    to: '#example',
    data: {
       articles: [{
@@ -302,16 +302,16 @@ Inject.bind({
 You are also able to display flat datasets without having to access a property by simply using `{{.}}`.
 
 ```javascript
-Inject.component({
-   name: 'example',
+Rocket.inject.component({
+   name: 'Example',
    html: `
       {{#paragraphs}}
          <p>{{.}}</p>
       {{/paragraphs}}
    `
 });
-Inject.bind({
-   component: 'example',
+Rocket.inject.bind({
+   component: 'Example',
    to: '#example',
    data: {
       paragraphs: ['This is paragraph one.', 'This is paragraph two.', 'This is paragraph three.']
@@ -323,8 +323,8 @@ Inject.bind({
 An inverted section is a rendering fallback for if the dataset is `null`, `undefined` or `false`. It requires a different opening declaration of `{{^}}`. For example.
 
 ```javascript
-Inject.component({
-   name: 'example',
+Rocket.inject.component({
+   name: 'Example',
    html: `
       {{#paragraphs}}
          <p>{{.}}</p>
@@ -332,8 +332,8 @@ Inject.component({
       {{^paragraphs}}There are no paragraphs to show.{{/paragraphs}}
    `
 });
-Inject.bind({
-   component: 'example',
+Rocket.inject.bind({
+   component: 'Example',
    to: '#example'
 });
 ```
@@ -345,8 +345,8 @@ Also note that the onDone function returns a **$element** variable on binding wh
 
 ```javascript
 // On component
-Inject.component({
-   name: 'article',
+Rocket.inject.component({
+   name: 'Article',
    html: '<article>{{value}}</article>',
    onDone: function($this) {
       console.log('This will output each time this component is used.');
@@ -354,8 +354,8 @@ Inject.component({
 });
 
 // On binding
-Inject.bind({
-   component: 'article',
+Rocket.inject.bind({
+   component: 'Article',
    to: '#article',
    data: {
       value: 'Something here.'
@@ -367,8 +367,8 @@ Inject.bind({
 });
 
 // On generation
-Inject.generate({
-   component: 'article',
+Rocket.inject.generate({
+   component: 'Article',
    data: {
       value: 'Something here.'
    },
@@ -385,8 +385,8 @@ Note that you are also be able to bind again with the onDone function and nest c
 
 ```javascript
 // Create components
-Inject.component({
-   name: 'article',
+Rocket.inject.component({
+   name: 'Article',
    html: `
       <article>
          <h2>{{heading}}</h2>
@@ -395,8 +395,8 @@ Inject.component({
       </article>
 	`
 });
-Inject.component({
-   name: 'comments',
+Rocket.inject.component({
+   name: 'Comments',
    html: `
       <ul>
          {{#comments}}
@@ -407,16 +407,16 @@ Inject.component({
 });
 
 // Call components
-Inject.bind({
-   component: 'article',
+Rocket.inject.bind({
+   component: 'Article',
    to: '#article',
    data: {
       heading: 'Anther Great Article Heading',
       content: 'More arbitrary text goes here.'
    },
    onDone: function() {
-      Inject.bind({
-         component: 'comments',
+      Rocket.inject.bind({
+         component: 'Comments',
          to: '#comments',
          data: {
             comments: [{
@@ -432,6 +432,12 @@ Inject.bind({
 });
 ```
 
+## Rocket Tools
+If you are using this component in conjunction with [Rocket Tools](https://github.com/chrishumboldt/Rocket-Tools), then **always** load the Rocket Tools library first. This component extends that library when detected.
+
+## Injectplate Deprecated
+The original library, Injectplate, has been deprecated. The entire Webplate project is being refactored and rebranded with a new development philosophy. Injectplate will be maintained only with bug fixes under the **injectplate** branch.
+
 ## Author
 Created and maintained by Chris Humboldt<br>
 Website: <a href="http://chrishumboldt.com/">chrishumboldt.com</a><br>
@@ -439,7 +445,7 @@ Twitter: <a href="https://twitter.com/chrishumboldt">twitter.com/chrishumboldt</
 GitHub <a href="https://github.com/chrishumboldt">github.com/chrishumboldt</a><br>
 
 ## Copyright and License
-Copyright 2015 HG Bolts
+Copyright 2016 Rocket Project
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

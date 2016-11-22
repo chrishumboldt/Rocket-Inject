@@ -1,13 +1,10 @@
-#!usr/bin/env node
-
-/**
- * File: index.js
- * Type: Javascript index file
- * Author: Chris Humboldt
-**/
-
-var Mustache = require('mustache');
-
+var Rocket = (typeof Rocket === 'object') ? Rocket : {};
+if (!Rocket.defaults) {
+    Rocket.defaults = {};
+}
+Rocket.defaults.inject = {
+    errors: true
+};
 var RocketInjectComponent;
 (function (RocketInjectComponent) {
     var components = {};
@@ -65,7 +62,9 @@ var RocketInjectComponent;
         },
         register: function (obj) {
             if (!validate.register(obj)) {
-					 throw new Error('Injectplate: Please provide a valid component name.');
+                if (Rocket.defaults.errors) {
+                    throw new Error('Injectplate: Please provide a valid component name.');
+                }
                 return false;
             }
             components[obj.name] = {
@@ -125,7 +124,9 @@ var RocketInjectComponent;
                 }
                 return htmlFlat;
         }
-        throw new Error('Injectplate: The HTML provided to create the component "' + name + '" is not valid.');
+        if (Rocket.defaults.errors) {
+            throw new Error('Injectplate: The HTML provided to create the component "' + name + '" is not valid.');
+        }
     }
     RocketInjectComponent.bind = componentMethods.bind;
     RocketInjectComponent.component = componentMethods.register;
@@ -133,5 +134,4 @@ var RocketInjectComponent;
     RocketInjectComponent.generate = componentMethods.generate;
     RocketInjectComponent.list = components;
 })(RocketInjectComponent || (RocketInjectComponent = {}));
-
-module.exports = RocketInjectComponent;
+Rocket.inject = RocketInjectComponent;
