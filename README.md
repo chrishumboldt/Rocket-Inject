@@ -16,6 +16,8 @@ A declare once Javascript component injector. This allows you to create HTML com
 	* [Inverted Sections](#inverted-sections)
 * [On Done](#on-done)
 * [Nesting Components](#nesting-components)
+* [Rocket Tools](#rocket-tools)
+* [Injectplate Deprecated](#injectplate-deprecated)
 
 ## Getting Started
 You can either download a fresh copy of the source files or install Rocket Inject via NPM.
@@ -429,6 +431,12 @@ Rocket.inject.bind({
    }
 });
 ```
+
+## Rocket Tools
+If you are using this component in conjunction with [Rocket Tools](https://github.com/chrishumboldt/Rocket-Tools), then **always** load the Rocket Tools library first. This component extends that library when detected.
+
+## Injectplate Deprecated
+The original library, Injectplate, has been deprecated. The entire Webplate project is being refactored and rebranded with a new development philosophy. Injectplate will be maintained only with bug fixes under the **injectplate** branch.
 
 ## Author
 Created and maintained by Chris Humboldt<br>
