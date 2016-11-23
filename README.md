@@ -31,7 +31,7 @@ Simply start by including the required Javascript file.
 ```html
 <body>
 	/* Your content goes here */
-   <script src="rocket-inject/js/inject.min.js"></script>
+	<script src="rocket-inject/js/inject.min.js"></script>
 </body>
 ```
 
@@ -40,15 +40,40 @@ This includes a minified version of Mustache.js. If you already have Mustache.js
 ```html
 <body>
 	/* Your content goes here */
-   <script src="rocket-inject/js/inject-lean.min.js"></script>
+	<script src="rocket-inject/js/inject-lean.min.js"></script>
 </body>
 ```
 
+Once included you will be able to use the component by referencing the **Rocket.inject** namespace. For example:
+
+```javascript
+// Declare the component
+Rocket.inject.component({
+	name: 'ExampleComponent',
+	html: '<div>{{text)}</div>'
+});
+
+// Use the component
+Rocket.inject.bind({
+	component: 'ExampleComponent',
+	to: '#example-element',
+	data: {
+		text: 'This is a test.'
+	}
+});
+```
+
 ## Getting Started With NPM
-If you instead wish to use Rocket Inject as a Node module simply require it as you would any other module.
+If you instead wish to use Rocket Inject as a Node module simply require it as you would any other module. The can then use the methods that are declare against the required variable.
 
 ```javascript
 var Inject = require('rocket-inject');
+
+// Declare the component
+Inject.component({
+	name: 'ExampleComponent',
+	html: '<div>{{text)}</div>'
+});
 ```
 
 ## Components
