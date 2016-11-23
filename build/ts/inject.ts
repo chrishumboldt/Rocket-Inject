@@ -16,10 +16,8 @@ interface component {
    to:string;
 }
 interface componentBind {
-   className:string|boolean;
    component:string;
    data:any;
-   html:any;
    to:string;
    onDone:any;
    overwrite:boolean;
@@ -97,9 +95,9 @@ module RocketInjectComponent {
             return false;
          }
          // Continue
-         const html = Mustache.render(components[obj.component].html, (typeof obj.data) ? obj.data : '');
-         if (typeof obj.onDone === 'function') {
-            obj.onDone(html);
+			let html = '';
+         if (typeof obj.data === 'object') {
+            html = Mustache.render(components[obj.component].html, obj.data);
          }
          return html;
       },

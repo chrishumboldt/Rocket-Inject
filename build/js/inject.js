@@ -54,9 +54,9 @@ var RocketInjectComponent;
             if (!validate.generate(obj)) {
                 return false;
             }
-            var html = Mustache.render(components[obj.component].html, (typeof obj.data) ? obj.data : '');
-            if (typeof obj.onDone === 'function') {
-                obj.onDone(html);
+            var html = '';
+            if (typeof obj.data === 'object') {
+                html = Mustache.render(components[obj.component].html, obj.data);
             }
             return html;
         },
