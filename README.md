@@ -142,7 +142,7 @@ Option | Default | Description
 `component` | | Choose the component you wish to use.
 `data` | | Parse in a JSON object with the data. This will then match to the HTML template of the component.
 
-The generated HTML is always returned and can be assigned to a variable as shown above. This will most often be used in a Node.js environment.
+The generated HTML is always returned and can be assigned to a variable as shown above.
 
 #### List & Edit
 If you would like to know what components have been created simply reference the list property to gain access to the components object. This also gives you the ability to edit a component, although it is not recommended. **NOTE** that if you edit the component HTML, you will need to parse it first through the flatten method. An example is shown below:
