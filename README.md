@@ -94,12 +94,13 @@ Rocket.inject.component({
 });
 ```
 
-| Option | Description |
-| ---- | ---- |
-| name | Set the name of the component. This is referenced when calling the binding function. |
-| className | Assign a class name to the containing element every time the component is bound. |
-| html | Set the HTML template that will be used when binding data. |
-| onDone | Assign a function that will be called once the component is bound. |
+Option | Description
+---- | ----
+`name` | Set the name of the component. This is referenced when calling the binding function.
+`className` | Assign a class name to the containing element every time the component is bound.
+`html` | Set the HTML template that will be used when binding data.
+`id` | Assign an id to the containing element every time the component is bound. This can cause conflicts so use sparingly.
+`onDone` | Assign a function that will be called once the component is bound.
 
 #### Bind
 Once the component has been created, simply bind it to an element and parse in the relevant data.
@@ -115,13 +116,13 @@ Rocket.inject.bind({
 });
 ```
 
-| Option | Default | Description |
-| ---- | ---- | ---- |
-| component | | Choose the component you wish to use. |
-| to | | Declare the selector of the DOM element you want to bind to. This can be an `id`, `class` or `tag name`. By default it will attempt to find an element with an id that matches the component name. |
-| data | | Parse in a JSON object with the data. This will then match to the HTML template of the component. |
-| onDone | | Assign a function that will be called once the binding is complete. |
-| overwrite | false | By default the component will append to the `to` selector. If set to `true` it will overwrite the inner HTML. |
+Option | Default | Description
+---- | ---- | ----
+`component` | | Choose the component you wish to use.
+`to` | | Declare the selector of the DOM element you want to bind to. This can be an `id`, `class` or `tag name`. By default it will attempt to find an element with an **id** that matches the component name.
+`data` | | Parse in a JSON object with the data. This will then match to the HTML template of the component.
+`onDone` | | Assign a function that will be called once the binding is complete.
+`overwrite` | `false` | By default the component will append to the `to` selector. If set to `true` it will overwrite the inner HTML.
 
 #### Generate
 If you simply wish to generate the HTML based on the component and data you can do so by using the generate method. This is especially useful when using Rocket Inject as a Node module.
@@ -136,13 +137,12 @@ var myComponent = Rocket.inject.generate({
 });
 ```
 
-| Option | Default | Description |
-| ---- | ---- | ---- |
-| component | | Choose the component you wish to use. |
-| data | | Parse in a JSON object with the data. This will then match to the HTML template of the component. |
-| onDone | | Assign a callback function that will be executed once the generation is complete. The return value in the callback is the generated HTML. |
+Option | Default | Description
+---- | ---- | ----
+`component` | | Choose the component you wish to use.
+`data` | | Parse in a JSON object with the data. This will then match to the HTML template of the component.
 
-**Notice** that the onDone function (which is also available on the component, generate and bind methods) can be used to return the generated HTML. For more on the onDone function [read here](#on-done). The generated HTML is however always returned and can be assigned to a variable as shown above. Both approaches have a place.
+The generated HTML is always returned and can be assigned to a variable as shown above. This will most often be used in a Node.js environment.
 
 #### List & Edit
 If you would like to know what components have been created simply reference the list property to gain access to the components object. This also gives you the ability to edit a component, although it is not recommended. **NOTE** that if you edit the component HTML, you will need to parse it first through the flatten method. An example is shown below:
