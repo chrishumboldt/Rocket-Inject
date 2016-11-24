@@ -41,6 +41,26 @@ module RocketInjectComponent {
    All methods pertaining to the components themselves exist here.
    This object acts as the methods namespace.
    */
+	function classAdd (element:any, className:string) {
+		let listClassNames = element.className.split(' ');
+		listClassNames.push(className);
+		listClassNames = listClassNames.filter(function (value, index, self) {
+			return self.indexOf(value) === index && value !== '';
+		});
+		// Apply the class again
+		classApply(element, listClassNames);
+	};
+	function classApply (element:any, listClassNames:string[]) {
+		if (listClassNames.length === 0) {
+			element.removeAttribute('class');
+		}
+		else if (listClassNames.length === 1) {
+			element.className = listClassNames[0];
+		}
+		else {
+			element.className = listClassNames.join(' ');
+		}
+	};
    const componentMethods = {
       bind: function (obj:componentBind) {
          // Catch
@@ -72,12 +92,7 @@ module RocketInjectComponent {
             }
             // Set a class on the container (bindTo element)
             if (typeof components[obj.component].className === 'string') {
-               let listClassNames = bindTo.className.split(' ');
-               listClassNames.push(components[obj.component].className);
-               listClassNames = listClassNames.filter(function (value, index, self) {
-                  return self.indexOf(value) === index;
-               });
-               bindTo.className = listClassNames.join(' ');
+					classAdd(bindTo, components[obj.component].className);
             }
             // Component onDone function
             if (typeof components[obj.component].onDone === 'function') {

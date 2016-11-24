@@ -8,6 +8,27 @@ Rocket.defaults.inject = {
 var RocketInjectComponent;
 (function (RocketInjectComponent) {
     var components = {};
+    function classAdd(element, className) {
+        var listClassNames = element.className.split(' ');
+        listClassNames.push(className);
+        listClassNames = listClassNames.filter(function (value, index, self) {
+            return self.indexOf(value) === index && value !== '';
+        });
+        classApply(element, listClassNames);
+    }
+    ;
+    function classApply(element, listClassNames) {
+        if (listClassNames.length === 0) {
+            element.removeAttribute('class');
+        }
+        else if (listClassNames.length === 1) {
+            element.className = listClassNames[0];
+        }
+        else {
+            element.className = listClassNames.join(' ');
+        }
+    }
+    ;
     var componentMethods = {
         bind: function (obj) {
             if (!validate.bind(obj)) {
@@ -35,12 +56,7 @@ var RocketInjectComponent;
                     bindTo.id = components[obj.component].id;
                 }
                 if (typeof components[obj.component].className === 'string') {
-                    var listClassNames = bindTo.className.split(' ');
-                    listClassNames.push(components[obj.component].className);
-                    listClassNames = listClassNames.filter(function (value, index, self) {
-                        return self.indexOf(value) === index;
-                    });
-                    bindTo.className = listClassNames.join(' ');
+                    classAdd(bindTo, components[obj.component].className);
                 }
                 if (typeof components[obj.component].onDone === 'function') {
                     components[obj.component].onDone(bindTo);
