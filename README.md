@@ -4,7 +4,7 @@ A declare once Javascript component injector. This allows you to create HTML com
 ## Table of Contents
 
 * [Getting Started](#getting-started)
-* [Getting Started With NPM](#getting-started-with-npm)
+* [Getting Started With NodeJS](#getting-started-with-nodejs)
 * [Components](#components)
 	* [Bind](#bind)
 	* [Generate](#generate)
@@ -63,8 +63,12 @@ Rocket.inject.bind({
 });
 ```
 
-## Getting Started With NPM
-If you instead wish to use Rocket Inject as a Node module simply require it as you would any other module. The can then use the methods that are declare against the required variable.
+## Getting Started With NodeJS
+If you instead wish to use Rocket Inject in NodeJS, require it as you would any other module and use the methods that are declared against the required variable.
+
+```
+npm install rocket-inject
+```
 
 ```javascript
 var Inject = require('rocket-inject');
