@@ -64,11 +64,13 @@ Rocket.inject.bind({
 ```
 
 ## Getting Started With NodeJS
-If you instead wish to use Rocket Inject in NodeJS, require it as you would any other module and use the methods that are declared against the required variable.
+Start by installing via NPM.
 
 ```
 npm install rocket-inject
 ```
+
+If you instead wish to use Rocket Inject in NodeJS, require it as you would any other module and use the methods that are declared against the required variable.
 
 ```javascript
 var Inject = require('rocket-inject');
