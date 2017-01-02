@@ -50,7 +50,7 @@ Once included you will be able to use the component by referencing the **Rocket.
 // Declare the component
 Rocket.inject.component({
 	name: 'ExampleComponent',
-	html: '<div>{{text)}</div>'
+	html: '<div>{{text}}</div>'
 });
 
 // Use the component
@@ -72,7 +72,7 @@ var Inject = require('rocket-inject');
 // Declare the component
 Inject.component({
 	name: 'ExampleComponent',
-	html: '<div>{{text)}</div>'
+	html: '<div>{{text}}</div>'
 });
 ```
 

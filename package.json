@@ -1,6 +1,6 @@
 {
    "name": "rocket-inject",
-   "version": "4.0.3",
+   "version": "4.0.4",
    "description": "A declare once Javascript component injector.",
    "main": "js/inject-light.min.js",
    "keywords": [
