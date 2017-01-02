@@ -39,10 +39,8 @@ var RocketInjectComponent;
             if (typeof listBindTo === 'undefined') {
                 return false;
             }
-            var html = '';
-            if (typeof obj.data === 'object') {
-                html = Mustache.render(components[obj.component].html, obj.data);
-            }
+            var data = (typeof obj.data === 'object') ? obj.data : '';
+            var html = Mustache.render(components[obj.component].html, data);
             for (var _i = 0, listBindTo_1 = listBindTo; _i < listBindTo_1.length; _i++) {
                 var bindTo = listBindTo_1[_i];
                 if (obj.overwrite === true) {
@@ -150,4 +148,3 @@ var RocketInjectComponent;
     RocketInjectComponent.generate = componentMethods.generate;
     RocketInjectComponent.list = components;
 })(RocketInjectComponent || (RocketInjectComponent = {}));
-Rocket.inject = RocketInjectComponent;

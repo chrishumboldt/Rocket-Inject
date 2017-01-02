@@ -7,7 +7,7 @@ Rocket.defaults.inject = {
    errors: true
 };
 
-// Interface
+// Interfaces
 interface component {
    component:string;
    data:any;
@@ -37,10 +37,6 @@ module RocketInjectComponent {
    let components:any = {};
 
    // Functions
-   /*
-   All methods pertaining to the components themselves exist here.
-   This object acts as the methods namespace.
-   */
 	function classAdd (element:any, className:string) {
 		let listClassNames = element.className.split(' ');
 		listClassNames.push(className);
@@ -61,6 +57,10 @@ module RocketInjectComponent {
 			element.className = listClassNames.join(' ');
 		}
 	};
+   /*
+   All methods pertaining to the components themselves exist here.
+   This object acts as the methods namespace.
+   */
    const componentMethods = {
       bind: function (obj:componentBind) {
          // Catch
@@ -69,15 +69,15 @@ module RocketInjectComponent {
          };
          // Continue
          const listBindTo:any = (typeof obj.to === 'string') ? document.querySelectorAll(obj.to) : document.getElementById('#' + obj.component);
+
          // Catch
          if (typeof listBindTo === 'undefined') {
             return false;
          }
          // Continue
-         let html = '';
-         if (typeof obj.data === 'object') {
-            html = Mustache.render(components[obj.component].html, obj.data);
-         }
+         const data = (typeof obj.data === 'object') ? obj.data : '';
+         const html = Mustache.render(components[obj.component].html, data);
+
          for (let bindTo of listBindTo) {
             // Overwrite or append
             if (obj.overwrite === true) {
@@ -200,6 +200,3 @@ module RocketInjectComponent {
    export const generate = componentMethods.generate;
    export const list = components;
 }
-
-// Bind to Rocket object
-Rocket.inject = RocketInjectComponent;

@@ -35,12 +35,12 @@ Simply start by including the required Javascript file.
 </body>
 ```
 
-This includes a minified version of Mustache.js. If you already have Mustache.js loaded, just use the lean version of the injector.
+This includes a minified version of Mustache.js. If you already have Mustache.js loaded, just use the light version of the injector.
 
 ```html
 <body>
 	/* Your content goes here */
-	<script src="rocket-inject/js/inject-lean.min.js"></script>
+	<script src="rocket-inject/js/inject-light.min.js"></script>
 </body>
 ```
 
