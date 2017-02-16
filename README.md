@@ -44,7 +44,7 @@ This includes a minified version of Mustache.js. If you already have Mustache.js
 <body>
 	/* Your content goes here */
    <script src="node_modules/rocket-tools/js/tools.min.js"></script>
-	<script src="rocket-inject/js/inject-light.min.js"></script>
+	<script src="node_modules/rocket-inject/js/inject-light.min.js"></script>
 </body>
 ```
 
