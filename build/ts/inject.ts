@@ -1,81 +1,36 @@
-// Create or extend Rocket
-var Rocket = (typeof Rocket === 'object') ? Rocket : {};
-if (!Rocket.defaults) {
-   Rocket.defaults = {};
-}
+/*
+Author: Chris Humboldt
+*/
+
+// Rocket module extension
 Rocket.defaults.inject = {
    errors: true
 };
 
-// Interfaces
-interface component {
-   component:string;
-   data:any;
-   onDone:any;
-   overwrite:boolean;
-   to:string;
-}
-interface componentBind {
-   component:string;
-   data:any;
-   to:string;
-   onDone:any;
-   overwrite:boolean;
-}
-interface componentNew {
-   className: string|boolean;
-   id: string|boolean;
-   html: any;
-   name: string;
-   onDone: any;
-   overwrite: boolean;
-}
+// Module container
+module RockMod_Inject {
 
-// Rocket component
-module RocketInjectComponent {
    // Variables
    let components:any = {};
 
-   // Functions
-	function classAdd (element:any, className:string) {
-		let listClassNames = element.className.split(' ');
-		listClassNames.push(className);
-		listClassNames = listClassNames.filter(function (value, index, self) {
-			return self.indexOf(value) === index && value !== '';
-		});
-		// Apply the class again
-		classApply(element, listClassNames);
-	};
-	function classApply (element:any, listClassNames:string[]) {
-		if (listClassNames.length === 0) {
-			element.removeAttribute('class');
-		}
-		else if (listClassNames.length === 1) {
-			element.className = listClassNames[0];
-		}
-		else {
-			element.className = listClassNames.join(' ');
-		}
-	};
    /*
    All methods pertaining to the components themselves exist here.
    This object acts as the methods namespace.
    */
    const componentMethods = {
-      bind: function (obj:componentBind) {
+      bind: (obj:componentBind) => {
          // Catch
          if (!validate.bind(obj)) {
             return false;
          };
          // Continue
-         const listBindTo:any = (typeof obj.to === 'string') ? document.querySelectorAll(obj.to) : document.getElementById('#' + obj.component);
+         const listBindTo:any = (Rocket.is.string(obj.to)) ? Rocket.dom.select(obj.to) : Rocket.dom.select('#' + obj.component)[0];
 
          // Catch
-         if (typeof listBindTo === 'undefined') {
-            return false;
-         }
+         if (!Rocket.exists(listBindTo)) { return false; }
+
          // Continue
-         const data = (typeof obj.data === 'object') ? obj.data : '';
+         const data = (Rocket.is.object(obj.data)) ? obj.data : '';
          const html = Mustache.render(components[obj.component].html, data);
 
          for (let bindTo of listBindTo) {
@@ -86,37 +41,41 @@ module RocketInjectComponent {
                bindTo.insertAdjacentHTML('beforeend', html);
             }
             bindTo.setAttribute('data-inject', 'true');
+
             // Set an id on the container (bindTo element)
-            if (typeof components[obj.component].id === 'string') {
+            if (Rocket.is.string(components[obj.component].id)) {
                bindTo.id = components[obj.component].id;
             }
+
             // Set a class on the container (bindTo element)
-            if (typeof components[obj.component].className === 'string') {
-					classAdd(bindTo, components[obj.component].className);
+            if (Rocket.is.string(components[obj.component].className)) {
+               Rocket.classes.add(bindTo, components[obj.component].className);
             }
+
             // Component onDone function
-            if (typeof components[obj.component].onDone === 'function') {
+            if (Rocket.is.function(components[obj.component].onDone)) {
                components[obj.component].onDone(bindTo);
             }
+
             // Binding onDone function
-            if (typeof obj.onDone === 'function') {
+            if (Rocket.is.function(obj.onDone)) {
                obj.onDone(bindTo);
             }
          }
       },
-      generate: function (obj:component) {
+      generate: (obj:component) => {
          // Catch
-         if (!validate.generate(obj)) {
-            return false;
-         }
+         if (!validate.generate(obj)) { return false; }
+
          // Continue
-			let html = '';
-         if (typeof obj.data === 'object') {
+         let html = '';
+         if (Rocket.is.object(obj.data)) {
             html = Mustache.render(components[obj.component].html, obj.data);
          }
+
          return html;
       },
-      register: function (obj:componentNew) {
+      register: (obj:componentNew) => {
          // Catch
          if (!validate.register(obj)) {
             if (Rocket.defaults.errors) {
@@ -124,51 +83,53 @@ module RocketInjectComponent {
             }
             return false;
          }
+
          // Continue
          components[obj.name] = {
-            className: (typeof obj.className === 'string') ? obj.className : false,
-            id: (typeof obj.id === 'string') ? obj.id : false,
+            className: (Rocket.is.string(obj.className)) ? obj.className : false,
+            id: (Rocket.is.string(obj.id)) ? obj.id : false,
             html: flattenHTML(obj.html, obj.name),
-            onDone: (typeof obj.onDone === 'function') ? obj.onDone : false,
-            overwrite: (typeof obj.overwrite === 'boolean') ? obj.overwrite : false
+            onDone: (Rocket.is.function(obj.onDone)) ? obj.onDone : false,
+            overwrite: (Rocket.is.boolean(obj.overwrite)) ? obj.overwrite : false
          };
       }
    };
+
    /*
    Validation methods are used to check all incoming data.
    */
    const validate = {
-      bind: function (obj:componentBind) {
-         if (typeof obj !== 'object') {
+      bind: (obj:componentBind) => {
+         if (!Rocket.is.object(obj)) {
+            return false;
+         } else if (!Rocket.is.string(obj.component)) {
+            return false;
+         } else if (!Rocket.is.object(components[obj.component])) {
             return false;
          }
-         else if (typeof obj.component !== 'string') {
-            return false;
-         }
-         else if (typeof components[obj.component] !== 'object') {
-            return false;
-         }
+
          return true;
       },
-      generate: function (obj:component) {
-         if (typeof obj !== 'object') {
+      generate: (obj:component) => {
+         if (!Rocket.is.object(obj)) {
+            return false;
+         } else if (!Rocket.exists(obj.component)) {
             return false;
          }
-         else if (typeof obj.component === 'undefined') {
-            return false;
-         }
+
          return true;
       },
-      register: function (obj:componentNew) {
-         if (typeof obj !== 'object') {
+      register: (obj:componentNew) => {
+         if (!Rocket.is.object(obj)) {
+            return false;
+         } else if (!Rocket.exists(obj.name)) {
             return false;
          }
-         else if (typeof obj.name === 'undefined') {
-            return false;
-         }
+
          return true;
       }
    };
+
    /*
    All templates are flattened for convenience and to make sure there are no
    unnecessary spaces.
@@ -187,6 +148,7 @@ module RocketInjectComponent {
             }
             return htmlFlat;
       }
+
       // Type check was unsuccessful
       if (Rocket.defaults.errors) {
          throw new Error('Injectplate: The HTML provided to create the component "' + name + '" is not valid.');

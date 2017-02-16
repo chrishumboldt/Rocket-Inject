@@ -5,5 +5,9 @@
 	},
 	"include": [
        "../js/mustach.js"
-    ]
+    ],
+    "filesGlob": [
+      "./**/*.ts",
+      "../../node_modules/rocket-tools/index.d.ts"
+   ]
 }

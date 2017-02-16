@@ -1,45 +1,20 @@
-var Rocket = (typeof Rocket === 'object') ? Rocket : {};
-if (!Rocket.defaults) {
-    Rocket.defaults = {};
-}
 Rocket.defaults.inject = {
     errors: true
 };
-var RocketInjectComponent;
-(function (RocketInjectComponent) {
+var RockMod_Inject;
+(function (RockMod_Inject) {
     var components = {};
-    function classAdd(element, className) {
-        var listClassNames = element.className.split(' ');
-        listClassNames.push(className);
-        listClassNames = listClassNames.filter(function (value, index, self) {
-            return self.indexOf(value) === index && value !== '';
-        });
-        classApply(element, listClassNames);
-    }
-    ;
-    function classApply(element, listClassNames) {
-        if (listClassNames.length === 0) {
-            element.removeAttribute('class');
-        }
-        else if (listClassNames.length === 1) {
-            element.className = listClassNames[0];
-        }
-        else {
-            element.className = listClassNames.join(' ');
-        }
-    }
-    ;
     var componentMethods = {
         bind: function (obj) {
             if (!validate.bind(obj)) {
                 return false;
             }
             ;
-            var listBindTo = (typeof obj.to === 'string') ? document.querySelectorAll(obj.to) : document.getElementById('#' + obj.component);
-            if (typeof listBindTo === 'undefined') {
+            var listBindTo = (Rocket.is.string(obj.to)) ? Rocket.dom.select(obj.to) : Rocket.dom.select('#' + obj.component)[0];
+            if (!Rocket.exists(listBindTo)) {
                 return false;
             }
-            var data = (typeof obj.data === 'object') ? obj.data : '';
+            var data = (Rocket.is.object(obj.data)) ? obj.data : '';
             var html = Mustache.render(components[obj.component].html, data);
             for (var _i = 0, listBindTo_1 = listBindTo; _i < listBindTo_1.length; _i++) {
                 var bindTo = listBindTo_1[_i];
@@ -50,16 +25,16 @@ var RocketInjectComponent;
                     bindTo.insertAdjacentHTML('beforeend', html);
                 }
                 bindTo.setAttribute('data-inject', 'true');
-                if (typeof components[obj.component].id === 'string') {
+                if (Rocket.is.string(components[obj.component].id)) {
                     bindTo.id = components[obj.component].id;
                 }
-                if (typeof components[obj.component].className === 'string') {
-                    classAdd(bindTo, components[obj.component].className);
+                if (Rocket.is.string(components[obj.component].className)) {
+                    Rocket.classes.add(bindTo, components[obj.component].className);
                 }
-                if (typeof components[obj.component].onDone === 'function') {
+                if (Rocket.is.function(components[obj.component].onDone)) {
                     components[obj.component].onDone(bindTo);
                 }
-                if (typeof obj.onDone === 'function') {
+                if (Rocket.is.function(obj.onDone)) {
                     obj.onDone(bindTo);
                 }
             }
@@ -69,7 +44,7 @@ var RocketInjectComponent;
                 return false;
             }
             var html = '';
-            if (typeof obj.data === 'object') {
+            if (Rocket.is.object(obj.data)) {
                 html = Mustache.render(components[obj.component].html, obj.data);
             }
             return html;
@@ -82,41 +57,41 @@ var RocketInjectComponent;
                 return false;
             }
             components[obj.name] = {
-                className: (typeof obj.className === 'string') ? obj.className : false,
-                id: (typeof obj.id === 'string') ? obj.id : false,
+                className: (Rocket.is.string(obj.className)) ? obj.className : false,
+                id: (Rocket.is.string(obj.id)) ? obj.id : false,
                 html: flattenHTML(obj.html, obj.name),
-                onDone: (typeof obj.onDone === 'function') ? obj.onDone : false,
-                overwrite: (typeof obj.overwrite === 'boolean') ? obj.overwrite : false
+                onDone: (Rocket.is.function(obj.onDone)) ? obj.onDone : false,
+                overwrite: (Rocket.is.boolean(obj.overwrite)) ? obj.overwrite : false
             };
         }
     };
     var validate = {
         bind: function (obj) {
-            if (typeof obj !== 'object') {
+            if (!Rocket.is.object(obj)) {
                 return false;
             }
-            else if (typeof obj.component !== 'string') {
+            else if (!Rocket.is.string(obj.component)) {
                 return false;
             }
-            else if (typeof components[obj.component] !== 'object') {
+            else if (!Rocket.is.object(components[obj.component])) {
                 return false;
             }
             return true;
         },
         generate: function (obj) {
-            if (typeof obj !== 'object') {
+            if (!Rocket.is.object(obj)) {
                 return false;
             }
-            else if (typeof obj.component === 'undefined') {
+            else if (!Rocket.exists(obj.component)) {
                 return false;
             }
             return true;
         },
         register: function (obj) {
-            if (typeof obj !== 'object') {
+            if (!Rocket.is.object(obj)) {
                 return false;
             }
-            else if (typeof obj.name === 'undefined') {
+            else if (!Rocket.exists(obj.name)) {
                 return false;
             }
             return true;
@@ -142,9 +117,9 @@ var RocketInjectComponent;
             throw new Error('Injectplate: The HTML provided to create the component "' + name + '" is not valid.');
         }
     }
-    RocketInjectComponent.bind = componentMethods.bind;
-    RocketInjectComponent.component = componentMethods.register;
-    RocketInjectComponent.flatten = flattenHTML;
-    RocketInjectComponent.generate = componentMethods.generate;
-    RocketInjectComponent.list = components;
-})(RocketInjectComponent || (RocketInjectComponent = {}));
+    RockMod_Inject.bind = componentMethods.bind;
+    RockMod_Inject.component = componentMethods.register;
+    RockMod_Inject.flatten = flattenHTML;
+    RockMod_Inject.generate = componentMethods.generate;
+    RockMod_Inject.list = components;
+})(RockMod_Inject || (RockMod_Inject = {}));
