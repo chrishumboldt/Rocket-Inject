@@ -145,10 +145,10 @@ var myComponent = Rocket.inject.generate({
 });
 ```
 
-Option | Default | Description
----- | ---- | ----
-`component` | | Choose the component you wish to use.
-`data` | | Parse in a JSON object with the data. This will then match to the HTML template of the component.
+Option | Description
+---- | ----
+`component` | Choose the component you wish to use.
+`data` | Parse in a JSON object with the data. This will then match to the HTML template of the component.
 
 The generated HTML is always returned and can be assigned to a variable as shown above.
 

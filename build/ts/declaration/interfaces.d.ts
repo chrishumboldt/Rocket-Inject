@@ -1,6 +1,6 @@
-/*
-Author: Chris Humboldt
-*/
+/**
+@author Chris Humboldt
+**/
 
 declare namespace Mustache {
    function render(html: any, data: any): any;
