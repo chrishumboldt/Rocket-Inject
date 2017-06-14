@@ -1,13 +1,10 @@
 {
+   "compileOnSave": true,
 	"compilerOptions": {
 		"outDir": "../js",
 		"target": "es5"
 	},
-	"include": [
-       "../js/mustach.js"
-    ],
-    "filesGlob": [
-      "./**/*.ts",
-      "../../node_modules/rocket-tools/index.d.ts"
+   "filesGlob": [
+      "./**/*.ts"
    ]
 }
