@@ -214,6 +214,7 @@ Rocket.inject.component({
    name: 'Example',
    html: '<p>{{value}}</p>'
 });
+
 Rocket.inject.bind({
    component: 'Example',
    to: '#example',
@@ -230,6 +231,7 @@ Rocket.inject.component({
    name: 'Example',
    html: '<p>{{user.firstname}} {{user.lastname}}</p>'
 });
+
 Rocket.inject.bind({
    component: 'Example',
    to: '#example',
@@ -250,6 +252,7 @@ Rocket.inject.component({
    name: 'Example',
    html: '<p>{{calculation}}</p>'
 });
+
 Rocket.inject.bind({
    component: 'Example',
    to: '#example',
@@ -273,6 +276,7 @@ Rocket.inject.component({
       {{/paragraphs}}
    `
 });
+
 Rocket.inject.bind({
    component: 'Example',
    to: '#example',
@@ -305,6 +309,7 @@ Rocket.inject.component({
       {{/articles}}
    `
 });
+
 Rocket.inject.bind({
    component: 'Example',
    to: '#example',
@@ -343,6 +348,7 @@ Rocket.inject.component({
       {{/paragraphs}}
    `
 });
+
 Rocket.inject.bind({
    component: 'Example',
    to: '#example',
@@ -365,6 +371,7 @@ Rocket.inject.component({
       {{^paragraphs}}There are no paragraphs to show.{{/paragraphs}}
    `
 });
+
 Rocket.inject.bind({
    component: 'Example',
    to: '#example'
@@ -428,6 +435,7 @@ Rocket.inject.component({
       </article>
    `
 });
+
 Rocket.inject.component({
    name: 'Comments',
    html: `
