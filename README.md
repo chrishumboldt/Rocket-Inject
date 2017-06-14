@@ -53,17 +53,17 @@ Once included you will be able to use the component by referencing the **Rocket.
 ```javascript
 // Declare the component
 Rocket.inject.component({
-	name: 'ExampleComponent',
-	html: '<div>{{text}}</div>'
+   name: 'ExampleComponent',
+   html: '<div>{{text}}</div>'
 });
 
 // Use the component
 Rocket.inject.bind({
-	component: 'ExampleComponent',
-	to: '#example-element',
-	data: {
-		text: 'This is a test.'
-	}
+   component: 'ExampleComponent',
+   to: '#example-element',
+   data: {
+      text: 'This is a test.'
+   }
 });
 ```
 
@@ -79,8 +79,8 @@ var Inject = require('rocket-inject');
 
 // Declare the component
 Inject.component({
-	name: 'ExampleComponent',
-	html: '<div>{{text}}</div>'
+   name: 'ExampleComponent',
+   html: '<div>{{text}}</div>'
 });
 ```
 
@@ -161,9 +161,9 @@ console.log(Rocket.inject.list);
 
 // Edit a component
 var newHTML = `
-	<div>
-		<h2>{{heading}}</h2>
-	</div>
+   <div>
+      <h2>{{heading}}</h2>
+   </div>
 `;
 Rocket.inject.list.ComponentName.html = Rocket.inject.flatten(newHTML); // Notice the flatten method used here
 Rocket.inject.list.ComponentName.overwrite = true;
@@ -374,14 +374,14 @@ Rocket.inject.bind({
 ## On Done
 Once the component has been injected you might want to execute some code. To do so apply the onDone event to your component, binding or generator. Assigning the event to the component will execute it every time the component is used, while assigning it to the binding or generator will only call it on that particular instance.
 
-Also note that the onDone function returns a **$element** variable on binding which is the newly bound DOM element, while it returns the generated HTML on the generator function.
+Also note that the onDone function returns a **elm** variable on binding which is the newly bound DOM element, while it returns the generated HTML on the generator function.
 
 ```javascript
 // On component
 Rocket.inject.component({
    name: 'Article',
    html: '<article>{{value}}</article>',
-   onDone: function($this) {
+   onDone: function() {
       console.log('This will output each time this component is used.');
    }
 });
@@ -393,9 +393,9 @@ Rocket.inject.bind({
    data: {
       value: 'Something here.'
    },
-   onDone: function($element) {
+   onDone: function(elm) {
       console.log('It is done!');
-      console.log($element);
+      console.log(elm);
    }
 });
 
@@ -405,9 +405,9 @@ Rocket.inject.generate({
    data: {
       value: 'Something here.'
    },
-   onDone: function($html) {
+   onDone: function(html) {
       console.log('It is done!');
-      console.log($html);
+      console.log(html);
    }
 });
 ```
@@ -426,7 +426,7 @@ Rocket.inject.component({
          <div>{{content}}</div>
          <div id="comments"></div>
       </article>
-	`
+   `
 });
 Rocket.inject.component({
    name: 'Comments',
@@ -478,7 +478,7 @@ Twitter: <a href="https://twitter.com/chrishumboldt">twitter.com/chrishumboldt</
 GitHub <a href="https://github.com/chrishumboldt">github.com/chrishumboldt</a><br>
 
 ## Copyright and License
-Copyright 2016 Rocket Project
+Copyright 2017 Rocket Project
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
