@@ -15,10 +15,18 @@ if (typeof exports !== 'undefined' && !exports.nodeType) {
       var Mustache = require('mustache');
       var Rocket = require('rocket-tools');
 
+      Rocket.defaults.inject = {
+         errors: true
+      };
+
       module.exports = RockMod_Inject;
       isNodeModule = true;
    }
 }
 if (!isNodeModule) {
+   Rocket.defaults.inject = {
+      errors: true
+   };
+
    Rocket.inject = RockMod_Inject;
 }
