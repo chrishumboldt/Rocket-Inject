@@ -1,10 +1,6 @@
-/*
-Author: Chris Humboldt
-*/
-// Rocket module extension
-Rocket.defaults.inject = {
-    errors: true
-};
+/**
+@author Chris Humboldt
+**/
 // Module container
 var RockMod_Inject;
 (function (RockMod_Inject) {
@@ -20,7 +16,6 @@ var RockMod_Inject;
             if (!validate.bind(obj)) {
                 return false;
             }
-            ;
             // Continue
             var listBindTo = (Rocket.is.string(obj.to)) ? Rocket.dom.select(obj.to) : Rocket.dom.select('#' + obj.component)[0];
             // Catch

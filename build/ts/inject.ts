@@ -2,11 +2,6 @@
 @author Chris Humboldt
 **/
 
-// Rocket module extension
-Rocket.defaults.inject = {
-   errors: true
-};
-
 // Module container
 module RockMod_Inject {
 
@@ -22,7 +17,7 @@ module RockMod_Inject {
          // Catch
          if (!validate.bind(obj)) {
             return false;
-         };
+         }
          // Continue
          const listBindTo:any = (Rocket.is.string(obj.to)) ? Rocket.dom.select(obj.to) : Rocket.dom.select('#' + obj.component)[0];
 
